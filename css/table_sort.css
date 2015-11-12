@@ -1,0 +1,16 @@
+#table {
+  width: 600px;
+  margin: 50px auto;
+  border-collapse: collapse; }
+  #table th {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  #table th, #table td {
+    border: 1px solid #ccc;
+    height: 30px;
+    line-height: 30px; }
+
+/*# sourceMappingURL=table_sort.css.map */

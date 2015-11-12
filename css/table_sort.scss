@@ -1,0 +1,17 @@
+#table {
+  width: 600px;
+  margin: 50px auto;
+  border-collapse: collapse;
+  th{
+    cursor:pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    height: 30px;
+    line-height: 30px;
+  }
+}

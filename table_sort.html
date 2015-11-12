@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/table_sort.css"/>
+</head>
+<body>
+<div>
+    <table id="table">
+        <thead></thead>
+        <tbody></tbody>
+    </table>
+</div>
+</body>
+<script>
+    var dataAry = [
+        {"name": "李赟", "age": 23, "score": 88},
+        {"name": "王慧", "age": 20, "score": 92},
+        {"name": "李占杰", "age": 48, "score": 84},
+        {"name": "边东策", "age": 22, "score": 90},
+        {"name": "白晓燕", "age": 20, "score": 96},
+        {"name": "曹易贤", "age": 39, "score": 63},
+        {"name": "周辉", "age": 16, "score": 61},
+        {"name": "王巧玲", "age": 24, "score": 82},
+        {"name": "刘松松", "age": 19, "score": 100}
+    ];
+    var table_sort = {
+        addInfoToTable: function (tableEle, dataAry) {
+            var oHead = tableEle.getElementsByTagName("thead")[0];
+            var oBody = tableEle.getElementsByTagName("tbody")[0];
+            if (dataAry.length > 0) {
+                var strTh = "";
+                for (var attr in dataAry[0]) {
+                    strTh += "<th>" + attr + "</th>";
+                }
+                oHead.innerHTML = strTh;
+            }
+            for (var i = 0; i < dataAry.length; i++) {
+                var strTd = "<tr>";
+                for (var j in dataAry[i]) {
+                    strTd += "<td>" + dataAry[i][j] + "</td>";
+                }
+                strTd += "</tr>";
+                oBody.innerHTML += strTd;
+            }
+        },
+        bindEvent: function (tableEle) {
+            var oTh = tableEle.getElementsByTagName("thead")[0].getElementsByTagName("th");
+            for (var i = 0; i < oTh.length; i++) {
+                oTh[i].onclick = function (i) {
+                    return function () {
+                        table_sort.sortTable(i, tableEle);
+                    }
+                }(i)
+            }
+        },
+        sortTable: function (curNum, tableEle) {
+            var oBody = tableEle.getElementsByTagName("tbody")[0];
+            var oTd = oBody.rows;
+            oTd = [].__proto__.slice.call(oTd, 0);
+            oTd.sort(function (a, b) {
+                a = a.cells[curNum].innerHTML;
+                b = b.cells[curNum].innerHTML
+                if (isNaN(a)) {
+                    return a.localeCompare(b);
+                }
+                a = parseFloat(a);
+                b = parseFloat(b);
+                return a - b;
+            });
+            if(tableEle.sortMethod=="asc"){
+                oTd.reverse();
+                tableEle.sortMethod="desc";
+            }
+            else{
+                tableEle.sortMethod="asc"
+            }
+            for (var i = 0; i < oTd.length; i++) {
+                oBody.appendChild(oTd[i]);
+            }
+        }
+    };
+    var tableEle = document.getElementById("table");
+    table_sort.addInfoToTable(tableEle, dataAry);
+    table_sort.bindEvent(tableEle);
+</script>
+</html>
