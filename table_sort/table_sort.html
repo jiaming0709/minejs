@@ -13,7 +13,7 @@
     </table>
 </div>
 </body>
-<script>
+<script type="text/javascript">
     var dataAry = [
         {"name": "李赟", "age": 23, "score": 88},
         {"name": "王慧", "age": 20, "score": 92},
@@ -27,13 +27,16 @@
     ];
     var table_sort = {
         addInfoToTable: function (tableEle, dataAry) {
-            var oHead = tableEle.getElementsByTagName("thead")[0];
-            var oBody = tableEle.getElementsByTagName("tbody")[0];
+//            var oHead = tableEle.getElementsByTagName("thead")[0];
+//            var oBody = tableEle.getElementsByTagName("tbody")[0];
+            var oHead=tableEle.tHead;
+            var oBody=tableEle.tBodies[0];
             if (dataAry.length > 0) {
                 var strTh = "";
                 for (var attr in dataAry[0]) {
                     strTh += "<th>" + attr + "</th>";
                 }
+                console.log(oHead.innerHTML);
                 oHead.innerHTML = strTh;
             }
             for (var i = 0; i < dataAry.length; i++) {

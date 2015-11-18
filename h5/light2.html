@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">d
+    <title>Document</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
+    <meta content='black' name='apple-mobile-web-app-status-bar-style'/>
+    <meta content='telephone=no' name='format-detection'/>
+    <style>
+        body {
+            background: #000;
+        }
+
+        #light {
+            width: 560px;
+            height: 500px;
+            position: absolute;
+            left: 10%;
+            top: 10%;
+            background: #ccc;
+            opacity:1;
+            animation:anim 1.5s linear;
+            animation-iteration-count:infinite;
+        }
+        #light img{
+            position:absolute;
+        }
+
+        @keyframes anim {
+            0%{
+                opacity:1;
+            }
+            50%{
+                opacity:0;
+            }
+            100%{
+                opacity:1;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="light">
+    <img src="img/aureole.png" alt=""/>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+    $(function(){
+        var w=$("#light").width();
+        var h=$("#light").height();
+        $("#light img").width(w*1.58+"px");
+        $("#light img").height(h*1.72+"px");
+        $("#light img").css("left",-0.29*w+"px");
+        $("#light img").css("top",-0.36*h+"px");
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+@import "layout.css";
+
+/*layout*/
+.container .firstScreen hgroup{
+    box-sizing:border-box;
+    width:100%;
+    text-align:center;
+    overflow:hidden;
+}
+.container .firstScreen .main{
+    box-sizing:border-box;
+    position:absolute;
+    bottom:8rem;
+}
+.container .firstScreen .btn{
+    box-sizing:border-box;
+    padding:0 2rem;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    height:5.5rem;
+}
+
+/*hgroup*/
+.container .firstScreen hgroup img{
+    height:11.2rem;
+}
+
+/*main*/
+.container .firstScreen .main{
+    position: absolute;
+    border: 3px solid #c2b276;
+    top: 11.4rem;
+    bottom:7.5rem;
+    left: 2rem;
+    right: 2rem;
+}
+.container .firstScreen .main .swiper-container{
+    position: absolute;
+    top: 3.5rem;
+    bottom:0;
+    left: 0;
+    right: 0;
+    /*height:100%;*/
+}
+.container .firstScreen .main .title{
+    text-align:center;
+    height:2rem;
+    margin:1rem 0 .5rem 0;
+}
+.container .firstScreen .main .title img{
+    height:100%;
+}
+.container .firstScreen .main .swiper-container .swiper-slide-active .intro{
+    display:block;
+}
+.container .firstScreen .main .swiper-container .intro{
+    display:none;
+    color:#fefab8;
+    padding:1rem 0;
+}
+.container .firstScreen .main .swiper-container .intro .name{
+    text-align:center;
+    font-size:1.4rem;
+    padding-bottom:0.6rem;
+}
+.container .firstScreen .main .swiper-container .intro .name span{
+    font-size:1rem;
+    padding-left:.5rem;
+}
+.container .firstScreen .main .swiper-container .intro .desc,.container .firstScreen .main .swiper-container .intro .casus{
+    font-size:1rem;
+    line-height:1.5rem;
+    height:1.5rem;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    width: 140%;
+    left: -20%;
+}
+
+.container .firstScreen .main .investor-pic {
+    width:100%;
+    height:72%;
+    font-size: 36px;
+    text-align: center;
+    background-size:cover;
+}
+
+/*btn*/
+.container .firstScreen  .btn a{
+    background-color:#f3df94;
+    border:2px solid #c2b276;
+    height:3.5rem;;
+    display:block;
+    text-align:center;
+}
+.container .firstScreen  .btn a img{
+    height:3.7rem;
+    vertical-align:middle;
+}
+
+.container .firstScreen  .btn .small{
+    font-size:1rem;
+    text-align:center;
+    color:#c0bd8d;
+    line-height:2rem;
+}
+.container .firstScreen  .btn .small img{
+    height:0.5rem;
+    margin-right: 0.5rem;
+}

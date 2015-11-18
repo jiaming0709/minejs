@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>game page</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
+    <meta content='black' name='apple-mobile-web-app-status-bar-style'/>
+    <meta content='telephone=no' name='format-detection'/>
+    <link rel="stylesheet" href="css/game.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="firstScreen">
+        <div class="numberCount">放弃本次(1/3)</div>
+        <div class="banner">
+            <div class="bannerbox">
+                <img src="img/banner_game.png" alt=""/>
+            </div>
+        </div>
+
+        <div class="main">
+            <div class="corner left_top"></div>
+            <div class="corner right_top"></div>
+            <div class="corner right_bottom"></div>
+            <div class="corner left_bottom"></div>
+            <div id="picBox"></div>
+        </div>
+        <!--<div class="btn"><span><img src="img/btn_turnout.png" alt="翻一块看看"/></span></div>-->
+        <!--<div class="btn" id="inviteFriend"><span><img src="img/btn_invite.png" alt="邀请好友帮我翻"/></span></div>-->
+        <!--<div class="btn btn_half">-->
+            <!--<span class="btn_gray">-->
+                <!--&lt;!&ndash;<img src="img/btn_helpfriend.png" alt=""/>&ndash;&gt;-->
+                <!--<img src="img/btn_helpfriend_gray.png" alt=""/>-->
+            <!--</span>-->
+            <!--<span><img src="img/btn_join.png" alt=""/></span>-->
+        <!--</div>-->
+        <div class="btn">
+            <span><img src="img/btn_toperfect.png" alt=""/></span>
+        </div>
+    </div>
+    <article>
+        <ul>
+            <!--<li>小T  在10月20日18：21 帮你翻过牌</li>-->
+            <!--<li>小T  在10月20日18：21 帮你翻过牌</li>-->
+            <!--<li>小T  在10月20日18：21 帮你翻过牌</li>-->
+        </ul>
+    </article>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+    //生成拼图html
+    var openList = [1,3];
+    function createPicPortion(eleId, row, col,lineWidth) {//容器的ID，行数，列数，间隔像素数
+        var htmlStr = '';
+        var thisEle = $("#" + eleId);
+        var width = (thisEle.width()-(col-1)*lineWidth) / col;
+        var height = (thisEle.height()-(row-1)*lineWidth) / row;
+        for (var i =0; i<row * col; i++) {
+            var left = (i % col) * (width+lineWidth);
+            var top = Math.floor(i / col) * (height+lineWidth);
+            thisEle.attr("widthSize",width);
+            thisEle.attr("heightSize",height);
+            htmlStr += '<div class="picPortion" bg-position="-'+left+'px -'+top+'px" style="width:' + width + 'px;height:' + height + 'px;left:' + left + 'px;top:' + top + 'px"></div>';
+        }
+        thisEle.html(htmlStr);
+        for(var index in openList){
+            var curr=thisEle.children(".picPortion").eq(openList[index]);
+            setPicStyle(eleId,curr,"img/investor_pic/pic_0.jpg");
+        }
+    }
+
+    //抽取要翻的牌子的index
+    function createNumber() {
+        return Math.floor(Math.random() * 6);
+    }
+
+    //清除动画
+    function clearAnimate(eleId){//照片容器
+        var elePortion = $("#" + eleId + " .picPortion");
+        for(var i=0;i<elePortion.length;i++){
+            elePortion.removeClass("turnOut");
+            elePortion.removeClass("magnify");
+        }
+    }
+
+//    设置当前的照片碎片为打开状态
+    function setPicStyle(eleId,curr,bgUrl){//照片容器，当前将要打开的碎片，图片src
+        curr.css("background-image", 'url('+bgUrl+')');
+        curr.css("background-position",curr.attr("bg-position"));
+        curr.css("background-size",$("#" + eleId).width()+"px "+$("#" + eleId).height()+"px");
+        curr.attr("open-flag", "true");
+    }
+    //click之后要执行的翻牌子的过程
+    function turnBrand(eleId) {//照片容器
+        var number =Math.floor(Math.random() *6);
+        var thisEle = $("#" + eleId + " .picPortion").eq(number);
+        clearAnimate(eleId);
+        if (!thisEle.attr("open-flag")) {//属性open-flag记录牌子是否已经被翻开，"true"已经翻开，若属性不在在，尚未翻开
+            setPicStyle(eleId,thisEle,"img/investor_pic/pic_0.jpg");
+            thisEle.addClass("turnOut");
+            return;
+        }
+        thisEle.addClass("magnify");
+    }
+
+    function turnBrandNone(eleId){
+        clearAnimate(eleId);
+        var number=Math.floor(Math.random() * openList.length);
+        $("#" + eleId + " .picPortion").eq(openList[number]).addClass("magnify");
+    }
+
+    //设置魔方图的宽高比，以保证投资人图片竖版
+    function setsize(){
+        var left=$(".main").css("left");
+        var height=$(".main").height();
+        var width=$(".main").width();
+        $(".main").width(parseFloat(height)*0.8+"px");
+        $(".main").css("left",(parseFloat(width)-parseFloat(height)*0.8)/2+parseFloat(left)+"px");
+    }
+
+    //，发送到朋友圈，邀请好友帮我 样式设置
+    function inviteFriend(){
+        $(".container").addClass("hidden");
+        $(".container").append('<div class="share"><div class="bg_black"></div><img src="img/share.png" alt="" class="share_pic"/></div>');
+        $(".container .bg_black").click(function(){
+            $(".share").remove();
+            $(".container").removeClass("hidden");
+        })
+    }
+    $(function () {
+        setsize();
+        createPicPortion("picBox", 3, 2,2);
+        $(".btn").click(function () {
+            turnBrand("picBox");
+//            turnBrandNone("picBox");
+        });
+        $("#inviteFriend").click(function(){
+            inviteFriend("picBox");
+        })
+    })
+</script>
+</body>
+</html>

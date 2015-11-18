@@ -1,0 +1,98 @@
+@import "layout.css";
+
+/*layout*/
+.container .firstScreen .banner {
+	box-sizing: border-box;
+	padding: 0 2rem;
+	width: 100%;
+	position: absolute;
+	bottom: 22rem;
+}
+.container .firstScreen .form{
+	box-sizing:border-box;
+	padding:0 2rem 2.5rem 2rem;
+	width:100%;
+	position:absolute;
+	bottom:5.5rem;
+}
+.container .firstScreen .btn{
+	box-sizing:border-box;
+	padding:0 2rem;
+	width:100%;
+	position:absolute;
+	bottom:0;
+	height:5.5rem;
+}
+
+.container{
+	position:relative;
+}
+.container .firstScreen{
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+}
+
+@media screen and (max-height:480px){
+	.container .firstScreen .form{
+		bottom:5rem;
+	}
+}
+
+.container .firstScreen .banner img{
+	width:100%;
+	vertical-align:middle;
+}
+
+
+/*form*/
+.container .firstScreen .form input.name{
+	background:url(../img/form_name.png) no-repeat 1rem 0;
+	background-size: auto 100%;
+}
+.container .firstScreen .form input.phone{
+	background:url(../img/form_phone.png) no-repeat 1rem 0;
+	background-size: auto 100%;
+}
+.container .firstScreen .form input.project{
+	 background:url(../img/form_project.png) no-repeat 1rem 0;
+	 background-size: auto 100%;
+ }
+
+.container .firstScreen .form .inputbox{
+	height:100%;
+}
+.container .firstScreen .form input{
+	box-sizing:border-box;
+	border:2px solid #d8c683;
+	height:3.5rem;
+	width:100%;
+	margin:0.5rem auto;
+	display:block;
+	background-size: auto 100%;
+	color:#c2b276;
+	padding-left:7rem;
+	font-size:1.2rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+	-webkit-appearance: none !important;
+	margin: 0;
+}
+input[type="number"]{-moz-appearance:textfield;}
+
+/*btn*/
+.container .firstScreen  .btn a{
+	background-color:#f3df94;
+	border:2px solid #c2b276;
+	height:3.5rem;;
+	display:block;
+	text-align:center;
+}
+.container .firstScreen  .btn a img{
+	height:3.7rem;
+	vertical-align:middle;
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
+    <meta content='black' name='apple-mobile-web-app-status-bar-style'/>
+    <meta content='telephone=no' name='format-detection'/>
+    <style>
+        body{
+            background:#222;
+        }
+        .box{
+            width:200px;
+            height:200px;
+            margin:100px auto;
+            background:#000;
+
+            border-image-source:url("img/aureole.png");
+            border-image-outset: 50px;
+            border-image-width:50px;
+            border-image-slice: 40% 40%;
+            border-image-repeat:round;
+
+        }
+        .turnOut{
+            -webkit-animation:turnOut 2.75s ease;
+            animation: turnOut 2.75s ease;
+        }
+        @-webkit-keyframes turnOut{
+            0% {
+                -webkit-transform: rotateY(540deg);
+                transform: rotateY(540deg);
+            }
+            100% {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+            }
+        }
+        @keyframes turnOut{
+            0% {
+                -webkit-transform: rotateY(540deg);
+                transform: rotateY(540deg);
+            }
+            100% {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="box" class="box"></div>
+<script src="js/jquery.min.js"></script>
+<script>
+
+    //清除动画
+    var isOpen = false;
+    function clearAnimate() {//照片容器
+        console.log("清除之前"+":"+$("#box").attr("class"));
+        var elePortion = $("#box");
+        for (var i = 0; i < elePortion.length; i++) {
+            elePortion.removeClass("turnOut");
+//            elePortion.removeClass("magnify");
+        }
+        console.log("清除之后"+":"+$("#box").attr("class"));
+//        clearAnimate("box");
+    }
+
+    $("#box").click(function(){
+        console.log("点击开始前"+":"+$("#box").attr("class") + "状态：" + isOpen);
+//        if (isOpen){
+//            clearAnimate("box");
+//            isOpen = false;
+//        } else {
+//            $("#box").addClass("turnOut");
+//            isOpen = true;
+//        }
+        $("#box").addClass("turnOut");
+        setTimeout(clearAnimate,3000);
+        console.log("点击开始后"+":"+$("#box").attr("class") + "状态：" + isOpen);
+    })
+
+
+</script>
+</body>
+</html>
