@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sort</title>
+    <style>
+        #table {
+            width: 500px;
+            border: 1px solid #ccc;
+            table-layout: fixed;
+            margin: 10px auto;
+            border-collapse: collapse;
+        }
+
+        #table th {
+            cursor: pointer;
+        }
+
+        #table th, #table td {
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<table id="table">
+    <thead></thead>
+    <tbody></tbody>
+</table>
+<script>
+    var dataAry = [
+        {"name": "李赟", "age": 23, "score": 88},
+        {"name": "王慧", "age": 20, "score": 92},
+        {"name": "李占杰", "age": 48, "score": 84},
+        {"name": "边东策", "age": 22, "score": 90},
+        {"name": "白晓燕", "age": 20, "score": 96},
+        {"name": "曹易贤", "age": 39, "score": 63},
+        {"name": "周辉", "age": 16, "score": 61},
+        {"name": "王巧玲", "age": 24, "score": 82},
+        {"name": "刘松松", "age": 19, "score": 100}
+    ];
+    var tableSort = {
+        createTable: function (eleId) {
+            var oHead = document.getElementById(eleId).getElementsByTagName("thead")[0];
+            var oBody = document.getElementById(eleId).getElementsByTagName("tbody")[0];
+            oHead.innerHTML = "<th>name</th><th>age</th><th>source</th></tr>";
+            var str = "";
+            for (var i in dataAry) {
+                str += "<tr>";
+                str += "<td>" + dataAry[i].name + "</td>" + "<td>" + dataAry[i].age + "</td>" + "<td>" + dataAry[i].score + "</td>";
+                str += "</tr>";
+            }
+            oBody.innerHTML = str;
+        },
+        bindEvent: function (eleId) {
+            var oThs = document.getElementById(eleId).getElementsByTagName("thead")[0].getElementsByTagName("th");
+            for (var i = 0; i < oThs.length; i++) {
+                oThs[i].onclick = (function (i) {
+                    return function () {
+                        tableSort.sortMethod(i, eleId);
+                    }
+                })(i);
+            }
+        },
+        sortMethod: function (curNumber, eleId) {
+            var table = document.getElementById(eleId).getElementsByTagName("tbody")[0];
+            var oTrs = table.rows;
+            oTrs = Array.prototype.slice.call(oTrs, 0);
+            oTrs.sort(function (a, b) {
+                a = a.cells[curNumber].innerHTML;
+                b = b.cells[curNumber].innerHTML;
+                if(isNaN(a)){
+                    return a.localeCompare(b);
+                }
+                return parseFloat(a)-parseFloat(b);
+            });
+            if(table.sortm=="asc"){
+                oTrs.reverse();
+                table.sortm="desc";
+            }
+            else{
+                table.sortm="asc";
+            }
+            for(var i=0;i<oTrs.length;i++){
+                table.appendChild(oTrs[i]);
+            }
+        }
+    }
+    tableSort.createTable("table");
+    tableSort.bindEvent("table")
+</script>
+</body>
+</html>
