@@ -1,0 +1,52 @@
+<ion-view view-title="首页" hide-nav-bar="true">
+	<ion-content>
+		<!--TODO-->
+		<ion-refresher
+						pulling-text="下拉刷新"
+						on-refresh="doRefresh()">
+		</ion-refresher>
+		<ion-slide-box does-continue="true" auto-play="true" show-pager="true" style="height: 200px;">
+			<ion-slide ng-repeat="banner in banners">
+				<div class="box blue"><img width="100%" ng-src="{{ banner.image_url }}"/></div>
+			</ion-slide>
+		</ion-slide-box>
+		<div class="list">
+			<div class="item item-divider">行业分类</div>
+			<div class="item item-body">
+				<div class="row responsive">
+					<div class="col col-25" ng-repeat="industry in industries">{{ industry.name }}</div>
+				</div>
+			</div>
+		</div>
+		<div class="list">
+			<div class="item item-divider">活动<!--TODO--></div>
+			<div class="item item-body">
+				<div>
+					联通活动
+				</div>
+			</div>
+		</div>
+		<div class="list">
+			<div class="item item-divider">推荐商家</div>
+			<!--<div class="item item-body">-->
+			<!--<ion-content>-->
+			<!--<ion-list>-->
+			<!--<ion-item collection-repeat="company in companies">-->
+			<!--{{company.name}}-->
+			<!--<ion-option-button class="button-calm icon ion-edit"></ion-option-button>-->
+			<!--<ion-option-button class="button-energized icon ion-share"></ion-option-button>-->
+			<!--</ion-item>-->
+			<!--</ion-list>-->
+			<!--</ion-content>-->
+			<!--</div>-->
+		</div>
+		<ion-list>
+			<ion-item collection-repeat="company in companies">
+				{{company.name}}
+				<ion-option-button class="button-calm icon ion-edit"></ion-option-button>
+				<ion-option-button class="button-energized icon ion-share"></ion-option-button>
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll on-infinite="loadMore()" distance="1%">...</ion-infinite-scroll>
+	</ion-content>
+</ion-view>
