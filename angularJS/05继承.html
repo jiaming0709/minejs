@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="fatherCtrl">
+    <p>father value: {{name}}</p>
+    <button ng-click="show()">father Click</button>
+    <div ng-controller="sonCtrl">
+        <p>son value: {{name}}</p>
+        <button ng-click="show()">son Click</button>
+    </div>
+</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("fatherCtrl", ["$scope",function($scope){
+        $scope.name = "john";
+        $scope.show = function () {
+            alert("father method");
+        };
+    }
+    ]);
+    app.controller("sonCtrl", function ($scope) {
+
+    })
+</script>
+</body>
+</html>

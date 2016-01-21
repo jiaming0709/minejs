@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<form action="" name="myForm" ng-controller="selectCtrl">
+    <div>
+        学制:
+        <select name="" id="" ng-model="a" ng-options="v.id as v.name for v in a_data" ng-change="a_change(a)">
+            <option value="">请选择</option>
+        </select>
+        {{a}}
+    </div>
+    <div>
+        班级:
+        <select name="" id="" ng-model="b" ng-options="b.id as b.name group by b.grade for b in b_data">
+            <option value="">请选择</option>
+        </select>
+        {{b}}
+    </div>
+</form>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("selectCtrl",function($scope){
+        $scope.a_data=[{id:"001",name:"小学"},{id:"002",name:"中学"},{id:"003",name:"大学"}];
+        $scope.a="";
+
+        $scope.b_data=[{id:"1001",name:"calss 1",grade:"one"},{id:"1002",name:"calss 2",grade:"one"},{id:"2001",name:"calss 1",grade:"two"},{id:"2002",name:"calss 2",grade:"two"}]
+        $scope.b="";
+    });
+</script>
+</body>
+</html>

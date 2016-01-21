@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        li span{
+            width:70px;
+            display:inline-block;
+            line-height:30px;
+            border:1px solid #eee;
+        }
+        .red{
+            color:#f00;
+        }
+        .green{
+            color:#0f0;
+        }
+    </style>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <ul>
+        <li>
+            <span>index</span>
+            <span>name</span>
+            <span>age</span>
+            <span>first?</span>
+            <span>last?</span>
+            <span>middle?</span>
+        </li>
+        <li ng-repeat="user in data">
+            <span style="color:{{text}}">{{$index+1}}</span>
+            <span ng-class="{true:'red',false:'green'}[colorValue]">{{user.name}}</span>
+            <span ng-class="{'red':a,'green':b}">{{user.age}}</span>
+            <span>{{$first?"是":"否"}}</span>
+            <span>{{$last}}</span>
+            <span>{{$middle}}</span>
+        </li>
+    </ul>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.colorValue=false;
+        $scope.a=true;
+        $scope.b=false;
+        $scope.text="#f00";
+        $scope.data=[{name:"john",age:13},{name:"hgfd",age:14},{name:"aaa",age:76},{name:"eoy",age:23},{name:"eoy",age:23}]
+    })
+</script>
+</body>
+</html>

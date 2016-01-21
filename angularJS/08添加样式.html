@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+
+    <style>
+        li span{
+            width:70px;
+            display:inline-block;
+            line-height:30px;
+            border:1px solid #eee;
+            font-weight:normal;
+        }
+        ul .odd{
+            color:#f00;
+        }
+        ul .even{
+            color:#0f0;
+        }
+        ul .bold{
+            font-weight:bold;
+        }
+        ul .focus{
+            background-color:#ff0;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <ul>
+        <li ng-class="{{bold}}">
+            <span>index</span>
+            <span>name</span>
+            <span>age</span>
+            <span>first?</span>
+            <span>last?</span>
+            <span>middle?</span>
+        </li>
+        <li ng-repeat="user in data"
+            ng-class-odd="'odd'"
+            ng-class-even="'even'"
+            ng-click="li_click($index)"
+            ng-class="{focus:$index==focus}"
+                >
+            <span>{{$index+1}}</span>
+            <span>{{user.name}}</span>
+            <span>{{user.age}}</span>
+            <span>{{$first}}</span>
+            <span>{{$last}}</span>
+            <span>{{$middle}}</span>
+        </li>
+    </ul>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.bold="bold";
+        $scope.li_click=function(i){
+            $scope.focus=i;
+            console.log(i);
+        }
+        $scope.data=[{name:"john",age:13},{name:"hgfd",age:14},{name:"aaa",age:76},{name:"eoy",age:23},{name:"eoy",age:23}]
+    })
+</script>
+</body>
+</html>

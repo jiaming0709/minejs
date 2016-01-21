@@ -266,7 +266,7 @@ window.ionic.version = '1.2.1';
      * @description
      * Get a rect representing the bounds of the given textNode.
      * @param {DOMElement} textNode The textNode to find the bounds of.
-     * @returns {object} An object representing the bounds of the node. Properties:
+     * @returns {object} An object representing the bounds of the nodejs. Properties:
      *   - `{number}` `left` The left position of the textNode.
      *   - `{number}` `right` The right position of the textNode.
      *   - `{number}` `top` The top position of the textNode.
@@ -302,7 +302,7 @@ window.ionic.version = '1.2.1';
      * @ngdoc method
      * @name ionic.DomUtil#getChildIndex
      * @description
-     * Get the first index of a child node within the given element of the
+     * Get the first index of a child nodejs within the given element of the
      * specified type.
      * @param {DOMElement} element The element to find the index of.
      * @param {string} type The nodeName to match children of element against.
@@ -1166,7 +1166,7 @@ window.ionic.version = '1.2.1';
 
 
     /**
-     * find if a node is in the given parent
+     * find if a nodejs is in the given parent
      * used for event delegation tricks
      * @param   {HTMLElement}   node
      * @param   {HTMLElement}   parent
@@ -3448,7 +3448,7 @@ ionic.DomUtil.ready(function() {
       if (!scope) return;
 
       if (scope.$root === scope) {
-        return; // we can't disconnect the root node;
+        return; // we can't disconnect the root nodejs;
       }
       var parent = scope.$parent;
       scope.$$disconnected = true;
@@ -3474,7 +3474,7 @@ ionic.DomUtil.ready(function() {
       if (!scope) return;
 
       if (scope.$root === scope) {
-        return; // we can't disconnect the root node;
+        return; // we can't disconnect the root nodejs;
       }
       if (!scope.$$disconnected) {
         return;
@@ -15001,7 +15001,7 @@ function getter(obj, path, bindFnToScope) {
 }
 
 /**
- * Return the DOM siblings between the first and last node in the given array.
+ * Return the DOM siblings between the first and last nodejs in the given array.
  * @param {Array} array like object
  * @returns {jqLite} jqLite collection containing the nodes
  */
@@ -15871,7 +15871,7 @@ function jqLiteBuildFragment(html, context) {
       nodes = [], i;
 
   if (jqLiteIsTextNode(html)) {
-    // Convert non-html into a text node
+    // Convert non-html into a text nodejs
     nodes.push(context.createTextNode(html));
   } else {
     // Convert html into DOM nodes
@@ -16129,7 +16129,7 @@ function jqLiteInheritedData(element, name, value) {
       if ((value = jqLite.data(element, names[i])) !== undefined) return value;
     }
 
-    // If dealing with a document fragment node with a host element, and no parent, use the host
+    // If dealing with a document fragment nodejs with a host element, and no parent, use the host
     // element as the parent. This enables directives within a Shadow DOM or polyfilled Shadow DOM
     // to lookup parent controllers.
     element = element.parentNode || (element.nodeType === NODE_TYPE_DOCUMENT_FRAGMENT && element.host);
@@ -18771,7 +18771,7 @@ function Browser(window, document, $log, $sniffer) {
    * @return {function(string)} Returns the registered listener fn - handy if the fn is anonymous.
    */
   self.onUrlChange = function(callback) {
-    // TODO(vojta): refactor to use node's syntax for events
+    // TODO(vojta): refactor to use nodejs's syntax for events
     if (!urlChangeInit) {
       // We listen on both (hashchange/popstate) when available, as some browsers (e.g. Opera)
       // don't fire popstate when user change the address bar and don't fire hashchange when url
@@ -19294,16 +19294,16 @@ function $TemplateCacheProvider() {
  *
  * DOM-related variables:
  *
- * - "node" - DOM Node
+ * - "nodejs" - DOM Node
  * - "element" - DOM Element or Node
- * - "$node" or "$element" - jqLite-wrapped node or element
+ * - "$nodejs" or "$element" - jqLite-wrapped nodejs or element
  *
  *
  * Compiler related stuff:
  *
  * - "linkFn" - linking fn of a single directive
- * - "nodeLinkFn" - function that aggregates all linking fns for a particular node
- * - "childLinkFn" -  function that aggregates all linking fns for child nodes of a particular node
+ * - "nodeLinkFn" - function that aggregates all linking fns for a particular nodejs
+ * - "childLinkFn" -  function that aggregates all linking fns for child nodes of a particular nodejs
  * - "compositeLinkFn" - function that aggregates all linking fns for a compilation root (nodeList)
  */
 
@@ -20609,10 +20609,10 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
     }
 
     /**
-     * Compile function matches each node in nodeList against the directives. Once all directives
-     * for a particular node are collected their compile functions are executed. The compile
+     * Compile function matches each nodejs in nodeList against the directives. Once all directives
+     * for a particular nodejs are collected their compile functions are executed. The compile
      * functions return values - the linking functions - are combined into a composite linking
-     * function, which is the a linking function for the node.
+     * function, which is the a linking function for the nodejs.
      *
      * @param {NodeList} nodeList an array of nodes or NodeList to compile
      * @param {function(angular.Scope, cloneAttachFn=)} transcludeFn A linking function, where the
@@ -20748,7 +20748,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
     }
 
     /**
-     * Looks for directives on the given node and adds them to the directive collection which is
+     * Looks for directives on the given nodejs and adds them to the directive collection which is
      * sorted.
      *
      * @param node Node to search.
@@ -20765,7 +20765,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
       switch (nodeType) {
         case NODE_TYPE_ELEMENT: /* Element */
-          // use the node name: <directive>
+          // use the nodejs name: <directive>
           addDirective(directives,
               directiveNormalize(nodeName_(node)), 'E', maxPriority, ignoreDirective);
 
@@ -20847,7 +20847,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             }
           } catch (e) {
             // turns out that under some circumstances IE9 throws errors when one attempts to read
-            // comment's node value.
+            // comment's nodejs value.
             // Just ignore it and continue. (Can't seem to reproduce in test case.)
           }
           break;
@@ -20858,7 +20858,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
     }
 
     /**
-     * Given a node with an directive-start it collects all of the siblings until it finds
+     * Given a nodejs with an directive-start it collects all of the siblings until it finds
      * directive-end.
      * @param node
      * @param attrStart
@@ -20911,7 +20911,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      *
      * @param {Array} directives Array of collected directives to execute their compile function.
      *        this needs to be pre-sorted by priority order.
-     * @param {Node} compileNode The raw DOM node to apply the compile functions to
+     * @param {Node} compileNode The raw DOM nodejs to apply the compile functions to
      * @param {Object} templateAttrs The shared attribute function
      * @param {function(angular.Scope, cloneAttachFn=)} transcludeFn A linking function, where the
      *                                                  scope argument is auto-generated to the new
@@ -20924,7 +20924,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * @param {Array.<Function>} preLinkFns
      * @param {Array.<Function>} postLinkFns
      * @param {Object} previousCompileContext Context used for previous compilation of the current
-     *                                        node
+     *                                        nodejs
      * @returns {Function} linkFn
      */
     function applyDirectivesToNode(directives, compileNode, templateAttrs, transcludeFn,
@@ -21067,7 +21067,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
             var newTemplateAttrs = {$attr: {}};
 
-            // combine directives from the original node and from the template:
+            // combine directives from the original nodejs and from the template:
             // - take the array of directives for this element
             // - split it into two parts, those that already applied (processed) and those that weren't (unprocessed)
             // - collect directives from the template and sort them by priority
@@ -21549,7 +21549,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
               }
               replaceWith(linkRootElement, jqLite(beforeTemplateLinkNode), linkNode);
 
-              // Copy in CSS classes from original node
+              // Copy in CSS classes from original nodejs
               safeAddClass(jqLite(linkNode), oldClasses);
             }
             if (afterTemplateNodeLinkFn.transcludeOnThisElement) {
@@ -21741,8 +21741,8 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * @param {JqLite=} $rootElement The root of the compile tree. Used so that we can replace nodes
      *                               in the root of the tree.
      * @param {JqLite} elementsToRemove The jqLite element which we are going to replace. We keep
-     *                                  the shell, but replace its DOM node reference.
-     * @param {Node} newNode The new DOM node.
+     *                                  the shell, but replace its DOM nodejs reference.
+     * @param {Node} newNode The new DOM nodejs.
      */
     function replaceWith($rootElement, elementsToRemove, newNode) {
       var firstElementToRemove = elementsToRemove[0],
@@ -21792,7 +21792,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
         // Remove data of the replaced element. We cannot just call .remove()
         // on the element it since that would deallocate scope that is needed
-        // for the new node. Instead, remove the data "manually".
+        // for the new nodejs. Instead, remove the data "manually".
         if (!jQuery) {
           delete jqLite.cache[firstElementToRemove[jqLite.expando]];
         } else {
@@ -24592,7 +24592,7 @@ function LocationHashbangUrl(appBase, hashPrefix) {
     this.$$compose();
 
     /*
-     * In Windows, on an anchor node on documents loaded from
+     * In Windows, on an anchor nodejs on documents loaded from
      * the filesystem, the browser will return a pathname
      * prefixed with the drive name ('/C:/path') when a
      * pathname without a drive is set:
@@ -27199,7 +27199,7 @@ function getValueOf(value) {
  *      `context`.
  *
  *    The returned function also has the following properties:
- *      * `literal` – `{boolean}` – whether the expression's top-level node is a JavaScript
+ *      * `literal` – `{boolean}` – whether the expression's top-level nodejs is a JavaScript
  *        literal.
  *      * `constant` – `{boolean}` – whether the expression is made entirely of JavaScript
  *        constant literals.
@@ -30945,24 +30945,24 @@ var originUrl = urlResolve(window.location.href);
  *
  * Implementation Notes for non-IE browsers
  * ----------------------------------------
- * Assigning a URL to the href property of an anchor DOM node, even one attached to the DOM,
+ * Assigning a URL to the href property of an anchor DOM nodejs, even one attached to the DOM,
  * results both in the normalizing and parsing of the URL.  Normalizing means that a relative
  * URL will be resolved into an absolute URL in the context of the application document.
- * Parsing means that the anchor node's host, hostname, protocol, port, pathname and related
+ * Parsing means that the anchor nodejs's host, hostname, protocol, port, pathname and related
  * properties are all populated to reflect the normalized URL.  This approach has wide
  * compatibility - Safari 1+, Mozilla 1+, Opera 7+,e etc.  See
  * http://www.aptana.com/reference/html/api/HTMLAnchorElement.html
  *
  * Implementation Notes for IE
  * ---------------------------
- * IE >= 8 and <= 10 normalizes the URL when assigned to the anchor node similar to the other
+ * IE >= 8 and <= 10 normalizes the URL when assigned to the anchor nodejs similar to the other
  * browsers.  However, the parsed components will not be set if the URL assigned did not specify
  * them.  (e.g. if you assign a.href = "foo", then a.protocol, a.host, etc. will be empty.)  We
  * work around that by performing the parsing in a 2nd step by taking a previously normalized
  * URL (e.g. by assigning to a.href) and assigning it a.href again.  This correctly populates the
  * properties such as protocol, hostname, port, etc.
  *
- * IE7 does not normalize the URL when assigned to an anchor node.  (Apparently, it does, if one
+ * IE7 does not normalize the URL when assigned to an anchor nodejs.  (Apparently, it does, if one
  * uses the inner HTML approach to assign the URL as part of an HTML snippet -
  * http://stackoverflow.com/a/472729)  However, setting img[src] does normalize the URL.
  * Unfortunately, setting img[src] to something like "javascript:foo" on IE throws an exception.
@@ -36992,7 +36992,7 @@ var ngIfDirective = ['$animate', function($animate) {
               $transclude(function(clone, newScope) {
                 childScope = newScope;
                 clone[clone.length++] = document.createComment(' end ngIf: ' + $attr.ngIf + ' ');
-                // Note: We only need the first/last node of the cloned nodes.
+                // Note: We only need the first/last nodejs of the cloned nodes.
                 // However, we need to keep the reference to the jqlite wrapper as it might be changed later
                 // by a directive with templateUrl when its template arrives.
                 block = {
@@ -40267,8 +40267,8 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
         //watch props
         $scope.$watchCollection(rhs, function ngRepeatAction(collection) {
           var index, length,
-              previousNode = $element[0],     // node that cloned nodes should be inserted after
-                                              // initialized to the comment node anchor
+              previousNode = $element[0],     // nodejs that cloned nodes should be inserted after
+                                              // initialized to the comment nodejs anchor
               nextNode,
               // Same as lastBlockMap but it has the current state. It will become the
               // lastBlockMap on the next iteration.
@@ -40378,7 +40378,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
                 // TODO(perf): support naked previousNode in `enter` to avoid creation of jqLite wrapper?
                 $animate.enter(clone, null, jqLite(previousNode));
                 previousNode = endNode;
-                // Note: We only need the first/last node of the cloned nodes.
+                // Note: We only need the first/last nodejs of the cloned nodes.
                 // However, we need to keep the reference to the jqlite wrapper as it might be changed later
                 // by a directive with templateUrl when its template arrives.
                 block.clone = clone;
@@ -43807,7 +43807,7 @@ var $$AnimateQueueProvider = ['$animateProvider', function($animateProvider) {
         var parentElement = element.parent() || [];
 
         // animate/structural/class-based animations all have requirements. Otherwise there
-        // is no point in performing an animation. The parent node must also be set.
+        // is no point in performing an animation. The parent nodejs must also be set.
         var isValidAnimation = parentElement.length > 0
                                 && (animationDetails.event === 'animate'
                                     || animationDetails.structural
@@ -45150,7 +45150,7 @@ var $$AnimationProvider = ['$animateProvider', function($animateProvider) {
  * do not rely on DOM nesting structure so that the anchor element appears the same as the starting element (since
  * the cloned element is placed inside of root element which is likely close to the body element).
  *
- * Note that if the root element is on the `<html>` element then the cloned node will be placed inside of body.
+ * Note that if the root element is on the `<html>` element then the cloned nodejs will be placed inside of body.
  *
  *
  * ## Using $animate in your directive code
@@ -55550,7 +55550,7 @@ function($scope, $element, $attrs, $q, $ionicConfig, $ionicHistory) {
 
       childSize = 0;
       if (c.nodeType == 1) {
-        // element node
+        // element nodejs
         if (c === titleEle) {
           isCountRightOfTitle = true;
           continue;
@@ -55598,7 +55598,7 @@ function($scope, $element, $attrs, $q, $ionicConfig, $ionicHistory) {
         }
 
       } else if (c.nodeType == 3 && c.nodeValue.trim()) {
-        // text node
+        // text nodejs
         bounds = ionic.DomUtil.getTextBounds(c);
         childSize = bounds && bounds.width || 0;
       }

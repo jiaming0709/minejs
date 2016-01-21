@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+    <style>
+        div{
+            width:100px;
+            height:30px;
+            background:#ff0;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <div ng-show="{{isShow}}">show</div>
+    <div ng-hide="{{ishide}}">hide</div>
+    <ul ng-switch on={{switch}}>
+        <li ng-switch-default>default</li>
+        <li ng-switch-when="1">11111</li>
+        <li ng-switch-when="2">22222</li>
+    </ul>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.switch=2;
+        $scope.isShow=true;
+        $scope.isHide=false;
+
+    })
+</script>
+</body>
+</html>

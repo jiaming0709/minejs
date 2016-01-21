@@ -259,7 +259,7 @@ window.ionic.version = '1.2.1';
      * @description
      * Get a rect representing the bounds of the given textNode.
      * @param {DOMElement} textNode The textNode to find the bounds of.
-     * @returns {object} An object representing the bounds of the node. Properties:
+     * @returns {object} An object representing the bounds of the nodejs. Properties:
      *   - `{number}` `left` The left position of the textNode.
      *   - `{number}` `right` The right position of the textNode.
      *   - `{number}` `top` The top position of the textNode.
@@ -295,7 +295,7 @@ window.ionic.version = '1.2.1';
      * @ngdoc method
      * @name ionic.DomUtil#getChildIndex
      * @description
-     * Get the first index of a child node within the given element of the
+     * Get the first index of a child nodejs within the given element of the
      * specified type.
      * @param {DOMElement} element The element to find the index of.
      * @param {string} type The nodeName to match children of element against.
@@ -1159,7 +1159,7 @@ window.ionic.version = '1.2.1';
 
 
     /**
-     * find if a node is in the given parent
+     * find if a nodejs is in the given parent
      * used for event delegation tricks
      * @param   {HTMLElement}   node
      * @param   {HTMLElement}   parent
@@ -3441,7 +3441,7 @@ ionic.DomUtil.ready(function() {
       if (!scope) return;
 
       if (scope.$root === scope) {
-        return; // we can't disconnect the root node;
+        return; // we can't disconnect the root nodejs;
       }
       var parent = scope.$parent;
       scope.$$disconnected = true;
@@ -3467,7 +3467,7 @@ ionic.DomUtil.ready(function() {
       if (!scope) return;
 
       if (scope.$root === scope) {
-        return; // we can't disconnect the root node;
+        return; // we can't disconnect the root nodejs;
       }
       if (!scope.$$disconnected) {
         return;

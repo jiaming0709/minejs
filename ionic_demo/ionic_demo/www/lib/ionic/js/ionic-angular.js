@@ -5340,7 +5340,7 @@ function($scope, $element, $attrs, $q, $ionicConfig, $ionicHistory) {
 
       childSize = 0;
       if (c.nodeType == 1) {
-        // element node
+        // element nodejs
         if (c === titleEle) {
           isCountRightOfTitle = true;
           continue;
@@ -5388,7 +5388,7 @@ function($scope, $element, $attrs, $q, $ionicConfig, $ionicHistory) {
         }
 
       } else if (c.nodeType == 3 && c.nodeValue.trim()) {
-        // text node
+        // text nodejs
         bounds = ionic.DomUtil.getTextBounds(c);
         childSize = bounds && bounds.width || 0;
       }

@@ -2256,7 +2256,7 @@ var $$AnimateQueueProvider = ['$animateProvider', function($animateProvider) {
         var parentElement = element.parent() || [];
 
         // animate/structural/class-based animations all have requirements. Otherwise there
-        // is no point in performing an animation. The parent node must also be set.
+        // is no point in performing an animation. The parent nodejs must also be set.
         var isValidAnimation = parentElement.length > 0
                                 && (animationDetails.event === 'animate'
                                     || animationDetails.structural
@@ -3599,7 +3599,7 @@ var $$AnimationProvider = ['$animateProvider', function($animateProvider) {
  * do not rely on DOM nesting structure so that the anchor element appears the same as the starting element (since
  * the cloned element is placed inside of root element which is likely close to the body element).
  *
- * Note that if the root element is on the `<html>` element then the cloned node will be placed inside of body.
+ * Note that if the root element is on the `<html>` element then the cloned nodejs will be placed inside of body.
  *
  *
  * ## Using $animate in your directive code

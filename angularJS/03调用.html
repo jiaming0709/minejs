@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="userController">
+
+    <input type="text" ng-model="user"/>
+    <div ng-bind="$eval(expre)"></div>
+    <button ng-click="reset()">reset</button>
+    <button ng-click="show()">show</button>
+    <button></button>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("userController",function($scope){
+        $scope.reset=function(){
+            $scope.user="";
+        }
+        $scope.expre="12.4+13 | number:0";
+        $scope.user="john";
+        $scope.show=function(){
+            $window.alert($scope.user);
+        }
+    })
+</script>
+</body>
+</html>

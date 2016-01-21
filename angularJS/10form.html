@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <form novalidate action="" name="my_form">
+        <p>
+            user: <input name="user" ng-model="user" type="text" required/>
+            <span ng-show="my_form.user.$error.required">不能为空</span>
+            <span ng-show="my_form.user.$dirty">已输入过</span>
+        </p>
+        <p>
+            email:<input name="email" ng-model="email" type="email">
+            <span ng-show="my_form.email.$error.email">格式不正确</span>
+        </p>
+        <p>
+            checkbox  同意: <input type="checkbox" ng-model="agreeBox" ng-true-value="agree" ng-false-value="disagree"/>
+        </p>
+        <p>
+            radio  性别: <input type="radio" ng-model="sex" value="girl"/> 女
+            <input type="radio" ng-model="sex" value="boy"/>  男
+        </p>
+        <p>
+            <input type="button" ng-click="submit_success()" ng-disabled="my_form.$invalid" value="submit"/>
+        </p>
+        <p>{{result}}</p>
+    </form>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.user="john";
+        $scope.email="1234567@qq.com";
+        $scope.submit_success=function(){
+//            alert("submit success");
+            $scope.result=$scope.agreeBox+","+$scope.sex;
+        }
+        $scope.agreeBox="agree";
+        $scope.sex="boy";
+    })
+</script>
+</body>
+</html>
