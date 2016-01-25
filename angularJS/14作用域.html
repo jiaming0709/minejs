@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="user"/>
+    <div>user:{{user}}</div>
+    <div>change count:{{count}}</div>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("myCtrl",function($scope){
+        $scope.user="John";
+        $scope.count=-1;
+        $scope.$watch("user",function(){
+            $scope.count++;
+        })
+    })
+</script>
+</body>
+</html>

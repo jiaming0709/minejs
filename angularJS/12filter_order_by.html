@@ -1,0 +1,82 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        span {
+            float: left;
+            width: 100px;
+            line-height: 30px;
+        }
+
+        li {
+            clear: both;
+        }
+
+        .red {
+            color: #f00;
+        }
+
+        .green {
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="orderCtrl">
+    <ul>
+        <li ng-class="{'red':a,'green':b}">
+            <span>index</span>
+            <span>name</span>
+            <span>sex</span>
+            <span>age</span>
+            <span>score</span>
+        </li>
+        <li ng-repeat="user in data | young:true">
+            <span>{{$index+1}}</span>
+            <span>{{user.name}}</span>
+            <span>{{user.sex}}</span>
+            <span>{{user.age}}</span>
+            <span>{{user.score}}</span>
+        </li>
+    </ul>
+</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("orderCtrl", function ($scope) {
+        $scope.findScore = function (e) {
+            return e.score > 85 && e.score < 90;
+        }
+        $scope.data = [
+            {name: "aaa", sex: "girl", age: "18", score: "88"},
+            {name: "bbb", sex: "boy", age: "25", score: "68"},
+            {name: "tre", sex: "girl", age: "54", score: "98"},
+            {name: "wer", sex: "boy", age: "8", score: "67"},
+            {name: "jhg", sex: "girl", age: "27", score: "87"}
+        ];
+        $scope.a = true;
+        $scope.colorValue = false;
+    })
+    app.filter("young", function () {
+        return function (e, type) {
+            var _out = [];
+            var _sex = type ? "boy" : "girl";
+            for(var i=0;i< e.length;i++){
+                if( e[i].sex==_sex){
+                    _out[_out.length]=e[i];
+                }
+            }
+            return _out;
+        }
+    });
+</script>
+</body>
+</html> 

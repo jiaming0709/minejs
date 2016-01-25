@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<input type="text" ng-model="expr"/>
+{{parseValue}}
+<script>
+    angular.module("myApp",[]).controller("myCtrl",function($scope,$parse){
+//        $scope.parseValue=0;
+        $scope.$watch("expr",function(newValue,oldValue,scope){
+            var parseFun=$parse(newValue);
+            console.dir(parseFun);
+
+            $scope.parseValue=parseFun($scope);
+
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        span {
+            float: left;
+            width: 100px;
+            line-height: 30px;
+        }
+
+        li {
+            clear: both;
+        }
+
+        .red {
+            color: #f00;
+        }
+
+        .green {
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="tableCtrl">
+    filter: <input type="text" ng-model="key"/>
+    <ul>
+        <li>
+            <span>index</span>
+            <span ng-click="title='name';desc=!desc">name</span>
+            <span ng-click="title='sex';desc=!desc">sex</span>
+            <span ng-click="title='age';desc=!desc">age</span>
+            <span ng-click="title='score';desc=!desc">score</span>
+        </li>
+        <li ng-repeat="user in data | orderBy:title:desc |filter:{name:key}">
+            <span>{{$index+1}}</span>
+            <span>{{user.name}}</span>
+            <span>{{user.sex}}</span>
+            <span>{{user.age}}</span>
+            <span>{{user.score}}</span>
+        </li>
+    </ul>
+</div>
+<script>
+    var app=angular.module("myApp",[]);
+    app.controller("tableCtrl",function($scope){
+        $scope.data = [
+            {name: "aaa", sex: "girl", age: "18", score: "88"},
+            {name: "bbb", sex: "boy", age: "25", score: "68"},
+            {name: "tre", sex: "girl", age: "54", score: "98"},
+            {name: "wer", sex: "boy", age: "8", score: "67"},
+            {name: "jhg", sex: "girl", age: "27", score: "87"}
+        ];
+        $scope.title="name";
+        $scope.desc=false;
+        $scope.key="";
+
+    })
+</script>
+</body>
+</html>
