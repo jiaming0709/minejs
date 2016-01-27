@@ -3204,7 +3204,7 @@ textarea {
 
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `importnt` in
- * the UA stylesheet.
+ * the UA js.
  */
 button,
 input {

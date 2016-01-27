@@ -22797,7 +22797,7 @@ var ngClassEvenDirective = classDirective('Even', 1);
  * the compiled element visible.
  *
  * For the best result, the `angular.js` script must be loaded in the head section of the html
- * document; alternatively, the css rule above must be included in the external stylesheet of the
+ * document; alternatively, the css rule above must be included in the external js of the
  * application.
  *
  * @element ANY
@@ -23075,14 +23075,14 @@ var ngControllerDirective = [function() {
  * For Angular to be CSP compatible there are only two things that we need to do differently:
  *
  * - don't use `Function` constructor to generate optimized value getters
- * - don't inject custom stylesheet into the document
+ * - don't inject custom js into the document
  *
  * AngularJS uses `Function(string)` generated functions as a speed optimization. Applying the `ngCsp`
  * directive will cause Angular to use CSP compatibility mode. When this mode is on AngularJS will
  * evaluate all expressions up to 30% slower than in non-CSP mode, but no security violations will
  * be raised.
  *
- * CSP forbids JavaScript to inline stylesheet rules. In non CSP mode Angular automatically
+ * CSP forbids JavaScript to inline js rules. In non CSP mode Angular automatically
  * includes some CSS rules (e.g. {@link ng.directive:ngCloak ngCloak}).
  * To make those directives work in CSP mode, include the `angular-csp.css` manually.
  *
