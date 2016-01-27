@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+    To:<input type="text" ng-model="to"/><br>
+    正文:<textarea ng-model="emailBody" name="" id="" cols="30" rows="10"></textarea><br>
+
+    <div>
+        {{to}}
+
+    </div>
+    <div>
+        <pre>
+        {{preViewText}}
+    </pre>
+    </div>
+</div>
+<script>
+    var app = angular.module("myApp", [emailParser]);
+    app.controller("myCtrl", function ($scope, $interpolate) {
+        $scope.$watch("emailBody", function (body) {
+            if (!!body) {
+                console.log(body);
+                var template = $interpolate(body);
+                $scope.preViewText = template({to: $scope.to})
+            }
+        })
+    });
+    angular.module("emailParser",[]).config(["$interpolateProvider",function($interpolateProvider){
+        $interpolateProvider.startSymbol("__");
+        $interpolateProvider.endSymbol("__");
+    }]).factory("EmailParser",["$interpolate",function($interpolate){
+        return {
+            parse:function(text,context){
+                var temp=$interpolate(text);
+                return temp(context);
+            }
+        }
+    }]);
+</script>
+</body>
+</html>

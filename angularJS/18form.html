@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+    <style>
+        .error {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="formCtrl">
+    <form action="" novalidate name="sign_up_form" ng-submit="signupForm()">
+        <h3>Sign up</h3>
+
+        <div class="row">
+            <span class="columns">
+                <label for="">your name:</label>
+                <input type="text" name="name" ng-model="signUp.name" ng-minlength="3" ng-maxlength="20" required/>
+            </span>
+            <span class="error" ng-show="sign_up_form.name.$dirty && sign_up_form.name.$invalid">
+                <span ng-show="sign_up_form.name.$error.required">
+                    your name is required
+                </span>
+                <span ng-show="sign_up_form.name.$error.minlength">
+                    Your name is required to be at least 3 characters
+                </span>
+                <span ng-show="sign_up_form.name.$error.maxlength">
+                    Your name cannot be longer than 20 characters
+                </span>
+            </span>
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <span class="columns">
+                <label for="">your email:</label>
+                <input type="email" name="email" ng-model="signUp.email" ng-minlength="3" ng-maxlength="20" required/>
+            </span>
+            <span class="error" ng-show="sign_up_form.email.$dirty && sign_up_form.email.$invalid">
+                <span ng-show="sign_up_form.email.$error.required">
+                    your email is required
+                </span>
+                <span ng-show="sign_up_form.email.$error.minlength">
+                    Your email is required to be at least 3 characters
+                </span>
+                <span ng-show="sign_up_form.email.$error.maxlength">
+                    Your email cannot be longer than 20 characters
+                </span>
+                <span ng-show="sign_up_form.email.$error.email">
+                    That is not a valid email. Please input a valid email.
+                </span>
+            </span>
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <span class="columns">
+                <label for="">userName</label>
+                <input type="text" name="userName" ng-model="signUp.userName" required ensure-unique="userName"/>
+            </span>
+            <span class="error" ng-show="sign_up_form.userName.$dirty && sign_up_form.userName.$invalid">
+                <span ng-show="sign_up_form.userName.$error.required">
+                    your userName is required
+                </span>
+            </span>
+            <span ng-show="sign_up_form.userName.$error.unique">
+                taken, please try another
+            </span>
+        </div>
+        <input type="submit" ng-disabled="sign_up_form.$invalid" ng-model="submit"/>
+    </form>
+</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("formCtrl", function ($scope) {
+        $scope.signUp = {
+            name: "xttt",
+            userName: "123456789",
+            email: "gfds@qq.com"
+        }
+    })
+    app.directive("ensureUnique",function($http){
+        return{
+            require:"ngModel",
+            link:function(scope,ele,attrs,c){
+                console.log(c);
+                scope.$watch(attrs.ngModel,function(n){
+                    console.log(n);
+                    if(!n)
+                        return;
+                    c.$setValidity('unique', data.isUnique);
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
