@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Highcharts Example</title>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    height:400,
+                    width:400,
+                    marginRight: 120
+
+                },
+                colors: [
+                    'red',//第一个颜色，4
+                    'blue',//第二个颜色
+                    'yellow',//第三个颜色
+                    '#1aadce', //。。。。
+                    '#492970',
+                    '#f28f43',
+                    '#77a1e5',
+                    '#c42525',
+                    '#a6c96a'
+                ],
+                title: {
+                    text: 'kjhgfdssdfghjklkjhgfd, 2010',
+                    style:{
+                        height:"40px"
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                legend:{
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: 0,
+                    y: 100,
+                    borderColor:"#f00"
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Browser share',
+                    data: [
+                        ['Firefox', 45.0],
+                        ['IE', 26.8],
+                        ['Opera', 6.2],
+                    ]
+                }]
+            });
+        });
+    </script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+<body>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>

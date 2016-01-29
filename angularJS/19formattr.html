@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+    <style>
+        input{
+            outline:none;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="someProperty"/>
+    <button ng-disabled="!someProperty">Button</button>
+    <br/>
+
+    <textarea ng-disabled="isDisabled" name="" id="" cols="30" rows="10"></textarea>
+    <br/><br/>
+
+    <input type="text" ng-model="isonly"/>
+    <input type="text" ng-readonly="isonly"/>
+    <br/><br/>
+
+    <div>{{isChecked}}</div>
+    <input type="checkbox" ng-model="isChecked" name="number"/>123
+    <br/><br/><br/>
+
+    <select name="" ng-model="a" ng-options="v.id as v.name for v in a_data" id="">
+        <option value="">请选择</option>
+    </select>
+</div>
+<script>
+    angular.module("myApp",[]).run(function($rootScope,$timeout){
+        $rootScope.isDisabled=true;
+        $timeout(function(){
+            $rootScope.isDisabled=false;
+        },5000)
+    }).controller("myCtrl",function($scope){
+        $scope.a="123";
+        $scope.isChecked=true;
+        $scope.a_data=[{id:"001",name:"小学"},{id:"002",name:"中学"},{id:"003",name:"大学"}];
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>scope</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="MainController">
+    outside:{{myProperty}}
+
+    <div my-directive ng-init="myProperty='wow,this is cool'">
+        inside:{{myProperty}}
+    </div>
+
+</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("MainController", function ($scope) {
+
+    });
+    app.directive("myDirective", function () {
+        return {
+            restrict: "A",
+            priority: 100,
+            template: '<p>Inside myDirective {{ myProperty }}</p>'
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="myApp">
+    <input type="text" ng-model="myUrl"/><br>
+    <div my-directive
+         my-url="{{myUrl}}"
+         my-link-text="click me">
+
+    </div>
+    <p> {{myUrl}}
+    </p>
+
+    <p>{{myLinkText}}</p>
+</div>
+
+<script>
+    angular.module("myApp", [])
+            .directive("myDirective", function () {
+                return {
+                    restrict: "A",
+                    replace: true,
+                    scope: {
+                        myUrl: "@",
+                        myLinkText: "@"
+                    },
+                    template:'<div>\
+                    <input type="text" ng-model="myUrl"/>\
+                    <a href="{{myUrl}}">{{myLinkText}}</a>\
+                    </div>'
+                };
+            });
+//            .controller("myCtrl", function ($scope) {
+//                $scope.myUrl = "http://123.com";
+//                $scope.myLinkText = "gfdsdfghgfds";
+//            });
+</script>
+</body>
+</html>

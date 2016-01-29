@@ -1,0 +1,22 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div>
+    <img ng-src="{{imgSrc}}" alt=""/>
+
+</div>
+<script>
+    angular.module("myApp",[])
+            .run(function($timeout,$rootScope){
+                $timeout(function(){
+                    $rootScope.imgSrc="http://img1.imgtn.bdimg.com/it/u=1299527813,1627608494&fm=21&gp=0.jpg";
+                })
+            })
+</script>
+</body>
+</html>

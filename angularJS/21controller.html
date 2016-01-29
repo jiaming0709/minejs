@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div my-directive>
+    <input type="text" ng-model="main.name"/>
+    <span>{{main.name}}</span>
+</div>
+
+<script>
+//    angular.module("myApp",[])
+//            .controller("MainController",function(){
+//                this.name="Air";
+//            })
+
+    angular.module("myApp",[])
+            .directive("myDirective",function(){
+                return{
+                    restrict:"A",
+                    template:"<h4>{{myController.msg}}</h4>",
+                    controllerAs:'myController',
+                    controller:function(){
+                        this.msg="hello";
+                    }
+                }
+            })
+</script>
+</body>
+</html>

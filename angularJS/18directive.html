@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div>
+    <input type="text" ng-model="theirUrl"/><br/><br/>
+    <div my-directive my-url="theirUrl" some-text="click Me"></div>
+</div>
+<script>
+    angular.module("myApp", []).directive("myDirective", function () {
+        return {
+            restrict: "A",
+            replace: true,
+            scope:{
+                myUrl:"@",
+                myText:"@someText"
+            },
+            template: '\
+            <div>\
+            <input type="text" ng-model="myUrl">\
+            <br>\
+            <a href="{{myUrl}}">{{myText}}</a>\
+            </div>\
+            '
+        };
+    });
+</script>
+</body>
+</html>
