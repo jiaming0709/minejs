@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<p id="reply_text1039" data-id="1039">
+    <span data-sendtime="2016-02-01 11:15:33">1分钟前</span>
+</p>
+<script src="jquery.min.js"></script>
+<script>
+    function timeAgo(sendTime){
+        var d_value=(new Date().getTime()-new Date(sendTime).getTime())/1000;
+        var d_hour=Math.floor(d_value/60/60);
+        var d_min=Math.floor((d_value-d_hour*60*60)/60);
+        var d_text=sendTime;
+        if (d_hour>=24){
+            d_text=d_hour<72?"昨天前":d_text;
+        }
+        else if(d_hour>0){
+            d_text=d_hour+"小时前";
+        }
+        else if(d_min>=30){
+            d_text="半小时前";
+        }
+        else{
+            d_text=d_min>0?d_min+"分钟前":"1分钟前";
+        }
+        return d_text;
+        console.log(sendTime)
+
+    }
+    var text=timeAgo("01-08 11:11");
+    $("span").html(text);
+</script>
+</body>
+</html>
