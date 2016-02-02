@@ -1,44 +1,19 @@
 <!doctype html>
-<html ng-app="myApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>index</title>
     <script src="libs/angular.js"></script>
-    <script src="libs/angular-route.min.js"></script>
+    <script src="controller/controller.js"></script>
+    <style>
+        #main{
+            min-height:100px;
+            background:#eee;
+        }
+    </style>
 </head>
 <body>
-<header>
-    <h1>header</h1>
-</header>
-<div class="content">
-    <div ng-view></div>
-</div>
-<footer>
-    <h5>footer</h5>
-</footer>
-<script>
-    angular.module("myApp", ['ngRoute'])
-            .config(['$routeProvider'], function ($routeProvider) {
-                $routeProvider
-                        .when("/", {
-                            $templateUrl: 'views/home.html',
-                            controller: 'homeController',
-                            template:"hgfdsdfghjkjhgfds"
-                        })
-                        .when("/login",{
-                            $templateUrl:'views/login.html',
-                            controller:'loginController'
-                        })
-                        .when("/dashboard",{
-                            $templateUrl:'views/dashboard.html',
-                            controller:'dashboardController',
-                            resole:{
-                                user:function(SessionService){
-                                    return sessionService.getCurrentUser();
-                                }
-                            }
-                        })
-            })
-</script>
+<h1>a-Mail</h1>
+<div id="main" ng-view></div>
 </body>
 </html>
