@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>student</title>
+    <script src="../angular.js"></script>
+</head>
+<body>
+<div class="student_list" ng-controller="studentController">
+    <ul ng-repeat="item in student">
+        <li>
+            <a href="views/{{item.id}}" ng-bind="item.name"></a>
+        </li>
+    </ul>
+    <input type="button" ng-click="insert_new()" value="insert new Student"/>
+</div>
+<script>
+    var student = [
+        {id:1,name: "tre", age: "54", sex: "girl"},
+        {id:2,name: "tre", age: "54", sex: "girl"},
+        {id:3,name: "tre", age: "54", sex: "girl"},
+        {id:4,name: "tre", age: "54", sex: "girl"},
+        {id:5,name: "tre", age: "54", sex: "girl"},
+        {id:6,name: "tre", age: "54", sex: "girl"},
+        {id:7,name: "tre", age: "54", sex: "girl"},
+    ];
+    angular.module("myApp",[])
+            .controller("studentController",function($scope){
+                $scope.student=student;
+            })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="startupController">
+    <input type="text" ng-model="user"/>
+    <div ng-bind="user"></div>
+    <div ng-bind="count">count</div>
+</div>
+<script>
+    function func(){
+        console.log("执行保存");
+    }
+    angular.module("myApp",[])
+            .controller("startupController",function($scope){
+                $scope.count=0;
+                $scope.user="123";
+                $scope.$watch("user",function(){
+                    $scope.count++;
+                    func();
+                })
+            })
+</script>
+</body>
+</html>

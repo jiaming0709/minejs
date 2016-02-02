@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>shopping</title>
+    <script src="angular.js"></script>
+</head>
+<body>
+<div ng-app="shoppingModel" ng-controller="shoppingCtrl">
+    <table>
+        <tr ng-repeat="item in items">
+            <td>{{item.title}}</td>
+            <td>{{item.desc}}</td>
+            <td>{{item.price | currency}}</td>
+        </tr>
+    </table>
+</div>
+<script>
+    var items = {
+        query: function () {
+            return [
+                {title: "ice", desc: "this is very good", price: 2},
+                {title: "ice", desc: "this is very good", price: 2},
+                {title: "ice", desc: "this is very good", price: 2},
+                {title: "ice", desc: "this is very good", price: 2},
+                {title: "ice", desc: "this is very good", price: 2}
+            ];
+        }
+    }
+    function shopping_control($scope) {
+        $scope.items = items.query();
+    }
+    angular.module("shoppingModel", []).controller("shoppingCtrl", shopping_control);
+</script>
+</body>
+</html>

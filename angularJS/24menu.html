@@ -1,0 +1,47 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.js"></script>
+    <style>
+        p{
+            display:inline-block;
+            line-height: 30px;
+            width:100px;
+            text-align:center;
+        }
+        .menu_false{
+            background:#f90;
+            color:#fff;
+        }
+        .menu_true{
+            background:#ccc;
+            color:#aaa;
+        }
+    </style>
+</head>
+<body ng-controller="myCtrl">
+<div class="menu">
+    <p ng-click="menu_status()" class="menu_{{is_disabled}}">menu</p>
+    <ul ng-show="menu_show">
+        <li>childMenu</li>
+        <li>childMenu</li>
+        <li>childMenu</li>
+        <li>childMenu</li>
+        <li>childMenu</li>
+    </ul>
+</div>
+<script>
+    angular.module("myApp", [])
+            .controller("myCtrl", function ($scope) {
+                $scope.menu_show=true;
+                $scope.is_disabled=false;
+                $scope.menu_status=function(){
+                    $scope.menu_show=!$scope.menu_show;
+                    $scope.is_disabled=!$scope.is_disabled;
+                }
+            });
+</script>
+</body>
+</html>

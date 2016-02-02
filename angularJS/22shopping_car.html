@@ -1,0 +1,69 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>shopping card</title>
+    <script src="angular.js"></script>
+    <style>
+        .red {
+            color: #f00;
+        }
+
+        span {
+            display: inline-block;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body ng-controller="cardController">
+<div ng-repeat="item in items">
+    <span>title:{{item.title}}</span>
+    <span>price:{{item.price | currency}}</span>
+    <input type="text" ng-model="item.quantity"/>
+    <span>quantity:{{item.quantity}}</span>
+    <span>{{item.price*item.quantity | currency}}</span>
+    <button ng-click="remove($index)">delete</button>
+</div>
+<p>total:{{total_value() | currency}}</p>
+
+<p>discount:{{discount | currency}}</p>
+
+<p>subtotal{{subtotal() | currency}}</p>
+
+<script>
+    function delete_func() {
+        console.log("执行后台删除");
+    }
+    function cardController($scope) {
+        $scope.items = [
+            {title: "pots", price: 2.3, quantity: 3},
+            {title: "pots", price: 2.3, quantity: 3},
+            {title: "pots", price: 2.3, quantity: 3},
+            {title: "pots", price: 2.3, quantity: 3},
+            {title: "pots", price: 2.3, quantity: 3}
+        ];
+        $scope.remove = function (index) {
+            $scope.items.splice(index, 1)
+            delete_func();
+        };
+        $scope.total_value = function () {
+            var total_val = 0;
+            for (var i = 0; i < $scope.items.length; i++) {
+                total_val += $scope.items[i].price * $scope.items[i].quantity;
+            }
+            return total_val;
+        }
+        $scope.$watch($scope.total_value, function (newValue,oldValue) {
+            console.log(newValue,oldValue);
+            $scope.discount = newValue > 100 ? 10 : 0;
+        })
+        $scope.subtotal = function () {
+            return $scope.total_value() - $scope.discount;
+        }
+
+    }
+    angular.module("myApp", [])
+            .controller("cardController", cardController);
+</script>
+</body>
+</html>
