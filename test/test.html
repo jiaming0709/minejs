@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<p id="reply_text1039" data-id="1039">
+    <span style="font-size:40px;" data-sendtime="2016-02-01 11:15:33">1分钟前</span>
+</p>
+<script src="jquery.min.js"></script>
+<script>
+    function timeAgo(sendTime) {
+        sendTime=sendTime.split(" ");
+        sendTime[0]=sendTime[0].split("-").join("/");
+        sendTime=sendTime.join(" ");
+        console.log(sendTime);
+        var d_value = (new Date().getTime() - new Date(sendTime).getTime()) / 1000;
+        var d_hour = Math.floor(d_value / 60 / 60);
+        var d_min = Math.floor((d_value - d_hour * 60 * 60) / 60);
+
+        var month = parseInt(new Date(sendTime).getMonth())+1;
+        var date=parseInt(new Date(sendTime).getDate());
+        month=month<10?"0"+month:month;
+        date=date<10?"0"+date:date;
+        var d_text=month+"-"+date;
+
+        if (d_hour >= 24) {
+            d_text = d_hour < 72 ? "昨天前" : d_text;
+        } else if (d_hour > 0) {
+            d_text = d_hour + "小时前";
+        } else if (d_hour <= 0){
+            if (d_min <= 30 ) {
+                d_text = d_min > 0 ? d_min + "分钟前" : "1分钟前";
+            } else {
+                d_text =  "banxiaoshiqian";
+            }
+        }
+        console.log(d_hour);
+        console.log(d_min);
+        return d_text
+
+
+    }
+    var text = timeAgo("2016-02-04 10:00");
+    $("span").html(text);
+</script>
+</body>
+</html>
