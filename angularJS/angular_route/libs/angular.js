@@ -1326,7 +1326,7 @@
             var d = /^\s*([@&]|=(\*?))(\??)\s*(\w*)\s*$/, e = {};
             n(a, function (a, f) {
                 var g = a.match(d);
-                if (!g)throw ia("iscp", b, f, a, c ? "controller bindings definition" : "isolate scope definition");
+                if (!g)throw ia("iscp", b, f, a, c ? "controllers bindings definition" : "isolate scope definition");
                 e[f] = {mode: g[1][0], collection: "*" === g[2], optional: "?" === g[3], attrName: g[4] || f}
             });
             return e
@@ -1632,7 +1632,7 @@
                             }
                             pa = !0
                         }
-                        !I.templateUrl && I.controller && (E = I.controller, N = N || X(), Wa("'" + sa + "' controller", N[sa], I, w), N[sa] = I);
+                        !I.templateUrl && I.controller && (E = I.controller, N = N || X(), Wa("'" + sa + "' controllers", N[sa], I, w), N[sa] = I);
                         if (E = I.transclude)if (W = !0, I.$$tlb || (Wa("transclusion", R, I, w), R = I), "element" == E)ya = !0, F = I.priority, oa = w, w = d.$$element = A(Z.createComment(" " + sa + ": " + d[sa] + " ")), b = w[0], aa(f, wa.call(oa, 0), b), H = Zb(S, oa, e, F, g && g.name, {nonTlbTranscludeDirective: R}); else {
                             var V = X();
                             oa = A(Wb(b)).contents();
@@ -1833,7 +1833,7 @@
                 function E(a, b) {
                     if ("srcdoc" == b)return M.HTML;
                     var c = ta(a);
-                    if ("xlinkHref" == b || "form" == c && "action" == b || "img" != c && ("src" == b || "ngSrc" == b))return M.RESOURCE_URL
+                    if ("xlinkHref" == b || "form" == c && "action" == b || "images" != c && ("src" == b || "ngSrc" == b))return M.RESOURCE_URL
                 }
 
                 function T(a, c, d, e, f) {
@@ -1971,8 +1971,8 @@
                         this[a] = b;
                         e ? this.$attr[a] = e : (e = this.$attr[a]) || (this.$attr[a] = e = Ac(a, "-"));
                         f = ta(this.$$element);
-                        if ("a" === f && ("href" === a || "xlinkHref" === a) || "img" === f && "src" === a)this[a] =
-                            b = C(b, "src" === a); else if ("img" === f && "srcset" === a) {
+                        if ("a" === f && ("href" === a || "xlinkHref" === a) || "images" === f && "src" === a)this[a] =
+                            b = C(b, "src" === a); else if ("images" === f && "srcset" === a) {
                             for (var f = "", g = Y(b), k = /(\s+\d+x\s*,|\s+\d+w\s*,|\s+,|,\s+)/, k = /\s/.test(g) ? k : /(,)/, g = g.split(k), k = Math.floor(g.length / 2), l = 0; l < k; l++)var m = 2 * l, f = f + C(Y(g[m]), !0), f = f + (" " + Y(g[m + 1]));
                             g = Y(g[2 * l]).split(/\s/);
                             f += C(Y(g[0]), !0);
