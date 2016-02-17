@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="box"></div>
+<script>
+        var obj=window.orientation;
+        if(window.orientation){
+            alert("true");
+        }
+        else{
+            alert("false");
+        }
+//    var obj = {"name": "rem", age: "12"};
+    var str = "";
+    for (item in obj) {
+        str += item + ":" + obj[item]+"<br>";
+    }
+    document.getElementById("box").innerHTML=str;
+</script>
+</body>
+</html>

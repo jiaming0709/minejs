@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>banner</title>
+    <style>
+        .box {
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        ul {
+            height: 440px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            width: 95px;
+            float: left;
+            overflow: hidden;
+            -webkit-transition: width 0.5s;
+            -webkit-transform: translateZ(0);
+        }
+
+        b {
+            -webkit-transition: all 0.5s;
+            background: url(http://gyc.woniu.com/tg/ad6/images/ts.jpg);
+            display: block;
+            height: 440px;
+        }
+
+        li:nth-child(1) b {
+            background-position: 0 0;
+        }
+
+        li:nth-child(2) b {
+            background-position: -95px 0;
+        }
+
+        li:nth-child(3) b {
+            background-position: -190px 0;
+        }
+
+        li:nth-child(4) b {
+            background-position: -285px 0;
+        }
+
+        li.on {
+            width: 915px;
+        }
+
+        li:nth-child(1) {
+            background: #f00;
+        }
+
+        li:nth-child(2) {
+            background: #0f0;
+        }
+
+        li:nth-child(3) {
+            background: #00f;
+        }
+
+        li:nth-child(4) {
+            background: #0ff;
+        }
+
+        li.on b {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li><b></b></li>
+        <li class="on"><b></b></li>
+        <li><b></b></li>
+        <li><b></b></li>
+    </ul>
+</div>
+
+<script src="jquery.min.js"></script>
+<script>
+    $(function(){
+        $(".box li").mouseover(function(){
+            $(this).addClass("on").siblings().removeClass("on");
+        })
+    })
+</script>
+</body>
+</html>
