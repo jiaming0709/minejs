@@ -1,0 +1,29 @@
+<ul>
+    <li>
+        <b>sender:</b>
+        {{message.sender}}
+    </li>
+    <li>
+        <b>subject:</b>
+        {{message.subject}}
+    </li>
+    <li>
+        <b>date:</b>
+        {{message.date}}
+    </li>
+    <li>
+        <b>sendTo:</b>
+        <span ng-repeat="recipient in message.recipients">{{recipient}}</span>
+    </li>
+    <li>
+        <b>message:</b>
+        {{message.message}}
+    </li>
+</ul>
+
+<br/><br/>
+<a href="#/views">back to</a>
+
+
+
+<p>details</p>
