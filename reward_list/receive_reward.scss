@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.receive_reward_list {
+  section {
+    padding: 16px;
+    border-bottom: 1px solid #ebebeb;
+    background:#fff;
+    &.new::before{
+      width:6px;
+      height:6px;
+      content:" ";
+      background:#f00;
+      display:block;
+    }
+    .head_img {
+      width: 44px;
+      height: 44px;
+      float: left;
+      img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+      }
+    }
+    ul.receive_main {
+      margin: 0 65px 0 50px;
+      li {
+      }
+      .rem_money {
+        color: #fa2400;
+        font-size: 17px;
+      }
+      .rem_from {
+        color: #666;
+        font-size: 10px;
+      }
+      .rem_time {
+        font-size: 10px;
+        color: #cacaca;
+      }
+    }
+    .receive_details {
+      height: 44px;
+      width: 53px;
+      padding: 0 5px;
+      background: #f7f7f7;
+      border: 1px solid #ededed;
+      float: right;
+      overflow: hidden;
+      line-height: 15px;
+      font-size: 10px;
+      color: #151515;
+    }
+  }
+}

@@ -7,7 +7,24 @@
 </head>
 <body>
 <div id="main_angel_dinner">
-    <nav>
+    <div class="banner">
+    </div>
+    <div id="intro" class="activity_sec activity_intro">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div id="schedule" class="activity_sec activity_schedule">
+        <div class="schedule"></div>
+    </div>
+    <div id="awards" class="activity_sec activity_awards">
         <ul>
             <li></li>
             <li></li>
@@ -17,7 +34,172 @@
             <li></li>
             <li></li>
         </ul>
+    </div>
+    <div id="partner" class="activity_sec activity_partner">
+        <section>
+            <div class="title"></div>
+            <ul>
+                <li></li>
+                <li></li>
+            </ul>
+        </section>
+        <section>
+            <div class="title"></div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="note"></div>
+        </section>
+        <section>
+            <div class="title"></div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="note"></div>
+        </section>
+        <section>
+            <div class="title"></div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="note"></div>
+        </section>
+        <section>
+            <div class="title"></div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <div class="note"></div>
+        </section>
+    </div>
+    <div id="history" class="activity_sec activity_history">
+        <ul>
+            <li></li>
+            <li><a href=""></a></li>
+
+        </ul>
+    </div>
+    <div id="contact" class="activity_sec activity_contact">
+        <ul>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div id="signUp" class="activity_sec activity_signUp">
+        <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+        </ul>
+    </div>
+    <nav class="side_bar">
+        <ul>
+            <!--<li><a href="#intro"></a></li>-->
+            <!--<li><a href="#schedule"></a></li>-->
+            <!--<li><a href="#awards"></a></li>-->
+            <!--<li><a href="#partner"></a></li>-->
+            <!--<li><a href="#history"></a></li>-->
+            <!--<li><a href="#contact"></a></li>-->
+            <!--<li><a href="#signUp"></a></li>-->
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+            <li><a href="javascript:;"></a></li>
+        </ul>
     </nav>
 </div>
+
+<script src="jquery.min.js"></script>
+<script>
+    var angel = {
+        getPos: function () {
+            var posAry = [];
+            $("#main_angel_dinner>.activity_sec").each(function () {
+                var posNumber = $(this).offset().top;
+                var height = $(this).height();
+                var currentIndex = $(this).index() - 1;
+                console.log(currentIndex);
+                posAry[currentIndex] = {"top": posNumber, "btm": posNumber + height}
+            });
+            posAry.pop();
+            return posAry;
+        },
+        autoPosTo: function (posAry, scTop) {
+            console.log(scTop);
+            for (var i = 0; i < posAry.length; i++) {
+                if (scTop >= posAry[i].top && scTop < posAry[i].btm) {
+                    $("nav.side_bar").find("li").eq(i).find("a").addClass("hover");
+                    $("nav.side_bar").find("li").eq(i).siblings().find("a").removeClass("hover");
+                }
+            }
+        }
+    }
+    $(function () {
+        var logo_count=0;
+        $("#main_angel_dinner .activity_partner section ul li").each(function(){
+            $(this).css("background-position-y",-80*logo_count++);
+        });
+
+        var posAry = angel.getPos();
+        console.log(posAry);
+        $(window).scroll(function () {
+            var scTop = $(window).scrollTop();
+            if(!$("nav").attr("data-click")){
+                console.log("true");
+                angel.autoPosTo(posAry, scTop);
+            }
+            var intro = $("#intro").offset().top;
+        })
+        $("nav.side_bar li").click(function(){
+            $(this).find("a").addClass("hover");
+            $(this).siblings().find("a").removeClass("hover");
+            $("nav").attr("data-click","true");
+            var cntIndex=$(this).index();
+            var value=posAry[cntIndex].top;
+            $('html,body').animate({scrollTop: value}, 800);
+            window.setTimeout(function(){
+                $("nav").removeAttr("data-click","true");
+            },800)
+        })
+    })
+</script>
 </body>
 </html>

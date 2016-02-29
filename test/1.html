@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            width:200px;
+            height:200px;
+            background:#ccc;
+        }
+        .shadow{
+            animation:shadow 1.5s ease-out;
+            -webkit-animation:shadow 1.5s ease-out;
+            -moz-animation:shadow 1.5s ease-out;
+
+        }
+
+        @keyframes shadow{
+            0%{
+                -webkit-box-shadow:2px 0 0 0 #FF0 inset;
+                -moz-box-shadow:2px 0 0 0 #FF0 inset;
+                -ms-box-shadow:2px 0 0 0 #FF0 inset;
+                box-shadow:2px 0 0 0 #FF0 inset;
+            }
+            50%{
+                -webkit-box-shadow:2px 0 40px 0 #FF0 inset;
+                -moz-box-shadow:2px 0 40px 0 #FF0 inset;
+                -ms-box-shadow:2px 0 40px 0 #FF0 inset;
+                box-shadow:2px 0 40px 0 #FF0 inset;
+            }
+            100%{
+                -webkit-box-shadow:2px 0 0 0 #FF0 inset;
+                -moz-box-shadow:2px 0 0 0 #FF0 inset;
+                -ms-box-shadow:2px 0 0 0 #FF0 inset;
+                box-shadow:2px 0 0 0 #FF0 inset;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script src="jquery.min.js"></script>
+<script>
+    $(function(){
+        $(".box").click(function(){
+            $(this).addClass("shadow");
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.reward_sort_list {
+  background: #fff; }
+  .reward_sort_list .h_group {
+    border-bottom: 1px solid #ebebeb;
+    color: #333;
+    font-size: 12px;
+    line-height: 44px;
+    padding-left: 38px;
+    background: url(reward_btn.png) no-repeat 10px 8px;
+    background-size: 26px 26px; }
+    .reward_sort_list .h_group span {
+      color: #f2b206;
+      font-size: 13px;
+      margin-right: 5px; }
+  .reward_sort_list section {
+    border-bottom: 1px solid #ebebeb; }
+    .reward_sort_list section .sort_user_avatar {
+      width: 35px;
+      height: 35px;
+      padding: 12px 10px;
+      float: left;
+      position: relative; }
+      .reward_sort_list section .sort_user_avatar::before {
+        width: 14px;
+        height: 14px;
+        display: block;
+        color: #fff;
+        position: absolute;
+        right: 7px;
+        border-radius: 50%;
+        font-size: 10px;
+        text-align: center;
+        line-height: 16px; }
+      .reward_sort_list section .sort_user_avatar img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%; }
+    .reward_sort_list section:nth-of-type(1) .sort_user_avatar::before {
+      content: "1";
+      background: #ff3b3b; }
+    .reward_sort_list section:nth-of-type(2) .sort_user_avatar::before {
+      content: "2";
+      background: #f2b206; }
+    .reward_sort_list section:nth-of-type(3) .sort_user_avatar::before {
+      content: "3";
+      background: #d1795e; }
+    .reward_sort_list section .sort_amount {
+      line-height: 60px;
+      float: right;
+      color: #fa2400;
+      font-size: 15px;
+      padding-right: 10px; }
+    .reward_sort_list section .sort_user_name {
+      line-height: 60px;
+      color: #333;
+      font-size: 12px;
+      margin: 0 150px 0 55px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+
+/*# sourceMappingURL=sort.css.map */

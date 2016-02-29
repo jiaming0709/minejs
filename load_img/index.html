@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
+    <meta content='black' name='apple-mobile-web-app-status-bar-style'/>
+    <meta content='telephone=no' name='format-detection'/>
+    <style>
+        body, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test li {
+            height: 100px;
+        }
+
+        .test li:nth-child(2n) {
+            background: #eee;
+        }
+
+        .test li:nth-child(2n+1) {
+            background: #ccc;
+        }
+
+        #box li {
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            margin: 100px;
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius:50%;
+        }
+    </style>
+</head>
+<body>
+<ul class="test">
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+    <!--<li></li>-->
+</ul>
+<ul id="box">
+    <li><img class="box1" src="demo_avator.jpg" alt=""
+             data-url="http://imgsrc.baidu.com/forum/pic/item/d058ccbf6c81800a672791b1b13533fa838b474a.jpg"/></li>
+    <li><img src="demo_avator.jpg" alt=""
+             data-url="http://img5.duitang.com/uploads/item/201409/12/20140912010058_55nsC.jpeg"/></li>
+    <li><img src="demo_avator.jpg" alt=""
+             data-url="http://img2.duitang.com/uploads/item/201203/08/20120308125812_xEj5h.jpeg"/></li>
+    <li><img src="demo_avator.jpg" alt=""
+             data-url="http://img.ycwb.com/news/attachement/jpg/site2/20130107/90fba6018719125488100e.jpg"/></li>
+</ul>
+
+<script src="../test/jquery.min.js"></script>
+<script>
+    var lazyLoad = {
+        loadImg: function (selector, pic_url) {
+            console.log(selector.attr(pic_url));
+            selector.attr("src", selector.attr(pic_url));
+        },
+        resetImg:function(selector){
+                selector.addClass("lazy_img");
+        },
+        filterImg:function(scTop){
+            $(".lazy_img").each(function(){
+                var box_top = $(this).offset().top;   //距离文档顶部的高
+                if (scTop > box_top) {
+                    console.log("success");
+                    lazyLoad.loadImg($(this), "data-url");
+                }
+            })
+        }
+    }/.filterImg($(window).height());
+        $(window).scroll(function () {
+            var scTop = $(window).scrollTop();   //被卷去的高
+            scTop += $(window).height();
+            lazyLoad.filterImg(scTop);
+        });
+    })
+
+</script>
+</body>
+</html>
