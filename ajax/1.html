@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="div_1"></div>
+<script>
+    //ajax async javascript and xml
+    function loadXHR(){
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest();
+        }
+        else{
+            xhr=new ActiveXObject("Microsoft.XMLHTTP"); //IE5,IE6
+        }
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4 && status==200){
+                document.getElementById("div_1").innerHTML=responseText;
+            }
+        }
+        xhr.open("GET","1.js",true);
+        xhr.send();
+    }
+    loadXHR();
+
+//    xhr.open(method,url,async) method:get/post   async:true异步 false同步  请求类型
+//    xhr.send(string) 将请求发送至服务器  string用于post请求 get无参
+//
+//    get:简单快
+//    post:没有数据限制（向服务器发送大量数据）；    更稳定更可靠（发送包含未知字符输入时）；  无法使用缓存文件（更新服务器上的文件或数据库）
+
+    //responseText(获取字符串形式的响应数据) responseXML（获取xml形式的响应数据）
+
+
+    //onreadystatechange
+    //readyState:0(请求未初始化) 1(服务器连接已建立) 2(请求接收) 3(请求处理中) 4(请求已完成，且响应就绪)
+    //status: 200(ok)  400(not found)
+</script>
+</body>
+</html>
