@@ -10,32 +10,16 @@
     <link rel="stylesheet" href="wei_chat.css"/>
 </head>
 <body>
-<div class="wei_chat_angel">
+<div class="wei_chat_angel_page1">
     <div class="header">创投圈</div>
+    <audio src="audio/weChat_prompt.mp3" preload='auto' loop=false id="weChat_prompt_ring"></audio>
     <div class="main">
-        <div class="msg_chat">
-            <div class="msg_head_img">
-                <img src="http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg" alt=""/>
-            </div>
-            <div class="msg_text">
-                <div class="user_name">小明</div>
-                <div class="user_text">哈哈哈哈哈哈哈哈哈哈</div>
-            </div>
-        </div>
-        <div class="msg_chat">
-            <div class="msg_head_img">
-                <img src="http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg" alt=""/>
-            </div>
-            <div class="msg_text">
-                <div class="user_name">小明</div>
-                <div class="user_text">哈哈哈哈哈哈哈哈哈哈</div>
-            </div>
-        </div>
+
     </div>
     <div class="reply_section">
         <div class="reply">
             <div class="reply_text">
-                <textarea id="replyTextBox"></textarea>
+                <div id="replyTextBox" contenteditable="true"></div>
             </div>
             <div class="reply_btn"><input id="sendMsg" type="submit" value="发送"></div>
         </div>
@@ -43,61 +27,6 @@
 </div>
 
 <script src="jquery.min.js"></script>
-<script>
-    $(function () {
-        function textBoxAutoHeight(_this) {
-            _this.height(0);
-            var setHeight = _this[0].scrollHeight - 12;
-            if (_this.attr("_height") != setHeight) {
-                _this.height(setHeight + "px").attr("_height", setHeight);
-            }
-            else {
-                _this.height(_this.attr("_height") + "px");
-            }
-        }
-
-        function replyMessage(message_obj) {
-            var replyStr='<div class="msg_chat">'+
-                        '<div class="msg_head_img">'+
-                            '<img src='+message_obj.headImg+' alt=""/>'+
-                        '</div>'+
-                        '<div class="msg_text">'+
-                            '<div class="user_name">'+message_obj.name+'</div>'+
-                            '<div class="user_text">'+message_obj.textInfo+'</div>'+
-                        '</div>'+
-                    '</div>'
-            $(".wei_chat_angel .main").append(replyStr);
-        }
-
-        $("#replyTextBox").on("keydown keyup", function () {
-            textBoxAutoHeight($(this));
-        });
-
-        var message_obj = [{
-            headImg: "http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg",
-            name: "小红",
-            textInfo: "没问题11"
-        }, {
-            headImg: "http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg",
-            name: "小红",
-            textInfo: "没问题12"
-        }, {
-            headImg: "http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg",
-            name: "小红",
-            textInfo: "没问题13"
-        }, {
-            headImg: "http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg",
-            name: "小红",
-            textInfo: "没问题44"
-        }, {
-            headImg: "http://img1.imgtn.bdimg.com/it/u=2820174595,1011627036&fm=21&gp=0.jpg",
-            name: "小红",
-            textInfo: "没问题55"
-        }];
-        $("#sendMsg").click(function(){
-            replyMessage(message_obj[0]);
-        })
-    });
-</script>
+<script src="wei_chat.js"></script>
 </body>
 </html>
