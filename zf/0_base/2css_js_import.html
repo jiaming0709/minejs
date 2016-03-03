@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //引入css的方式
+       //行内样式：不推荐使用、 内嵌式、 外链式、导入式：@import "css/index.css";
+
+    //href 是首字母缩写，不是一个单
+
+
+    //引入js
+        //行内引入(不推荐) 安全性能低
+        //内嵌式
+        //外链式
+
+    //细节：
+        //1)在外链式中，script脚本块中间不可以写js代码，写了中间的代码也不执行，，但外链代码继续执行，不受影响
+        //2)通常将js放在body的最后面，原因：html页面是从上到下依次加载，js通常是获取html标签给予动态操作效果的，所以需要先加载html标签再加载js
+</script>
+<script>
+    var oDiv=document.getElementById("div1");
+</script>
+<script src="2.js">
+    alert("inner");
+</script>
+</body>
+</html>
