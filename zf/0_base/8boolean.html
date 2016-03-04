@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //boolean
+        //! 取反 将值转化为boolean-->取反
+        //!! 将其他类型转为boolean 相当于 Boolean()
+
+    //数据类型转换的规则
+        //如果只有一个值，只有0,NaN,"",null,undefined 为false，其余的都是真
+        //如果是两个值比较是否相等,==会进行默认的数据转换
+            //1) 对象==对象 -->false  对象（数组，{}，function）
+            //2) 对象==串
+                //对象-->串([].toString())
+                    //[].toString()==>"" [1,2,3].toString()="1,2,3";
+                    //{}.toString()==>"object Object"
+            //3) 对象==Boolean
+                //对象.toString().Number();
+                //boolean-->数字：true1 false0
+                    //[]==false [].toString-->""-->Number("")=0    Number(false)=0   true
+            //4) 对象==数字
+                //对象.toString().Number()
+                    //[]==1  [].toString()=""-->Number("")=0   false
+            //5) boolean==数字
+                    //Number(boolean)
+                        //2==true  false
+            //6)字符串==数字
+            //7)字符串==布尔  Number("string"）  Number(boolean)
+            //8)null==undefined true
+            //9)null undefined 和其它任何数据类型相比 false
+        //===: 绝对比较：数据类型不同=false
+
+
+
+</script>
+</body>
+</html>
