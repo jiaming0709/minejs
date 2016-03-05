@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //js中检测数据类型的方式(4种)
+        //typeof
+        //instanceof
+        //constructor
+        //Object.prototype.toString.call()
+
+    //typeof value  -->return: 一个字符串 包含了数据类型字符 "number" "string" "boolean" "undefined" "function" "object"
+        //typeof null --> "object"
+        //typeof {}/[]/regexp -->"object"
+    //typeof 局限性:不能具体的检查 object 下细分的类型,检查这些返回的都是 "object"
+
+    //面试题
+     console.log(typeof(typeof(typeof(typeof[])))); //"string"
+
+
+</script>
+</body>
+</html>

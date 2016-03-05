@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #bodyEle {
+            margin: 0;
+            padding: 0;
+            height: 100px;
+            width: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="bodyEle" style="background:black">
+    12345677654321
+</div>
+<script type="text/javascript">
+    var oBody = document.getElementById("bodyEle");
+    oBody.onclick = function () {
+        var bg = this.style.backgroundColor;
+//        if (bg == "white") {
+//            this.style.backgroundColor = "black";
+//        }
+//        else{
+//            this.style.backgroundColor = "white";
+//        }
+
+//        bg=="white"?this.style.backgroundColor="black":this.style.backgroundColor="white";
+
+        this.style.backgroundColor=bg=="white"?"black":"white";
+    }
+</script>
+</body>
+</html>
