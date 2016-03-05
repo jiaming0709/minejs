@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var num=13;
+    function fn(){
+        var num=100;
+        return function(){
+            console.log(num);
+        }
+    }
+    var f=fn();  //先把fn 执行,再把fn执行的返回结果(return后跟的,如果没有return --> undefined(default value))赋值给f
+    f(); //100
+
+    //如何区分当前作用域的上一级作用域
+        //1)上一级作用域是谁只和在哪定义的有关系,和函数在哪执行没有关系
+            //-->B是前前作用域,想看B的上一级作用域,只需要看B对应的堆内存空间是在哪个作用域定义的
+</script>
+</body>
+</html>

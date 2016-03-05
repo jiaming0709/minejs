@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //in 检测当前某一个属性名是否属于这个对象,如果属于这个对象,return true,   else  return false
+    var obj={name:"aaa"};
+    console.log("name" in obj); //true
+
+    //在全局作用域中,声明的全局变量也相当于是window的一个属性名(私有作用域中没有这个机制)
+    var num=13;
+    console.log("num" in window); //true
+    var num2;
+    console.log("num2" in window);//true
+
+
+
+
+
+
+
+
+
+
+    //1) 不管条件是否成立,里面出现的所有带var function关键字的都要进行预解释
+    //预解释 var num --> window.num=undefined;
+    console.log(num); //undefined  预解释
+    if(!("num" in window)){   //条件不成立
+        var num=13;
+    }
+    console.log(num); //undefined  还是预解释的值
+
+
+
+
+
+
+
+
+
+
+    fn();  //"ok"
+    function fn(){
+        console.log("ok")
+    }
+    fn();  //"ok"
+
+    //fn1(); //Uncaught TypeError: fn1 is not a function, 下边代码不再执行
+    var fn1=function(){
+        console.log("ok");
+    };
+    fn1();
+
+    //函数表达式:把一个函数定义的部分当作一个值赋值给一个变量或者一个元素的某个事件
+
+    //2)"="是赋值,左边是变量右边是常量(值),在预解释的时候,只对左边的变量进行预解释,右边的是值,不进行预解释
+
+    //function fn(){} var fn=function(){} 区别
+    //function fn(){} 进行预解释,上面,下面调用都可以
+    //var fn=function(){} 不进行预解释, 调用只可以写在下面
+
+
+
+
+
+
+
+
+
+
+
+
+    //3)在私有作用域中,虽然return 下面的代码不再执行,但是会预解释
+    var n=10;
+    function fn(){
+        //形参无
+        //预解释: var n 私有作用域中的 n 都是自己私有的
+        n=12;
+        console.log(n);  //12 n是私有的
+        return function(){}; //这个函数是当做值返回的,是不进行预解释的,
+        var n=100;//return下面的代码不再执行
+    }
+    fn();
+    console.log(n); //window.n=10
+
+    //return 函数体中return下面的代码都不在执行
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //4)在预解释阶段,如果变量或者函数名已经声明过了,那么不会重新进行声明,但是需要重新定义(赋值)
+            //-->即如果同名了,会声明一次,定义N次
+
+    // 面试题
+    //预解释: function fn=xf1;
+    //      var fn; 这一步在预解释时不执行,即不声明,但是在执行时会进行赋值
+    //      function fn=xf2;-->最终 fn=xf2
+    fn();  //2
+    function fn(){
+        console.log(1);
+    }
+    fn(); //2
+    var fn=13; //fn重新赋值为13
+    fn();  //==>13()   Error: fn is not a function
+    function fn(){
+        console.log(2);
+    }
+    fn();
+
+    //在全局作用域下,声明的变量或者函数都是相当于给window增加了一个属性名,for example: var fn-->window.fn   function fn -->window.fn
+    //but js 是规定 一个对象的属性名是不是重复的 window(浏览器对象)
+    //so 函数名字 和 变量名字一样,也算是冲突了
+
+
+
+
+
+
+
+
+
+    //5)预解释只发生在当前作用域
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

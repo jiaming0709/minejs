@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //预解释（变量提升）
+    //在当前的作用域中，js代码从上到下执行之前，浏览器会默认的先把所有带 var function 关键字的进行提前的声明或者定义
+        //声明:var num;  告诉浏览器在当前作用域中有一个名字叫做num; -->只声明不定义, value=undefined;
+        //定义:num=13; 给变量赋值
+
+    //在预解释阶段,带var 关键字的只是提前的声明,只有在JS从上到下执行的过程中才会进行定义赋值
+    console.log(num); //undefined
+    var num=13;
+    console.log(num); //13
+
+    //在预解释阶段,带function 关键字的提前 声明+定义  两部分都完成
+    //->预解释阶段,fn=xxxfff000;
+    console.log(fn); //function fn(){console.log("ok")}
+    function fn(){
+        console.log("ok");
+    }//在预解释阶段已经声明+定义,以后代码执行时再遇到,直接跳过,不会再重新进行操作
+    console.log(fn); //function fn(){console.log("ok")}
+
+
+
+    console.log(n,s); //undefined, undefined
+    var n=9;
+    var s="str";
+    function fn(){
+        console.log(n,s); //undefined, "str"
+        n=7;
+        s="zfpx";
+        var n=6;
+    }
+    fn(); //
+    console.log(n,s); //9,"zfpx";
+
+    //预解释只发生在当前作用域中:开始的时候只对window 下带var function 关键字的进行预解释,
+            // -->而函数中出现的var....这些此时带是一堆字符串(没在实际意义),所以开始时函数体中的这些带关键字的都不管
+            // -->只有全局代码执行到函数执行fn()这块的时候,才会形成一个新的私有的作用域,
+                // 此时函数体中才会从新进行预解释(在私有作用域代码从上到下执行之前也要进行预解释)
+
+    //当函数执行时,形成一个新的私有作用域,它会按照如下步骤执行:
+        //1)首先给函数的形参赋值
+        //2)私有作用域预解释
+        //3)代码从上到下执行
+
+    //作用域链:在私有作用域中,JS代码从上到下执行,如果遇到了一个变量,
+        //首先看否是自己私有的变量,(看是不是形参,看有没有var过)
+            //如果是私有的,接下来的所有操作(get value,modify value...)都是用的自己私有的,和外面的没有任何关系
+            //如果不是自己私有的,则去当前作用域的上一级作用域中查找,如果上一级有,那么接下来操作的,都是在操作上级作用域中的变量,如果上级没有,逐级向上至window
+            //如果window也没有,如果是变量=值:window下增加一个新的全局变量
+                            //如果是console.log(变量) 报错
+
+    //如何看变量是否为私有的(两者有其一,为私有变量)
+        //看是否为形参
+        //看是否var 声明过
+
+
+    var num=13;
+    var a=20;
+    fn(100);
+    function fn(num){
+        console.log(num,a); //100 undefined
+        var a=16;
+        a=17;
+        b=18;
+        console.log(num,a,b);//100 17 18
+    }
+    console.log(num,a,b);//13 20 18
+
+
+    var num=13;
+    var a=20;
+    fn(100);
+    function fn(num){
+        console.log(num,a,b); //Uncaught ReferenceError:b is not defined ,后边不再执行
+        var a=16;
+        a=17;
+        b=18;
+        console.log(num,a,b);
+    }
+    console.log(num,a,b);
+</script>
+</body>
+</html>

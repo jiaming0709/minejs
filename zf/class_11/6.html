@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //内存释放实战题:
+
+    var i=10;
+    function fn(){
+        var i=5;
+        return function(n){
+            console.log(n+(++i));
+        }
+    }
+    var f=fn();
+    f(20); //26
+    f(30); //37
+    fn()(20);  //26
+    fn()(30);   //36
+    console.log(i);  //10
+
+</script>
+</body>
+</html>

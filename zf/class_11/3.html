@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var ary=[12,23,34,45];
+    function fn(ary){
+        ary.length--;
+        ary=[];
+        ary[ary.length]=100;
+        console.log(ary);//[100]
+    }
+    fn(ary);
+    console.log(ary);[12,23,34];
+
+
+
+    var i=10;
+    console.log(10+(++i)+(i++)+(i++)+(++i));
+    console.log(i);
+
+</script>
+</body>
+</html>

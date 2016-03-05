@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 14px;
+            -webkit-user-select: none;;
+
+        }
+
+        .box {
+            margin: 100px auto;
+            width: 300px;
+            text-align: center;
+        }
+
+        .box h2 {
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px dashed #f00;;
+        }
+
+        .box div {
+            margin-top: 20px;
+            height: 30px;
+            line-height: 30px;
+            background: #00ffff;
+            text-align: center;
+            cursor: pointer;;
+        }
+
+        .box div span {
+            color: #f00;
+            font-size: 24px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>请投票</h2>
+
+    <div id="voteBtn">我要投票 [<span id="voteNum">0</span>]</div>
+</div>
+<script>
+    var voteBtn = document.getElementById("voteBtn");
+    var voteNum = document.getElementById("voteNum");
+
+    //    voteBtn.onclick = function () {    //error:每次执行都新开辟一个作用域,私有i=0
+    //        var i=0;
+    //        voteNum.innerHTML=++i;
+    //    };
+
+    //    var i=0;
+    //    voteBtn.onclick = function () {  //true 全局作用域不销毁  ,不建议过多使用全局变量
+    //        voteNum.innerHTML=++i;
+    //    };
+
+
+
+    //绑定事件时首先执行一个自执行函数,先把自执行函数执行,把自执行函数的返回结果赋值给onclick,自执行函数的返回结果是一个函数的引用地址,被外面的onclick占用了,所以A这个作用域不销毁,里面的私有变量i也不销毁
+    voteBtn.onclick = (function () {
+        var i = 0;
+        return function () {
+            voteNum.innerHTML = ++i;
+        }
+    })();
+
+    
+
+    //    voteBtn.onclick = function () {
+    //        voteNum.innerHTML++;
+    //    };
+</script>
+</body>
+</html>
