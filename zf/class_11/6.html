@@ -22,6 +22,19 @@
     fn()(30);   //36
     console.log(i);  //10
 
+
+    function fo(){
+        var i=0;
+        return function(n){
+            return n+i++;
+        }
+    }
+    var f=fo();
+    var a=f(15);     //15
+    var b=fo()(15);  //15
+    var c=fo()(20);  //20
+    var d=f(20);     //16
+
 </script>
 </body>
 </html>
