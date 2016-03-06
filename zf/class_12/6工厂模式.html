@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工厂模式就是一个函数</title>
+</head>
+<body>
+<script>
+    var jsPerson1={
+        name:"aaa",
+        age:"12",
+        writeCss:function(){
+            console.log("my name is "+this.name+" ,my age is "+age+" ,i can write css ");
+        },
+        writeJS:function(){
+            console.log("my name is "+this.name+" ,my age is "+age+" ,i can write JS ");
+        }
+    };
+    var jsPerson2={
+        name:"bbb",
+        age:"22",
+        writeCss:function(){
+            console.log("my name is "+this.name+" ,my age is "+this.age+" ,i can write css ");
+        },
+        writeJS:function(){
+            console.log("my name is "+this.name+" ,my age is "+this.age+" ,i can write JS ");
+        }
+    };
+
+    //工厂模式作用:
+        //不用像之前的单例模式一个个的写了,只需要开一个工厂,实现指货摊生产即可
+        //把实现一个功能的代码封装到一个函数中,以后再想实现这个功能,不需要重新的编写这些代码了,只需要执行这个函数即可
+            //--->这个过程叫做函数的封装(类的封装) 低耦合高内聚(减少页面中的冗余代码,提高代码的重复利用率)
+
+
+    function createJsPerson(name,age){
+        var obj={};
+        obj.name=name;
+        obj.age=age;
+        obj.writeCss=function(){
+            console.log("my name is "+name+" ,my age is "+age+" ,i can write css ");
+        };
+        obj.writeJs=function(){
+            console.log("my name is "+name+" ,my age is "+age+" ,i can write Js ");
+        }
+        return obj;
+    }
+    var jsPerson1=createJsPerson("aaa",12);
+    var jsPerson1=createJsPerson("bbb",22);
+</script>
+</body>
+</html>

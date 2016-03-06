@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Fn(){
+        this.x=100;
+        this.getX=function(){
+
+        }
+
+    }
+    var f1=new Fn();
+
+
+    //类:所有的类都是函数数据类型的, typeof Fn-->"function"  typeof Array-->"function" typeof Object-->"function"
+    //实例:所有类的实例都是对象数据类型的, typeof f1-->"object"
+        //ary它是Array这个类的实例 typeof ary->"object"
+
+
+
+
+    //1)在使用new执行函数的时候,如果fn不需要传递参数的话,后面的小括号可以加也可以不加
+        var f1=new Fn();
+        var f2=new Fn();
+
+
+
+
+    //2)instanceof 检测某一个实例是否属于这个类
+            var ary=[];
+            console.log(f1 instanceof Fn);  //true
+            console.log(f1 instanceof Array);  //false
+            console.log(ary instanceof Array);  //true
+        //instanceof 弥补了typeof的局限性
+
+        //instanceof的局限性
+            console.log(ary instanceof Object); //true
+
+
+
+    //3)f1/f2都是Fn这个类的一个实例,f1/f2都所拥有x,getX这两个属性但是每一个实例都是单独的,所有他们拥有的属性也都是自己单独的
+        console.log(f1.getX==f2.getX); //false 每个实例虽然所拥有的属性看上去是一样的,但是是每个实例的私有属性.
+
+        //-->如何检测某一个属性是否属于这个对象(实例)
+            //in:检测某一个属性名是否属于这个对象(不管属性名是私有的还是私有的,均为true)
+                var obj={name:"zf"};
+                console.log("name" in obj);  //true
+                console.log("age" in obj)   //false
+            //hasOwnPrototype:检测某一个属性名是否属于这个对象的私有属性
+                //(只有是自己私有的,不管公有上有没有,return true)
+                console.log(f1.hasOwnProperty(Fn)); //true
+
+    //思考题:
+      //  hasPubProperty:检测是否为自己公有的属性
+    function hasPubProperty(attr,obj){
+        return attr in obj && attr.hasOwnProperty(obj);
+    }
+
+
+
+    //4)num是函数Fn的私有的变量,和实例没关系,所以f1没有这个属性名,在js中如果一个对象没有这个属性名,默认的属性值为undefined
+    function Fn(){
+        var num=100; //按普通函数执行创建的变量,和类的实例没有关系,能和实例关联在一起的只有this.xxx=xxx; 因为this是当前实例,this.xxx=xxx相当于手动给实例增加的属性名,
+        this.x=100;
+        this.getX=function(){
+
+        }
+    }
+    var f1=new Fn();
+    console.log(f1.num); //undefined  ->
+
+
+
+
+
+    //5)构造函数浏览器默认返回一个对象数据类型的值
+            //如果手动return
+                //return一个基本数据类型的值,返回的仍然是默认返回的值,不能覆盖原有值
+                //return一个对象数据类型的值,会将默认值覆盖
+    function Fn(){
+        var num=100; //按普通函数执行创建的变量,和类的实例没有关系,能和实例关联在一起的只有this.xxx=xxx; 因为this是当前实例,this.xxx=xxx相当于手动给实例增加的属性名,
+        this.x=100;
+        this.getX=function(){
+
+        };
+        return 1;
+        return {name:"fdf"};
+    }
+    var f1=new Fn();
+    console.log(f1);
+
+
+
+
+    //通过new一个类,实例就拥有了这个类里面的所有私有属性,并且继承了公有的属性
+</script>
+</body>
+</html>

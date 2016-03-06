@@ -51,31 +51,77 @@
     var voteBtn = document.getElementById("voteBtn");
     var voteNum = document.getElementById("voteNum");
 
+    //通过元素的 Id 获取一个元素是什么类型?   //对象数据类型  引用数据类型
+        //style:存储当前元素中所有的行内样式
+    //获取元素的方法:id ,tagname, className,  name,   document.documentElement|document.body  querySelector querySelectorAll
+
     //    voteBtn.onclick = function () {    //error:每次执行都新开辟一个作用域,私有i=0
     //        var i=0;
     //        voteNum.innerHTML=++i;
     //    };
 
-    //    var i=0;
-    //    voteBtn.onclick = function () {  //true 全局作用域不销毁  ,不建议过多使用全局变量
-    //        voteNum.innerHTML=++i;
-    //    };
 
 
 
-    //绑定事件时首先执行一个自执行函数,先把自执行函数执行,把自执行函数的返回结果赋值给onclick,自执行函数的返回结果是一个函数的引用地址,被外面的onclick占用了,所以A这个作用域不销毁,里面的私有变量i也不销毁
+
+
+
+
+    //1)利用全局作用域不销毁的原理
+        var i=0;
+        voteBtn.onclick = function () {  //true 全局作用域不销毁  ,不建议过多使用全局变量
+            voteNum.innerHTML=++i;
+        };
+
+
+
+
+
+
+
+    //2)//创建一个不销毁的私有作用域
+
+    //绑定事件时首先执行一个自执行函数,先把自执行函数执行,把自执行函数的返回结果赋值给onclick,
+    // 自执行函数的返回结果是一个函数的引用地址,被外面的onclick占用了,所以A这个作用域不销毁,里面的私有变量i也不销毁
     voteBtn.onclick = (function () {
         var i = 0;
         return function () {
             voteNum.innerHTML = ++i;
         }
     })();
+    //在给voteBtn赋值时,首先是把函数执行,然后再把函数执行的返回结果赋值给它
+    //自执行函数执行,形成一个不销毁的作用域(return function 被voteBtn.onclick占用)
+        //自执行函数只有在第一次给onclick赋值时执行一次,把自己的返回结果赋值给voteBtn.onclick
+        //voteBtn.onclick={voteNum.innerHTML = ++i;}
+    //以后每一次点击的时候,和自执行函数就没有关系了,它也不会再重新的执行自执行函数
+        //i++,不是私有的,往上级作用域查找A,A.i++ -->给页面中的标签赋值 ,然后销毁当前作用域
+
+    //自执行函数包起来
+    ~function(){
+        var i=0;
+        voteBtn.onclick = function () {
+            voteNum.innerHTML=++i;
+        };
+    }();
 
 
 
-    //    voteBtn.onclick = function () {
-    //        voteNum.innerHTML++;
-    //    };
+
+
+    //3)自定义属性实现
+    voteNum.count=0; //把需要保留的数字记录在自己的自定义属性上
+    voteBtn.onclick = function () {
+        voteNum.innerHTML=++this.count;  //每次点击时,先更新自定义属性的值,再把最新的值赋值
+    };
+
+
+
+
+
+    //4)
+    voteBtn.onclick = function () {
+        voteNum.innerHTML++;
+    };
 </script>
 </body>
 </html>

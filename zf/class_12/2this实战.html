@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var num = 10;
+    var obj = {
+        num: 20,
+        fn: (function (num) {
+            this.num *= 2;
+            num += 10;  //20 21 22
+            return function () {
+                this.num *= 3;
+                num += 1;
+                console.log(num);
+            }
+        })(num)
+    };
+    var fn = obj.fn;
+    fn();   //21
+    obj.fn();   //22
+    console.log(window.num, obj.num);  //60 60
+
+
+    //window下预解释:
+        //var num,var obj,var fn
+    //window下执行
+        //window.num=10
+        //obj=xxxfff000
+            //obj.num=20;
+            //obj.fn=自执行函数执行的返回结果
+                //自执行函数形成,私有栈A(不销毁)
+                    //形参:A.num=window.num=10 (自执行函数形参为全局作用域下num的值)
+                    //无预解释,
+                    //A下代码执行
+                        //this.num*=2;  自执行函数的this=window --> window.num=20
+                        //num+=10  //A.num+=10   20
+                        //return xxxfff111
+        //obj.fn=xxxfff111;
+        //fn=xxxfff111;
+        //fn()执行
+            //形成私有栈B
+                //形参:无,预解释:无
+                //B下代码执行
+                    //this.num*=3;   window.num*=3   window.num=60
+                    //num+=1;  //num不是B私有,向上级A中找   A.num=21
+                    //console.log(num)  A.num=21
+                //执行后 B 销毁
+        //obj.fn()
+            //形成私有栈c
+            //形参:无,预解释:无
+            //C下代码执行
+                //this.num*=3;   obj.num*=3   obj.num=60
+                //num+=1;  A.num=22
+            //执行后 C 销毁
+        //console.log(window.num,obj.num)  //60 60
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="oDiv"></div>
+<script>
+    var oDiv=document.getElementById("oDiv");
+    //数组14个方法:
+        //push pop shift unshift  contact toString slice indexOf lastIndezOf john sort reverse
+
+    //context 上下文: 当前方法执行的范围
+    //this:执行的主体: 谁来执行的这个方法
+
+
+    //研究this,一般都形容函数里面的this指向问题函数外面的this,一般都是window
+
+
+
+    //this的作用(-共5种)   函数中的this是谁,和函数在哪定义的\在哪执行的都没有关系,
+
+        //1)只要是自执行函数执行,方法中的this就是window
+            var obj={
+                fn:(function(){
+                    console.log(this);   //window
+                    return function(){
+
+                    }
+                })
+            }
+
+        //2)给当前元素的某一个事件绑定方法,方法中的this就是当前元素
+            oDiv.oncick=function(){
+                console.log("1");
+                console.log(this);  //oDiv
+            }
+            oDiv.onclick=(function(){
+                console.log(this); //window
+                return function(){
+                    console.log(this); //oDiv
+                }
+            })();
+
+
+        //3)方法名() 这个是在执行方法,想知道方法中的this是谁,只需要看设计方法名前面是否有"."
+                // ,有的话,"."前面是谁,this就是谁,没有的话this 就是window
+    f.__proto__.__proto__.hasOwnProperty()  //this-->f.__proto__.__proto__
+    fn.call.call.call.call.call();   //最后一个call方法中的this  fn.call.call.call.call.\
+
+
+        //4)在构造函数模式执行的时候,方法体中的this就是当前这个类的一个实例
+        //5)
+
+
+
+
+
+    //fn=xxxfff000
+    function fn(){
+        console.log(this);
+    }
+    var obj={
+        name:"zfpx",
+        fn:fn //fn=xxxfff000
+    };
+    fn();//widnow
+    obj.fn();//obj
+
+    ~function(){
+        fn();
+    }();
+
+    function sum(){
+        fn();
+    }
+    sum();
+    //你以为 你以为的 就是你以为的
+
+
+</script>
+</body>
+</html>

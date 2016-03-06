@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //把全局下的name,age在私有作用域中修改
+
+    var name = "china";
+    var age = 5000;
+    (function (name, age) {
+        console.log(name, age);    //china 5000
+        name = "zf";
+        age = 7;
+        console.log(name, age);   //zf 7
+
+        window.name=name; //在私有作用域中直接通过window修改window下的变量值
+        this.age=7;
+    })(name, age);   //把全局作用域中的name,age 传递给形参
+    console.log(name, age);       //zf 7
+
+
+    //jquery原理
+    (function(){
+        var jQuery=function(selector,context){
+            return new jQuery.fn.init(selector,context);
+        };
+        window.jQuery=window.$=jQuery;
+    })();
+    jquery();
+    $();
+</script>
+</body>
+</html>

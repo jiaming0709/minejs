@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单例模式就是一个对象</title>
+</head>
+<body>
+<script>
+    var name = "aaa";
+    var age = 15;
+
+    var name = "bbb";
+    var age = 80;
+
+    //后面的名字相同,将前面的覆盖
+
+    //把描述同一件事物特片的 key value 放到同一个组中,避免两个事物属性的部突------>单例模式
+    //单例模式实际上就是一个对象
+    var person1 = {
+            name="aaa",
+            age="15"
+            };
+    var person1 = {
+            name="aaa",
+            age="15"
+            };
+
+    //单例模式中,
+        //命名空间: person1,person2
+        //为了防止名字相同时候的冲突,把每一个事物都看成一个单独的个体,把描述这件事物的属性放在同一个命名空间下,以后通过不同的命名空间来区分不同的实例
+
+
+    //单例模式是实现模块化开发最常用的方式
+    //utils or tool 等 命名空间下封闭的都是每一个模块都会使用的公共方法.
+
+
+
+    //命名模式
+    //参数预处理模式
+
+
+    //单例模式的局限性:
+
+
+</script>
+</body>
+</html>
