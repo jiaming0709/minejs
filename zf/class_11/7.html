@@ -90,11 +90,15 @@
         }
     })();
     //在给voteBtn赋值时,首先是把函数执行,然后再把函数执行的返回结果赋值给它
+
+
     //自执行函数执行,形成一个不销毁的作用域(return function 被voteBtn.onclick占用)
         //自执行函数只有在第一次给onclick赋值时执行一次,把自己的返回结果赋值给voteBtn.onclick
         //voteBtn.onclick={voteNum.innerHTML = ++i;}
     //以后每一次点击的时候,和自执行函数就没有关系了,它也不会再重新的执行自执行函数
         //i++,不是私有的,往上级作用域查找A,A.i++ -->给页面中的标签赋值 ,然后销毁当前作用域
+
+
 
     //自执行函数包起来
     ~function(){
@@ -103,6 +107,9 @@
             voteNum.innerHTML=++i;
         };
     }();
+    //自执行函数执行,形成私有作用域A,
+    //执行voteBtn.onclick:开辟一个堆内存,存储字符串代码(voteNum.innerHTML=++i;)
+    //voteBtn是window下的属性==>被window下的属性占用,也不会销毁
 
 
 
