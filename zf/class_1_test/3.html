@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        ul li{
+            width:100px;
+            height:50px;
+            background:#ccc;
+            color:#151515;
+            margin:10px;
+            display:inline-block;
+        }
+        #tabs div{
+            width:500px;
+            height:100px;
+            background:#eee;
+            display:none;
+        }
+        li.select{
+            background:#f00;
+            color:#fff;
+        }
+        #tabs div.select{
+            display:block;
+        }
+
+    </style>
+</head>
+<body>
+<div id="tabs">
+    <ul>
+        <li class="select">111</li>
+        <li>222</li>
+        <li>333</li>
+        <li>444</li>
+        <li>555</li>
+    </ul>
+    <div class="select">111</div>
+    <div>222</div>
+    <div>333</div>
+    <div>444</div>
+    <div>555</div>
+</div>
+<script>
+    var oTab=document.getElementById("tabs");
+    var oLis=oTab.getElementsByTagName("li");
+    var oDivs=oTab.getElementsByTagName("div");
+    function tabChange(nIndex){
+        for(var i=0;i<oLis.length;i++){
+            oLis[i].className=null;
+            oDivs[i].className=null;
+        }
+        oLis[nIndex].className="select";
+        oDivs[nIndex].className="select";
+    }
+    for(var i=0;i<oLis.length;i++){
+        ~(function(i){
+            oLis[i].onclick=function(){
+                tabChange(i);
+            }
+        })(i)
+    }
+
+
+</script>
+</body>
+</html>
