@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var ary=[1,2,3,4];
+    function fn(ary){
+        ary[0]=0;
+        ary=[0];
+        ary[0]=100;
+        return ary;
+    }
+    var res=fn(ary);
+    console.log(ary);
+    console.log(res);
+
+    console.log(window.a);
+    a=12;
+    function fn(){
+//        console.log(a);
+        a=13;
+    }
+    fn();
+    console.log(a);
+</script>
+</body>
+</html>

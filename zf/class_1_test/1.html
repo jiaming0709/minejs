@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<input type="button"/>
+<input type="button" value="1"/><input type="button"/><input type="button"/><input type="button"/>
+<script>
+    var ary=["red","yellow","pink","green","blue"];
+    var oInputs=document.getElementsByTagName("input");
+    for(var i=0;i<oInputs.length;i++){
+        oInputs[i].onclick=(function(i){
+            return function(){
+                (document.documentElement||document.body).style.backgroundColor=ary[i];
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>
