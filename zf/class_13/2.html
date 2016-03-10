@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Fn(x, y) {
+        this.x = 30;
+        this.getX = function () {
+            console.log(this.x);
+        }
+    }
+    Fn.prototype.getX = function () {
+        console.log(this.x);
+    }
+    Fn.prototype.setX = function (x) {
+        this.x = x;
+    }
+    var f=new Fn();
+
+    f.getX();
+    f.__proto__.getX();
+
+    var pro=Fn.prototype;
+    pro.setY=function(y){
+        this.y=y;
+    };
+    pro.getY=function(){
+        console.log(this.y)
+    };
+    f.setY(10);
+    f.getY();
+
+
+    Array.prototype.sort=function(){
+        alert("aaa")
+    }
+</script>
+</body>
+</html>

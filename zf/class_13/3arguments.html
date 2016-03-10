@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Fn(a,b,c){
+//        "use strict";
+        console.log(arguments.callee.caller);
+        console.log(arguments.callee);
+        console.log(arguments);
+        a=7;
+        console.log(arguments);
+    }
+        Fn(1,2,3);
+
+</script>
+</body>
+</html>
