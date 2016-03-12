@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //在js中使用try catch 进行浏览器的异常信息捕获
+    //    console.log(num);  //num is not defined  下面代码不再执行
+    //    console.log("ok");
+
+    try {
+        console.log(num);  //num is not defined  下面代码不再执行
+
+    } catch (e) {  //e 形参必须要写,一般起名为e,
+        console.log("ok");
+        console.dir(e);
+    }
+    finally{
+
+    }
+//    如果try中代码执行出错,会默认去执行catch中的代码
+//    e.mesage收集当前代码报错的原因
+    //try catch 作用:
+        //1)如果用try/catch捕获了异常信息,不影响下面的代码继续执行
+        //2)收集错误信息
+    //finally:一般不使用
+        //-->不管try中的代码是否报错,都要执行finally中的代码
+
+
+
+//    即想获取到错误的信息,又想不让下边的代码执行,手动抛出一条错误信息,中止执行
+    try {
+        console.log(num);
+
+    } catch (e) {
+        console.dir(e);
+//        throw new Error("网络繁忙");
+        throw new ReferenceError("引用错误");
+        throw new TypeError("类型错误 ");
+        throw new RangeError("范围错误");
+    }
+    console.log("ok");
+
+</script>
+</body>
+</html>

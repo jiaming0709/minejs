@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function avgFn() {
+        //arguments.sort()//arguments.sort is not a function
+        //arguments是一个类数组的集合,不能使用数组的方法sort
+
+        //1)将类数组转化为数组,再排序
+
+        //方式一:
+//        var ary = [];
+//        for (var i = 0; i < arguments.length; i++) {
+//            ary[ary.length] = arguments[i];
+//        }
+        //方式二:
+        var ary = Array.prototype.slice.call(arguments);
+        var ary = [].slice.call(arguments);
+
+
+        ary.sort(function (a, b) {
+            return a - b;
+        });
+        ary.shift();
+        ary.pop();
+        console.log(ary);
+        return eval(ary.join("+")) / ary.length;
+
+
+        //2)不转换,直接排序
+        Array.prototype.sort.call(arguments, function (a, b) {
+            return a - b;
+        });
+        [].shift.call(arguments);
+        [].pop.call(arguments);
+        return eval([].join.call(arguments, "+")) / arguments.length;
+
+    }
+    var res = avgFn(9, 4, 3, 5, 6, 7, 10, 1);
+    res = res.toFixed(2);  //toFixed 保留小数点后两位
+    console.log(res);
+
+
+    //模拟内置的slice实现数组clone的功能
+    Array.prototype.mySlice = function () {
+        var ary = [];
+        for (var i = 0; i < this.length; i++) {
+            ary[ary.length] = this[i];
+        }
+        return ary;
+    };
+    var ary = [12, 23, 34];
+    var newAry = ary.mySlice();
+    console.log(newAry);
+</script>
+</body>
+</html>

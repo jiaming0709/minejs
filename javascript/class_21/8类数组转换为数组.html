@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<script>
+    function fn(){
+        var ary=[].slice.call(arguments);
+    }
+
+    //HTMLCollection 元素集合类
+    //NodeList  节点集合类
+    var oDivs=document.getElementsByTagName("div");
+    console.log(oDivs);   //是元素集合HTMLCollection的一个实例 也是一个类数组集合
+    oDivs=document.getElementsByName("zf");
+    console.log(oDivs);   //是节点集合NodeList的一个实例 也是一个类数组集合
+
+    var ary=Array.prototype.slice.call(oDivs);
+    console.dir(ary);
+
+    //在IE6-8中,不支持借用数组的slice实现将类数组(元素集合或者节点集合)转换为数组  报错,this is not a javascript 对象
+    //但是对于arguments不存在任何兼容性问题
+
+    //检测兼容  -->浏览器的异常信息捕获
+    try{
+        var ary=Array.prototype.slice.call(oDivs);
+    }catch(e){
+        var ary=[];
+        for(var i=0;i<oDivs.length;i++){
+            ary[ary.length]=oDivs[i];
+        }
+    }
+</script>
+</body>
+</html>

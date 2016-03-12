@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //关于json和数据绑定问题
+    //后台: 提供一个数据请求的接口,前端通过接口地址可以请求到后台的数据 getInfo
+
+    //前端:发送一条请求给后
+    //后台:接收到请求,把对应的数据准备好,并将数据返回给前端(一般返回的都是json格式的数据)
+    //前端:得到数据后,需要进行数据解析,把有用的数据得到-->把数据绑定在html页面上(数据绑定)
+
+
+
+    //JSON不是一个单独的数据类型,只是一种特殊的数据格式
+    var obj={name:"aa",age:7};
+    var jsonObj={"name":"aa",age:7};
+    //JSON:相对于普通的格式来说,只是把属性名用双引号包起来了,必须是双引号,单引号都不可以
+
+    //在window浏览器对象中,提供了一个叫json的属性,里面提供了两个方法
+        //JSON.stringify()  对象--串
+        //JSON.parse()  串-->对象
+
+    var jsonStr=JSON.stringify(jsonObj);
+    var jsonObj2=JSON.parse(jsonStr);
+
+
+
+
+
+
+
+
+    //在IE6-7中,window.JSON不存在
+
+    //在IE6-7中,把JSON格式的字符串转换为JSON格式的对象
+    eval("("+str+")");
+
+    //在IE6-7中,把 JSON格式的对象 转换为 JSON格式的字符串
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>求数组中的最大值 和最小值</title>
+</head>
+<body>
+<script>
+    //求数组中的最大值 和最小值
+
+    //1.数组排序
+    var ary=[1,3,2,4,23,34,45,56,67,54,22];
+    ary.sort(function(a,b){
+        return a-b;
+    });
+    var min=ary[0];
+    var max=ary[ary.length-1];
+    console.log(min,max);
+
+
+
+    //2调用Math.min,Math.max
+    var res_min=Math.min.apply(null,ary);
+    var res_max=Math.max.apply(null,ary);
+    console.log(res_min,res_max);
+
+
+    console.log("eval");
+    //3) eval:把一个字符串变为js 表达式执行
+    var eval_sum=eval(ary.join("+"));
+    console.log("求和:"+eval_sum);
+
+    //首先不要管子其他的,将最后要执行的表达式拼接成一家字符串,再用eval执行
+    eval_min=eval("Math.min("+ary.join()+")");
+    console.log(eval_min);
+
+
+
+    //4.调用当前数组中的第一个值是最大值 ,然后拿这个值和后面的逐一进行比较,如果后面某一个值比假设的还要大,说明假设错了,把假设的值 进行规制
+    var j_min=ary[0];
+    var j_max=ary[0];
+    for(var i=1;i<ary.length;i++){
+        j_min=ary[i]<j_min?ary[i]:j_min;
+        j_max=ary[i]>j_max?ary[i]:j_max;
+    }
+    console.log(j_min,j_max);
+
+
+
+    // 括号表达式
+    var ary=[1,3,2,4,23,34,45,56,67,54,22];
+    lastNum=eval(ary.join());
+    console.log(lastNum);
+
+    //1)
+    function fn1(){console.log(1)}
+    function fn2(){console.log(2)}
+    ;(fn1,fn2)(); //只有fn2 执行了 (x1,x2,x3,x4,x5...)括号表达式,一个括号中出现多项,用逗号隔开,最后获取到的结果只有最后一项
+
+
+    //2)
+    function fn1(){console.log(this)}
+    function fn2(){console.log(this)}
+    var obj={
+        name:'aaa',
+        fn:fn2
+    };
+    ;(fn2,obj.fn)();  //执行的是obj.fn2,但是执行时里面的this变为了window
+    ;(obj.fn)(); //里面只有一项,this还是obj
+</script>
+</body>
+</html>
