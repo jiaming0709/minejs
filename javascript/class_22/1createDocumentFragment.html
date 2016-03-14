@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #ul1 {
+            width: 300px;
+            margin: 20px auto;
+            border: 1px solid #f2b206;
+            border-radius: 4px;
+        }
+
+        li {
+            line-height: 30px;;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul1">
+    <li>1234</li>
+    <li>234</li>
+    <li>234</li>
+</ul>
+<script>
+    var oUl = document.getElementById("ul1");
+    var oLis = document.getElementsByTagName("li");
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].onmouseover = function () {
+            this.style.backgroundColor = "yellow";
+        };
+        oLis[i].onmouseout = function () {
+            this.style.backgroundColor = "";
+        }
+    }
+
+    var ary = [
+        {title: "123", desc: "dsgafsdfads"},
+        {title: "123", desc: "dsgafsdfads"},
+        {title: "123", desc: "dsgafsdfads"},
+        {title: "123", desc: "dsgafsdfads"},
+        {title: "123", desc: "dsgafsdfads"}
+    ];
+
+    //1)利用动态创建元素节点,并把它追加到页面中的方式实现数据绑定
+    for (var i = 0; i < ary.length; i++) {
+        var oLi = document.createElement("li");
+        oLi.innerHTML = "<span>" + (i + 4) + "</span>" + ary[i].title;
+        oUl.appendChild(oLi);
+    }
+        //把需要动态绑定的内容一个个的追加到页面中,对原来的元素没有任何影响,但是新添加的元素没有绑定事件
+    //弊端:每创建一个li,添加到页面中,就会引发一次回流,最后引发回流的次数过多,影响性能
+
+
+    //2)字符串拼接的方法:首先循环需要绑定的数据,然后把需要动态绑定的标签以字符串的方法先拼接到一起,拼接完成后终一追加到页面中
+    var str="";
+    for(var i=0;i<ary.length;i++){
+        str+="<li><span>"+(i+4)+"</span>"+ary[i].title+"</li>";
+    }
+    oUl.innerHTML+=str;
+    //弊端:把新拼接的串添加到ul中,原有的li绑定的事件都消失了
+    //优势:最后统一添加到页面, 只引发一次回流
+
+    //字符串拼接是最常用的方法
+    //模板引擎数据绑定(jade,kTemplate Angular.js  backbone.js)   所有模板引擎绑定数据的原理都是字符串拼接
+
+    //3)文档碎片
+    var frg=document.createDocumentFragment();
+    //创建文档碎片相当于邻时创建了一个容器
+    for (var i = 0; i < ary.length; i++) {
+        var oLi = document.createElement("li");
+        oLi.innerHTML = "<span>" + (i + 4) + "</span>" + ary[i].title;
+        frg.appendChild(oLi);
+    }
+    oUl.appendChild(frg);
+
+
+
+
+
+    //JS中DOM的回流和重绘
+    //回流(重排 reflow):  当页面中的HTML结构发生改变(增加,删除元素,位置发生改变) 浏览器都需要重新计算一齐遍最新的DOM结构,重新对当前页面进行渲染
+    //重绘:某一个元素的部分样式发生改变,浏览器只需要重新渲染当前元素即可
+
+    //回流耗性能,重绘只对当前元素有影响
+    //JS优化法则:尽量减少DOM的回流
+</script>
+</body>
+</html>

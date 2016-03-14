@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //1.使用exec进行正则捕获
+    var reg=/\d+/;
+    console.log(reg.exec("hgfsfhjkjhgfdssdfgkk"));   //null
+    //正则捕获分为两个阶段
+        //1)首先判断字符串和正则是否匹配,不匹配直接返回 null
+        //2)匹配 把和正则匹配的内容都捕获到
+    console.log(reg.lastIndex); //上一次正则捕获的结束位置, 下一次捕获的起始位置
+    console.dir(reg.exec("hgfsfh2015jkjhgfds2016sdfgkk"));
+//    0: "2015"
+//    index: 6
+//    input: "hgfsfh2015jkjhgfds2016sdfgkk"
+
+    console.log(reg.lastIndex);
+    console.dir(reg.exec("hgfsfh2015jkjhgfds2016sdfgkk"));
+
+
+
+
+
+
+    //正则捕获的懒惰性:一个串中有多个都和正则匹配,但是执行一次exec只能捕获到第一个匹配的,再次执行exec还是只能捕获到和第一个匹配的
+        //惰性:每一次执行exec后并没有改变reg.lastIndex值,即使手动修改reg.lastIndex值 也不起作用
+
+    //解决正则的懒惰性:给正则增加修饰符 g
+        //正则的修饰符: i(ignoreCase忽略大小写) m(multiline多行匹配) g(global 全局匹配)
+    var reg1=/\d+/g;
+    var str="hgfsfh2015jkjhgfds2016sdfgkk";
+    //console.log(reg1.exec(str));  //["2015", index: 6, input: "hgfsfh2015jkjhgfds2016sdfgkk"]
+    //console.log(reg1.exec(str));  //["2016", index: 18, input: "hgfsfh2015jkjhgfds2016sdfgkk"]
+
+
+    //执行多次reg的exec,
+    var ary=[];
+    var res=reg1.exec(str);
+    console.log(res);
+    while(res){
+        ary.push(res[0]);
+        res=reg1.exec(str);
+    }
+    console.log(ary);
+
+    //执行字符串的match方法一次捕获到所有匹配的内容
+    console.log(str.match(reg1));
+
+
+
+
+
+
+    //正则的贪婪性:每次捕获是按照匹配的最长结果进行捕获
+        //在量词无字符后 + ?
+    var reg2=/\d+?/;
+    console.log(reg2.exec(str));
+
+
+
+
+    console.log("match");
+    //match在分组捕获中,match不能捕获到小分组匹配的内容
+    var reg3=/\[(\d+)\]/g;
+    var str3="[hgfghj[2015]jhhj[2913]jhgfdd[1240]";
+    console.log(str3.match(reg3));
+
+    //match可以捕获到大正则匹配的,但是不能匹配小分组匹配的,执行一次可以捕获到所有的大正则
+
+    //exec可以捕获到大正则匹配的和小分组匹配的,执行次数多
+
+        //当小分组捕获一次就捕获完的,用match可以捕获到,用exec也可以捕获到
+        //当小分组捕获一次不能捕获完成时,只能用exec
+</script>
+</body>
+</html>

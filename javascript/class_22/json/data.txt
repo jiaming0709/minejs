@@ -1,0 +1,1 @@
+[{"name":"hgfds","age":12,"score":64,"sex":0},{"name":"iuytrew","age":65,"score":23,"sex":1},{"name":"zxcvbn","age":13,"score":98,"sex":0},{"name":"hgbv    ","age":24,"score":56,"sex":1}]

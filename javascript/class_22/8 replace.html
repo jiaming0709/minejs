@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //replace 在不使用正则的情况下,执行一次replace只能替换一个
+    var str="hgfdfg2014hgfsdfg2014";
+    var res=str.replace(/2014/g,function(){
+        console.log(arguments);
+        return "4012";
+    });
+    console.log(res);
+
+
+    console.log("replace");
+    //replace原理
+    var str2="015676345676543";
+    var ary2=["零","壹","二","叁","肆","伍","陆","柒","捌","玖"];
+    var res2=str2.replace(/\d+?/g,function(){
+        console.log(arguments);
+        return ary2[arguments[0]];
+    })
+    console.log(res2);
+
+    //执行replace,第一个是正则,第二个是函数
+        //匿名函数执行的次数取决于 正则和字符串进行匹配,匹配到几项,匿名函数就执行几次
+        //arguments 当前这一次获取到的内容,和执行exec得到的结果一样
+            //arguments[0]:大正则捕获到的内容,arguments[1]:起始索引index arguments[2]:原始字符串
+        //匿名函数中return 相当于把当前正则匹配的内容替换
+</script>
+</body>
+</html>

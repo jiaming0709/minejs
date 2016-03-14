@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style:none;
+        }
+
+        #ul1 {
+            width: 300px;
+            margin: 20px auto;
+            border-radius: 4px;
+        }
+
+        li {
+            line-height: 40px;
+            border-bottom: 1px solid #f90;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul1">
+    <li>65</li>
+    <li>86</li>
+    <li>23</li>
+    <li>64</li>
+    <li>34</li>
+</ul>
+
+<script src="../js/util.js"></script>
+<script>
+    var oUl=document.getElementById("ul1");
+    var oLis=oUl.getElementsByTagName("li");
+    console.log(oLis.length);  //5
+    var oLi=document.createElement("li");
+    oUl.appendChild(oLi);
+    console.log(oLis.length);  //6 没有重新获取,但是集合中的长度和内容会自动发生改变
+
+    //DOM映射机制:页面中的标签 和 JS中获取到的元素对象或者元素集合 是紧紧绑定到一起的
+    //页面中HTML结构改变了,JS中不需要重新获取,集合里面的内容也会跟着自动改变
+</script>
+</body>
+</html>
