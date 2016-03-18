@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var ary=["zero","一","二","三","四","五","六","柒","捌","九"];
+    var str="123456709876543212345609876541509876";
+    var res=str.replace(/\d+?/g,function(){
+        console.log(arguments);
+        return ary[arguments[0]];
+    })
+    console.log(res);
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var url = "http://www.b.com/a.html?Id=123&name=fff&age=23";
+    var obj = {};
+    url.replace(/([^?&=]+)=([^?&=]+)/g, function () {
+        obj[arguments[1]] = arguments[2];
+    });
+    console.log(obj);
+
+
+    var str = "1234567891234567891122333";
+    var obj = {};
+    str.replace(/\w+?/g, function () {
+        if (!obj[arguments[0]]) {
+            obj[arguments[0]] = 1;
+        } else {
+            obj[arguments[0]] += 1;
+        }
+    });
+    var max = 0;
+    var key_value = null;
+    for (key in obj) {
+        if (obj[key] > max) {
+            max = obj[key];
+            key_value = key;
+        }
+    }
+    console.log(obj, key_value, obj[key_value]);
+
+
+    var ary3 = ["葛琪", "26", "china", "javascript"];
+    var str3 = "my name is {0}，my age is {1}，i com from {2}，i can do {3}~~";
+    var res = str3.replace(/{(\d+)}/g, function () {
+        console.log(ary3[arguments[1]]);
+        return ary3[arguments[1]];
+    });
+    console.log(res);
+
+
+    var str4 = "my name is zhou xiao tian,my age is twenty five years old~~";
+    var res4=str4.replace(/\b\w+?/g,function(){
+        return arguments[0].toUpperCase();
+    });
+    console.log(res4);
+
+
+
+</script>
+</body>
+</html>

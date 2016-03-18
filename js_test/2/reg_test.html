@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var reg=/\d+?/g;
+    var str="ddd[123]ccc[456]bbb[789]aaa";
+    console.log(reg.exec(str));
+    console.log(reg.exec(str));
+    console.log(reg.exec(str));
+    console.log(str.match(reg));
+</script>
+</body>
+</html>

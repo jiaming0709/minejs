@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    str = '[{"name":"zs","age":25},{"name":"ls","age":18},{"name":"ww","age":32},{"name":"zl","age":23}]';
+
+    function toJsonObj(str) {
+        return "JSON" ? JSON.parse(str) : eval("(" + str + ")");
+    }
+    var ary = toJsonObj(str);
+    ary.sort(function (a, b) {
+        return a.age - b.age;
+    });
+    console.log(ary);
+
+
+</script>
+</body>
+</html>

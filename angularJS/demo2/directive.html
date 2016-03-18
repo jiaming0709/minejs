@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../demo/angular.js"></script>
+</head>
+<body>
+<input type="text" ng-model="myUrl"/>
+<div my-directive my-url="{{myUrl}}" link-text="baidu"></div>
+<script>
+    angular.module("myApp", [])
+            .directive("myDirective", function () {
+                return {
+                    restrict: "A",
+                    replace: true,
+                    scope: {
+                        linkUrl: "@myUrl",
+                        linkText: "@"
+                    },
+                    template: '<a href="{{linkUrl}}">{{linkText}}</a>'
+                }
+            })
+</script>
+</body>
+</html>

@@ -19,6 +19,6 @@ var utils = {
         //    val = eval("(" + str + ")");
         //}
         //return val;
-        return "json" in window ? JSON.parse(str) : eval("(" + str + ")");
+        return "JSON" in window ? JSON.parse(str) : eval("(" + str + ")");
     }
 }

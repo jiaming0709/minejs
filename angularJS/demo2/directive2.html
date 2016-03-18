@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            background: #ccc;
+            width: 60px;
+            height: 30px;
+            margin: 10px;
+        }
+    </style>
+    <script src="../demo/angular.js"></script>
+</head>
+<body>
+<div superman data1>1</div>
+<div superman data1 data2>1 2</div>
+<div superman data1 data2 data3>1 2 3</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.directive("superman", function () {
+        return {
+            restrict: "A",
+            scope: {},
+            controller: function ($scope) {
+                $scope.abilities = [];
+                this.addData1 = function () {
+                    $scope.abilities.push("data1");
+                };
+                this.addData2 = function () {
+                    $scope.abilities.push("data2");
+                };
+                this.addData3 = function () {
+                    $scope.abilities.push("data3");
+                };
+            },
+            link: function (scope, element, attr) {
+                element.on("mouseover", function () {
+                    console.log(scope.abilities);
+                });
+            }
+        }
+    });
+    app.directive("data1", function () {
+        return {
+            require: "superman",
+            link: function (scope, element, attr, supermanCtrl) {
+                supermanCtrl.addData1();
+            }
+        }
+    });
+    app.directive("data2", function () {
+        return {
+            require: "superman",
+            link: function (scope, element, attr, supermanCtrl) {
+                supermanCtrl.addData2();
+            }
+        }
+    });
+    app.directive("data3", function () {
+        return {
+            require: "superman",
+            link: function (scope, element, attr, supermanCtrl) {
+                supermanCtrl.addData3();
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../demo/angular.js"></script>
+</head>
+<body>
+<div ng-controller="loadCtrl">
+    <div load howToLoad="loadData()"></div>
+    <ul>
+        <li>123</li>
+        <li>234</li>
+        <li>234</li>
+    </ul>
+</div>
+<div ng-controller="loadCtrl2">
+    <div load howToLoad="loadData2()"></div>
+    <ul>
+        <li>123</li>
+        <li>234</li>
+        <li>234</li>
+    </ul>
+</div>
+<script>
+    var app = angular.module("myApp", []);
+    app.directive("load", function () {
+        return {
+            restrict: "A",
+            transclude: true,
+            template: '<div>load load</div><div ng-transclude=""></div>',
+            link: function (scope, element, attr) {
+                element.on("mouseover", function () {
+//                    scope.loadData();
+//                    scope.$apply("loadData()");
+                    scope.$apply(attr.howtoload);
+                })
+            }
+        }
+    });
+    app.controller("loadCtrl", function ($scope) {
+        $scope.loadData = function () {
+            console.log("load......");
+        }
+    });
+    app.controller("loadCtrl2", function ($scope) {
+        $scope.loadData2 = function () {
+            console.log("load......   222");
+        }
+    })
+</script>
+</body>
+</html>

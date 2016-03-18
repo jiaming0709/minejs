@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            width: 500px;
+            padding: 20px;
+            border: 1px solid #eee;
+            margin: 20px auto;
+            color: #ccc
+        }
+
+        #list span, h3 span {
+            width: 150px;
+            display: inline-block;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            border-bottom: 2px solid #eee;
+        }
+
+        #list li + li {
+            border-top: 1px solid #fafafa;
+        }
+
+        #page ul {
+            display: inline-block;
+        }
+
+        #page {
+            padding-top: 50px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        #page li, #page span {
+            min-width: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 0 5px;
+            display: inline-block;
+            cursor:pointer;
+            -webkit-user-select: none;
+        }
+
+        #page span {
+            display: inline-block;
+            border: none;
+        }
+
+        #search {
+            width: 40px;
+            line-height: 20px;
+            padding: 0;
+        }
+        .select{
+            color:#999;
+            background:#ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h3>
+        <span>ID</span>
+        <span>SEX</span>
+        <span>SCORE</span>
+    </h3>
+    <ul id="list">
+
+    </ul>
+    <div id="page">
+        <span id="first">首页</span>
+        <span id="prev">上一页</span>
+        <ul id="page_list">
+
+        </ul>
+        <span id="next">下一页</span>
+        <span id="last">尾页</span>
+        <input type="text" id="search"/>
+    </div>
+</div>
+<script src="js/utils.js"></script>
+<script src="js/page.js"></script>
+</body>
+</html>

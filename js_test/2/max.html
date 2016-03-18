@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function fn(){
+        var first=Array.prototype.shift.call(arguments);
+        Array.prototype.sort.call(arguments,function(a,b){
+            return a-b;
+        });
+        var max=Array.prototype.pop.call(arguments);
+        return first*max;
+    }
+    fn(1,2,5,3,7,8,9,3,2,2);
+</script>
+</body>
+</html>

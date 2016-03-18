@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #box{
+            width:400px;
+            margin:50px auto;
+            padding:20px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            box-shadow:5px 5px 5px 0 #888;
+            -webkit-user-select: none;
+        }
+        th{
+            background:#dadada;
+            cursor:pointer
+        }
+        th,td{
+            height:30px;
+            width:100px;
+            line-height:30px;
+            text-align:center;
+        }
+        tbody tr:nth-child(even){
+            background:#fafafa;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <table id="tab" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+            <th>name</th>
+            <th>age</th>
+            <th>score</th>
+            <th>sex</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function toJSON(data){
+        return "JSON" in window?JSON.parse(data):eval("("+data+")");
+    }
+    var xhr=new XMLHttpRequest();
+    xhr.open("get","json/data.txt",true);
+    xhr.onreadystatechange=function(){
+        if(this.readyState==4 && /^2\d{2}$/g.test(this.status)){
+            var val=toJSON(this.responseText);
+            console.log(val);
+            bind(val);
+        }
+    };
+    xhr.send();
+
+    var table=document.getElementById("tab");
+    var tHead=table.tHead;
+    var ths=table.rows[0].cells;
+    var tBody=table.tBodies[0];
+    var trs=tBody.rows;
+
+    function bind(data){
+        var frg=document.createDocumentFragment();
+        for(var i=0;i<data.length;i++){
+            var tr=document.createElement("tr");
+            for(var key in data[i]){
+                var td=document.createElement("td");
+                td.innerHTML=key=="sex"?(data[i][key]==1?"男":"女"):data[i][key];
+                tr.appendChild(td);
+            }
+            frg.appendChild(tr);
+        }
+        tBody.appendChild(frg);
+        frg=null;
+    }
+
+    function sort(index){
+        for(var k=0;k<ths.length;k++){
+            if(k!=index){
+                ths[k].flag=-1;
+            }
+        }
+        var _this=this;
+        _this.flag*=-1;
+        var ary=Array.prototype.slice.call(trs,0);
+        ary.sort(function(a,b){
+           var ina= a.cells[index].innerHTML;
+           var inb= b.cells[index].innerHTML;
+            if(isNaN(ina) || isNaN(inb)){
+                return (ina.localeCompare(inb))*_this.flag;
+            }
+            return (parseFloat(ina)-parseFloat(inb))*_this.flag;
+        });
+        var frg=document.createDocumentFragment();
+        for(var i=0;i<ary.length;i++){
+            frg.appendChild(ary[i]);
+        }
+        tBody.appendChild(frg);
+
+    }
+
+    for(var i=0;i<ths.length;i++){
+        (function(i){
+            ths[i].flag=-1;
+            ths[i].onclick=function(){
+                sort.call(this,i);
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>

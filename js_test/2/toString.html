@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function isType(value, type) {
+        var res = Object.prototype.toString.call(value);
+        var newType=type.replace(/\b(\w)/g,function(){   //arguments: ["a", 0, "array"]
+            console.log(arguments);
+            return arguments[0].toUpperCase();
+        });
+        return res=="[object "+newType+"]";
+    }
+    var res2 = isType([1, 2, 3], "array");
+    console.log(res2);
+
+
+
+    var reg = /^([1-9]\d)(\d{4})(\d{4})(\d{2})(\d{2})\d{2}(\d)(?:\d|X)$/;
+    console.dir(reg.exec("130828199012040617"));
+
+    var reg1=/\d+/g;
+    console.log(reg1.exec("1234gfds1234gfdsa1234"));
+    console.log("130828199012040617".match(reg));
+</script>
+</body>
+</html>
