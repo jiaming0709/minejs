@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1, #div2, #div3, #div4 {
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            margin: 50px;
+            clear: both;
+
+        }
+
+        #div4 {
+            border: 10px solid;
+        }
+
+        #div2 {
+            float: right;
+        }
+
+        #div3 {
+            float: right;
+            margin-left: 10px;
+        }
+
+        #div5 {
+            width: 200px;
+            height: 200px;
+            background: #ccc;
+            margin: 50px;
+            clear: both;
+        }
+
+        #div5 div {
+            position: relative;
+            margin: 10px;
+            background: #f00;
+        }
+
+        #div5 #middle {
+            background: #ff0;
+            border: 10px solid #0000ff;
+        }
+
+        #div5 #inner {
+            background: #f0f;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<div id="div3"></div>
+<div id="div4"></div>
+<div id="div5">
+    <div id="outer">outer
+        <div id="middle">middle
+            <div id="inner">inner</div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    //每一个盒子距离浏览器都会有偏移,默认从浏览器的左上角开始计算
+    //offsetLeft
+    // offsetTop
+    // offsetParent(偏移量参照物 所有元素的领衔量参照物是body)
+
+    //1.float后再设置margin,值不影响如:div2.offsetLeft=div3.offsetLeft
+    //2.从border外面开始计算
+    //3.offsetParent 默认都是body     body.offsetParent=null
+    //更改默认的offsetParent:site position
+    //设置定位会影响元素layout的变化
+
+    //inner距离文档的偏移量
+
+    function offset(ele) {
+        var t = ele.offsetTop;
+        var l = ele.offsetLeft;
+        var p = ele.offsetParent;
+        while (p) {
+            if (window.navigator.userAgent.indexOf("MSIE 8.0") == -1) {
+                t += p.clientTop; //上边框
+                l += +p.clientLeft; //左边框
+            }
+            t += p.offsetTop;
+            l += p.offsetLeft;
+            p = p.offsetParent;
+        }
+        return {left: l, top: t};
+    }
+    var res = offset(inner);
+    console.log(res);
+
+    //window.navigator.userAgent
+        //ie11不好使
+</script>
+</html>

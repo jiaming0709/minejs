@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234
+    hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn
+    hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd
+    gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd 234 hgfdd gh234 dfn hgfd
+    234 hgfdd gh234
+</div>
+<script>
+    //scrollTop+clientHeight =scrollHeight;
+
+    div1.onclick = function () {
+        console.log(this.scrollTop);
+    };
+    //自执行函数前加括号和单目运算符是有区别的
+//    (function () {
+//        div1.scrollTop++;
+//        if (div1.scrollHeight - div1.clientHeight == div1.scrollTop) {
+//            div1.scrollTop = 0;
+//        }
+//        window.setTimeout(arguments.callee, 10);
+//    })();
+//
+//    (function () {
+//        var t = div1.scrollTop;
+//        div1.scrollTop++;
+//        if (t == div1.scrollTop) {
+//            div1.innerHTML += div1.innerHTML;
+//        }
+//        window.setTimeout(arguments.callee, 10);
+//    })();
+
+//    (function () {
+//        var t = div1.scrollTop;
+//        if (t == (++div1.scrollTop)) {
+//            div1.innerHTML += div1.innerHTML;
+//        }
+//        window.setTimeout(arguments.callee, 10);
+//    })();
+</script>
+</body>
+</html>

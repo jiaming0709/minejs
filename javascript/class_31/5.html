@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #top{
+            height:6000px;
+        }
+        #content{
+            background:#f90;
+            color:#fff;
+            font-size:40px;
+            text-align:center;
+            height:300px;
+            line-height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="top"></div>
+<div id="content">content</div>
+<script src="../js/util.js"></script>
+<script>
+    /*
+    当浏览器滚动条滚动时,检测盒子是否进入了浏览器的可视窗口
+        浏览器流动条在滚动window.onscroll onscroll没有兼容性问题
+        如何知道某个元素到了浏览器的可视区域
+            1.盒子的位置是固定的
+            2.浏览器的可视窗口是变化的,但可以计算出当前可视窗口,可计算出当前窗口的哪一部分显示
+            3.如果网页的可视区底边>元素底边,进来了
+                document.scrollTop+document.documentElement.clientHeight > offset(ele).t+ele.offseHeight
+    */
+
+    content.btm=utils.offset(content).top+content.offsetHeight;
+    window.onscroll=function(){
+        document_h=(document.documentElement.scrollTop || document.body.scrollTop)+document.documentElement.clientHeight;
+        console.log(content.btm+","+document_h);
+        if(document_h>content.btm){
+            content.innerHTML="DFGHJKLJHGFDS";
+        }
+    }
+</script>
+</body>
+</html>

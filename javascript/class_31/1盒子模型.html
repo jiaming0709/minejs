@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div{
+            height:100px;
+            margin:100px;
+            background:red;
+        }
+        #div2,#div3{
+            padding:50px;
+        }
+        #div3{
+            border:50px solid #0000ff;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">margin </div>
+<div id="div2">margin + padding</div>
+<div id="div3">margin + padding</div>
+<div id="div4" style="border:50px solid #ccc;width:50px;"></div>
+
+<script>
+
+    //clientTop clientLeft 边框border 信息
+
+    //clientWidth clientHeight     content+padding
+    //offsetWidth offsetHeight     content+padding+border
+
+    //属性值 以在浏览器中的显示为准 并且是只读的属性
+    //没有可以直接获得元素内容宽或高的属性
+
+    //scrollHeight  永远是实际内容的高,即使overflow:hidden(即溢出时scrollHeight=padding-top+content)
+    //                              没有溢出scrollHeight=clientWidth;
+    //scrollWidth
+
+    //计算content.width content.height   //clientWidth-padding
+
+
+
+
+
+
+
+    //获取元素的具体样式信息值
+    //1) div1.style.height 只能获取行内样式
+
+
+    //2)getComputedStyle() 注意是一个函数,不是一个方法  IE6-8不支持  获取所有经过浏览器计算的样式值
+    //参数一: 当前元素
+    //参数二: 当前元素元素的伪类
+    //getComputedStyle(div1,null)   返回CSSStyleDeclaration类的一个实例  CSSStyleDeclaration-->object
+    //getComputedStyle(div1,null)["height"]    返回结果为字符串 "12px"
+    //getComputedStyle(div1,null).height       返回结果为字符串 "12px"
+
+    //getComputedStyle中存储的color值 为rgb格式的数组(rgb(255, 0, 0) 注意要有空格 ) ,判断 red #f00 均为false
+
+    //currentStyle 注意这是一个属性   IE处理
+    //div1.currentStyle.height
+
+    //检测浏览器的方法  window.navigator.userAgent
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

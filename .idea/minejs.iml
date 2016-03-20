@@ -3,7 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/../js2016" />
     <content url="file://$MODULE_DIR$/../jsnine" />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/angularJS/BookStore_demo/node_modules/grunt-contrib-jshint/node_modules/jshint/src/platforms" />
+    </content>
     <content url="file://$MODULE_DIR$/../simditor" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

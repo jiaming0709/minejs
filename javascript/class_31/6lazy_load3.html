@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #space {
+            height: 1000px;
+        }
+
+        img {
+            margin-top:100px;
+            height: 200px;
+            display:block;
+        }
+    </style>
+</head>
+<body>
+<div id="space"></div>
+<img src="http://img.xiami.net/images/collect/461/61/31986461_1403438543_OK8q.jpg" alt=""
+     data-src="http://img4q.duitang.com/uploads/item/201404/19/20140419101516_yxyve.thumb.700_0.jpeg"/>
+
+<img src="http://img.xiami.net/images/collect/461/61/31986461_1403438543_OK8q.jpg" alt=""
+     data-src="http://imgs1.rybbaby.com/uploadfile/20121229/1356767966.jpg"/>
+
+<img src="http://img.xiami.net/images/collect/461/61/31986461_1403438543_OK8q.jpg" alt=""
+     data-src="http://img4.duitang.com/uploads/item/201406/12/20140612161745_5XJkJ.thumb.700_0.jpeg"/>
+
+</body>
+<script>
+    function offset(ele) {
+        var t = ele.offsetTop;
+        var l = ele.offsetLeft;
+        var p = ele.offsetParent;
+        while (p) {
+            if (window.navigator.userAgent.indexOf("MSIE 8.0") == -1) {
+                t += p.clientTop; //上边框
+                l += +p.clientLeft; //左边框
+            }
+            t += p.offsetTop;
+            l += p.offsetLeft;
+            p = p.offsetParent;
+        }
+        return {left: l, top: t};
+    }
+
+    var oImg = document.images;
+    for(var i=0;i<oImg.length;i++){
+        oImg[i].btm = (offset(oImg[i]).top + oImg[i].offsetHeight);
+    }
+    console.log(oImg.btm);
+    window.onscroll = function () {
+
+        for(var i=0;i<oImg.length;i++){
+            loadimg(i);
+        }
+
+    }
+
+
+    function loadimg(i){
+        var h = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.clientHeight;
+        if (h > oImg[i].btm) {
+            if (oImg[i].loaded) return;
+            console.log("in");
+            var dataSrc = oImg[i].getAttribute("data-src") + "?rundom=" + Math.random();
+            oImg[i].src = "loading.gif";
+            var tempImg = new Image; //document.createElement("img")
+            tempImg.src = dataSrc;
+            tempImg.onload = function () {
+                oImg[i].src = this.src;
+                oImg[i].loaded=true;
+            }
+        }
+    }
+</script>
+</html>

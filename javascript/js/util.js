@@ -20,5 +20,20 @@ var utils = {
         //}
         //return val;
         return "JSON" in window ? JSON.parse(str) : eval("(" + str + ")");
+    },
+    offset: function (ele) {
+        var t = ele.offsetTop;
+        var l = ele.offsetLeft;
+        var p = ele.offsetParent;
+        while (p) {
+            if (window.navigator.userAgent.indexOf("MSIE 8.0") == -1) {
+                t += p.clientTop; //上边框
+                l += +p.clientLeft; //左边框
+            }
+            t += p.offsetTop;
+            l += p.offsetLeft;
+            p = p.offsetParent;
+        }
+        return {left: l, top: t};
     }
 }

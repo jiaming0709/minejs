@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //方式一:
+    function getCss(ele,attr){
+        if(typeof getComputedStyle=="function"){
+            return getComputedStyle(attr,null)[attr];
+        }
+        else{
+            return ele.currentStyle[attr];
+        }
+    }
+
+    //方式二:
+    function getCss(ele,attr){
+        if(window.getComputedStyle){  //不加window报错
+            return getComputedStyle(ele,null)[attr];
+        }
+        else{
+            return ele.currentStyle[attr];
+        }
+    }
+    //所有的全局方法或者全局变量都可以看作是window的属性
+    //JS中顶级作用域是window,window之上,还有 global(window是global的代理)
+    //Math RegExp window 是平级的
+
+    //nodeJS里有process,没有window
+
+
+    //IE中
+    //如果一个变量不存在,直接读操作,则会报错
+    //如果一个变量以属性的方式来做读操作,则没有问题  结果是undefined
+    //一个变量不定义,直接进行写操作,没有问题
+
+
+
+
+
+    //方式三:
+    function getCss(ele,attr){
+        try{
+            return getComputedStyle(ele,null)[attr];
+        }catch(e){
+            return ele.currentStyle[attr];
+        }
+    }
+
+
+
+    function getCss(ele, attr) {
+        var res = null;
+        if (window.getComputedStyle) {
+            res = getComputedStyle(ele, null)[attr];
+        }
+        else {
+            if (attr = "opacity") {
+                var str=ele.currentStyle["filter"];//alpha(opacity=20);
+                var reg=/^alpha\(opacity=(\d+(\.\d+)?)\)$/;
+                var temp=reg.exec(str);
+                res=reg.test(str)?(temp[1]/100):1;
+            }
+            else {
+                res = ele.currentStyle[attr];
+            }
+        }
+        return /^-?\d+(\.\d+)?(px|rem|em|pt)?$/.test(res)?parseFloat(res):res;
+    }
+
+
+</script>
+</body>
+</html>
