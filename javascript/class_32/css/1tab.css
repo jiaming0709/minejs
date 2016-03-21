@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.tablePanels {
+  width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ffcccc;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px 0 #FFE0E9; }
+  .tablePanels ul.tabGroup li.tab {
+    width: 80px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    display: inline-block;
+    background: #ffcccc;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    opacity: 0.5;
+    cursor: pointer;
+    -webkit-user-select: none; }
+    .tablePanels ul.tabGroup li.tab + .tab {
+      margin-left: 10px; }
+    .tablePanels ul.tabGroup li.tab.selected {
+      font-size: 16px;
+      background: #ff00ff;
+      opacity: 1; }
+    .tablePanels ul.tabGroup li.tab.promoted {
+      color: #000; }
+  .tablePanels div.contentGroup {
+    height: 200px;
+    background: #FFE0E9;
+    opacity: 0.5; }
+    .tablePanels div.contentGroup .content {
+      line-height: 30px;
+      padding: 20px;
+      color: #333;
+      font-size: 14px;
+      display: none; }
+      .tablePanels div.contentGroup .content.selected {
+        display: block; }
+
+/*# sourceMappingURL=1tab.css.map */
