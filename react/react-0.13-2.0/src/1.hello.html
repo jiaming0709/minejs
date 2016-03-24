@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<!--<script type="text/jsx" src="js/hello.js"></script>-->
+<script type="text/jsx">
+    var Hello=React.createClass({
+        render:function(){
+            return (
+                    <p>
+                        HELLO, <input type="text" placeHolder="you name here"/>!
+                        it is {this.props.date.toTimeString()}
+                    </p>
+            )
+        }
+    });
+
+    setInterval(function(){
+        React.render(
+                <Hello date = {new Date()}/>,
+                document.getElementById("example")
+        )
+    },500);
+</script>
+</body>
+</html>

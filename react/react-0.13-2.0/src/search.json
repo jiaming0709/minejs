@@ -1,0 +1,38 @@
+[
+  {
+    category: "sporting Goods",
+    price: "$49.99",
+    stocked: true,
+    name: "football"
+  },
+  {
+    category: "sporting Goods",
+    price: "$9.99",
+    stocked: true,
+    name: "baseball"
+  },
+  {
+    category: "sporting Goods",
+    price: "$29.88",
+    stocked: false,
+    name: "basketball"
+  },
+  {
+    category: "Electronics",
+    price: "$99.99",
+    stocked: true,
+    name: "ipod touch"
+  },
+  {
+    category: "Electronics",
+    price: "$399.99",
+    stocked: false,
+    name: "iphone 5"
+  },
+  {
+    category: "Electronics",
+    price: "$199.99",
+    stocked: true,
+    name: "nexus 7"
+  }
+]

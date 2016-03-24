@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../../angel_dinner/jquery.min.js"></script>
+</head>
+<body>
+<script>
+//    var url="data.json";
+//    var xhr = new XMLHttpRequest();
+//    xhr.open("get", url, true);
+//    xhr.onreadystatechange = function () {
+//        if (this.readyState == 4 && this.status == 200) {
+//            var val = this.responseText;
+//            console.log(val);
+//        }
+//    };
+//    xhr.send();
+
+    $(function(){
+        $.ajax({
+            url: "./data.json",
+            dataType:"json",
+            type:"GET",
+            success:function(data){
+                console.log(data);
+            },
+            error:function(){
+                console.log("error");
+            }
+        })
+    })
+</script>
+</body>
+</html>

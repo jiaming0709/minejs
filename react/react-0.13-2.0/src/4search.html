@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
+    <script src="../../../angel_dinner/jquery.min.js"></script>
+    <style>
+        thead {
+            background: #ccc;
+            font-size: 20px;
+            line-height: 40px;
+        }
+
+        tbody td {
+            line-height: 25px;
+            background: #eee;
+        }
+
+        tbody th {
+            font-size: 20px;
+            line-height: 30px;
+        }
+
+        .red {
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/jsx">
+    var product = [
+        {
+            category: "sporting Goods",
+            price: "$49.99",
+            stocked: true,
+            name: "football"
+        },
+        {
+            category: "sporting Goods",
+            price: "$9.99",
+            stocked: true,
+            name: "baseball"
+        },
+        {
+            category: "sporting Goods",
+            price: "$29.88",
+            stocked: false,
+            name: "basketball"
+        },
+        {
+            category: "Electronics",
+            price: "$99.99",
+            stocked: true,
+            name: "ipod touch"
+        },
+        {
+            category: "Electronics",
+            price: "$399.99",
+            stocked: false,
+            name: "iphone 5"
+        },
+        {
+            category: "Electronics",
+            price: "$199.99",
+            stocked: true,
+            name: "nexus 7"
+        }
+    ];
+    var SearchBar = React.createClass({
+        handleChange:function(e){
+            console.log(React.findDOMNode(this.refs.filterText).value);
+            this.props.onUserInput(
+                    React.findDOMNode(this.refs.filterText).value,
+                    React.findDOMNode(this.refs.inStockOnly).checked);
+        },
+        render: function () {
+            return (
+                    <div className="searchBar">
+                        <input type="text"
+                               placeholder="search..."
+                               value={this.props.filterText}
+                               ref="filterText"
+                               onChange={this.handleChange}
+                                />
+                        <br />
+                        <input type="checkbox"
+                               checked={this.props.inStockOnly}
+                               ref="inStockOnly"
+                               onChange={this.handleChange}
+                                />
+                        only show products in stock
+                    </div>
+            );
+        }
+    });
+    var ProductCategoryRow = React.createClass({
+        render: function () {
+            return (
+                    <tr>
+                        <th>
+                            {this.props.category}
+                        </th>
+                    </tr>
+            )
+        }
+    });
+    var ProductRow = React.createClass({
+        render: function () {
+            var name = this.props.product.stocked ?
+                    <span className="red">{this.props.product.name}</span> : this.props.product.name;
+            return (
+                    <tr>
+                        <td>{name}</td>
+                        <td>{this.props.product.price}</td>
+                    </tr>
+            )
+        }
+    });
+    var ProductTable = React.createClass({
+        render: function () {
+            var rows = [];
+            var lastCategory = null;
+            this.props.product.map(function (product) {
+                if (product.name.indexOf(this.props.filterText) === -1 || (!product.stocked && this.props.inStockOnly)) {
+                    return;
+                }
+                product.category != lastCategory ? rows.push(<ProductCategoryRow category={product.category}/>) : null;
+                rows.push(<ProductRow product={product}/>);
+                lastCategory = product.category;
+            }.bind(this));
+            return (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </table>
+            )
+        }
+    });
+    var Filterable = React.createClass({
+        getInitialState: function () {
+            return {
+                filterText: "",
+                inStockOnly: false
+            }
+        },
+        handleUserInput:function(filterText,inStockOnly){
+            this.setState({
+                filterText:filterText,
+                inStockOnly:inStockOnly
+            })
+        },
+        render: function () {
+            return (
+                    <div className="filterable">
+                        <SearchBar filterText={this.state.filterText}
+                                   inStockOnly={this.state.inStockOnly}
+                                   onUserInput={this.handleUserInput}
+                                />
+                        <ProductTable product={this.props.product}
+                                      filterText={this.state.filterText}
+                                      inStockOnly={this.state.inStockOnly}/>
+                    </div>
+            );
+        }
+    });
+
+    React.render(
+            <Filterable product={product}/>,
+            document.getElementById("container")
+    );
+
+
+</script>
+</body>
+</html>
