@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #content {
+            width: 1000px;
+            height: 666px;
+            position: relative;
+            margin: 10px;
+            background: #eee;
+        }
+
+        #content div {
+            position: absolute;
+            background: #f00;
+            background: url("22.jpg") no-repeat;;
+        }
+    </style>
+</head>
+<body>
+<img src="22.jpg" alt=""/>
+
+<div id="content"></div>
+<!--<script src="../js/tween.js"></script>-->
+<script src="../js/animate.js"></script>
+<script>
+    function getCss(ele, attr) {
+        if (window.getComputedStyle) {
+            return parseFloat(getComputedStyle(ele, null)[attr]);
+        }
+        else {
+            return parseFloat(ele.currentStyle[attr]);
+        }
+    }
+
+    var content = document.getElementById("content");
+    var rows = 3;
+    var cols = 10;
+    var a = [];
+    for (var i = 0; i < rows * cols; i++) {
+        var ele = document.createElement("div");
+        content.appendChild(ele);
+
+        width = getCss(content, "width") / cols;
+        height = getCss(content, "height") / rows;
+
+        ele.l = i % cols * width;
+        ele.t = Math.floor(i / cols) * height;
+
+        ele.style.width = width + "px";
+        ele.style.height = height + "px";
+
+        ele.style.top = "-200px";   //cols * width;
+        ele.style.left = "-100px";  //rows * height;
+        ele.style.opacity = 0;
+        ele.style.backgroundPosition = (-(i % cols * width)) + "px " + (-Math.floor(i / cols) * height) + "px ";
+
+        a.push(ele);
+    }
+
+    content.onclick = function () {
+        console.log(a);
+        for (var i = 0; i < a.length; i++) {
+            (function(i){
+                window.setTimeout(function(){
+                    animate(a[i], {left: a[i].l, top: a[i].t, opacity: 1}, 800);
+                },i%cols*200);
+            })(i);
+        }
+    }
+
+</script>
+</body>
+</html>

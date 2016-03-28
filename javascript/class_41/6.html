@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            position: absolute;
+            left: 300px;
+            top: 300px;
+
+        }
+
+        #left, #right {
+            width: 50px;
+            height: 50px;
+            background: #f00;
+            position: absolute;
+            left: 150px;
+            top: 520px;
+            margin: 10px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #right {
+            left: 220px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="left">left</div>
+<div id="right">right</div>
+<script>
+    function animate(ele, obj, duration, callback) {
+        var times = 0;
+        var interval = 10;
+
+        var beginObj = {};
+        var changeObj = {};
+        var flag = 0;
+        for (var attr in obj) {
+            var begin = parseFloat(animate.getCss(ele, attr));
+            var change = obj[attr] - begin;
+            if (change) {
+                beginObj[attr] = begin;
+                changeObj[attr] = change;
+                flag++;
+            }
+        }
+        if (flag === 0) {
+            return;
+        }
+
+        if (ele.timer) {
+            clearInterval(ele.timer);
+            ele.timer = null;
+        }
+
+        function step() {
+            times += interval;
+            var curPos = {};
+            for (attr in obj) {
+                curPos[attr] = times / duration * changeObj[attr] + beginObj[attr];
+            }
+            if (times >= duration) {
+                clearInterval(ele.timer);
+                ele.timer = null;
+                for (attr in obj) {
+                    curPos[attr] = obj[attr];
+                }
+            }
+            for (attr in obj) {
+                animate.setCss(ele, attr, curPos[attr]);
+            }
+        }
+
+        ele.timer = setInterval(step, interval);
+
+    }
+    ;
+    animate.getCss = function (ele, attr) {
+        if (window.getComputedStyle) {
+            return getComputedStyle(ele, null)[attr];
+        }
+        else {
+            if (attr = "opacity") {
+                var value = ele.currentStyle.filter.replace(/ +/g, "");  //alpha(opacity=66.66);
+                var reg = /alpha\(opacity=(\d+(\.\d+)?)\)/;
+                var res = reg.exec(value);
+                if (reg.test(value)) {
+                    return parseFloat(RegExp.$1) / 100;
+                }
+                else {
+                    return 1;
+                }
+            }
+            return parseFloat(ele.currentStyle[attr]);
+        }
+    };
+    animate.setCss = function (ele, attr, value) {
+        if (attr == "opacity") {
+            ele.style.opacity = value;
+            ele.style.filter = "alpha(opacity=" + value * 100 + ")";
+        }
+        else {
+            ele.style[attr] = value + "px";
+        }
+    };
+
+    left.onclick = function () {
+        var obj = {opacity: 0.2, height: 400, left: 100, width: 400, top: 100, "border-radius": 200};
+        animate(div1, obj, 2000);
+    };
+    right.onclick = function () {
+        var obj = {opacity: 1, height: 100, left: 300, width: 100, top: 300, "border-radius": 0};
+        animate(div1, obj, 2000);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            margin-left: 4000px;
+            width: 1000px;
+            height: 200px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    function offset(ele) {
+        var l = ele.offsetLeft;
+        var t = ele.offsetTop;
+        var p = ele.offsetParent;
+        while (p) {
+            if (window.navigator.userAgent.indexOf("MSIE 8.0") == -1) {
+                l += p.clientLeft;
+                t += p.clientTop;
+            }
+            l += p.offsetLeft;
+            t += p.offsetTop;
+            p = p.offsetParent;
+        }
+        return {left: l, top: t};
+    }
+
+    function lazyLoad(ele,srcStr) {
+        var win_scroll = document.documentElement.scrollLeft || document.body.scrollLeft;
+        var win_width = document.documentElement.clientWidth || document.body.clientWidth;
+        if (win_scroll + win_width >= (div1_h + 1000)) {
+            if (ele.loadedFlag) {
+                return;
+            }
+            var tempImg = new Image();
+            tempImg.src = srcStr + "?=" + Math.random();
+            tempImg.onload = function () {
+                ele.appendChild(tempImg);
+                ele.loadedFlag = true;
+            }
+        }
+    }
+
+    var div1 = document.getElementById("div1");
+    var div1_h = offset(div1).left+div1.offsetWidth;
+    src = "22.jpg";
+    window.onscroll = function () {
+        lazyLoad(div1, src);
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        #left, #right {
+            width: 50px;
+            height: 50px;
+            background: #f00;
+            position: absolute;
+            left: 150px;
+            top: 220px;
+            margin: 10px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #right {
+            left: 220px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="left">left</div>
+<div id="right">right</div>
+<script>
+    // animate方法名  ele运动的元素    attr运动的方向css属性    target运动终点     duration完成动画的总时间     interval动画的间隔时间
+
+    function animate(ele, attr, target, duration) {
+        clearInterval(ele["timer" + attr]);
+        ele["timer" + attr] = null;
+        var times = 0;
+        var interval = 15;
+
+        var begin = parseFloat(getCss(ele, attr));
+
+        function step() {
+            times += interval;
+            var curPos = times / duration * (target - begin) + begin;
+            if (times >= duration) {
+                curPos = target;
+                clearInterval(ele["timer" + attr]);
+                ele["timer" + attr] = null;
+            }
+            ele.style[attr] = curPos + "px";
+        }
+
+        ele["timer" + attr] = setInterval(step, interval);
+    }
+
+    div1.onclick = function () {
+        animate(div1, "width", 1000, 2000);
+    };
+    left.onclick = function () {
+        animate(div1, "left", 1000, 2000);
+    };
+    right.onclick = function () {
+        animate(this, "left", 500, 1000);
+    };
+//    right.onclick = function () {
+//        animate(this, "width", 1000, 2000);
+//    };
+
+    //bug:   right盒子运动,把div1盒子的动画覆盖,div1盒子中止
+    //用自定义属性的方式
+    //bug:  如果元素同时有两个变化,(控制同一个元素的多个属性) 第一个变化中止,执行第二个
+    //不同的属性用不同的定时器
+
+
+    function getCss(ele, attr) {
+        if (window.getComputedStyle) {
+            return getComputedStyle(ele, null)[attr];
+        }
+        else {
+            return ele.currentStyle[attr];
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        #left, #right {
+            width: 50px;
+            height: 50px;
+            background: #f00;
+            position: absolute;
+            left: 150px;
+            top: 220px;
+            margin: 10px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #right {
+            left: 220px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="left">left</div>
+<div id="right">right</div>
+<script>
+    // animate方法名  ele运动的元素    attr运动的方向css属性    target运动终点     duration完成动画的总时间     interval动画的间隔时间
+    function fn() {
+        this.style.backgroundColor = "#f0f";
+    }
+
+    left.onclick = function () {
+        fadeInout(div1, 0, 1000);
+    };
+    right.onclick = function () {
+        fadeInout(div1, 1, 1000);
+
+    };
+
+
+    function getCss(ele, attr) {
+        if (window.getComputedStyle) {
+            return getComputedStyle(ele, null)[attr];
+        }
+        else {
+            return ele.currentStyle[attr];
+        }
+    }
+
+    function fadeInout(ele, target, duration, callBack) {
+        if (!ele.timer) {
+            ele.timer = setInterval(step, interval);
+        }
+        else {
+            clearInterval(ele.timer);
+            ele.timer = null;
+        }
+        var times = 0;
+        var interval = 10;
+        var begin = getCss(ele, "opacity");
+
+        function step() {
+            times += interval;
+            var curPos = times / duration * (target - begin) + parseFloat(begin);
+            if (times >= duration) {
+                curPos = target;
+                clearInterval(ele.timer);
+                ele.timer = null;
+                if (typeof callback == "function") {
+                    callback.call(ele);
+                }
+            }
+            ele.style.opacity = curPos;
+        }
+    }
+</script>
+</body>
+</html>

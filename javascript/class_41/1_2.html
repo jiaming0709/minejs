@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //当前起点:100px,1000ms内走到900px;
+    //当前消耗的时间/规定的时间=当前走的路/总路径
+
+    //    var times = 0;
+    //    var allTimes = 1000;
+    //    var interval = 10;
+    //
+    //    var start = 100;
+    //    var end = 900;
+    //
+    //    ele = document.getElementById("div1");
+    //    function step() {
+    //        clearInterval(window.timer);
+    //        window.timer=null;
+    //
+    //        times += interval;
+    //        var curPos = times / allTimes * (end - start) + start;
+    //        if(times>=allTimes){
+    //            clearInterval(window.timer);
+    //            window.timer=null;
+    //            curPos=end;
+    //            return;
+    //        }
+    //        ele.style.left=curPos+"px";
+    //        window.timer=setTimeout(step,interval);
+    //    }
+    //    step();
+
+
+    var times = 0;
+    var duration = 1000;
+    var interval = 10;
+
+    var begin = 100;
+    var target = 900;
+
+    function step() {
+        clearInterval(window.timer);
+        window.timer = null;
+        times += interval;
+        var curPos = (times / duration) * (target - begin) + begin;
+        if (times >= duration) {
+            var curPos = target;
+            clearInterval(window.timer);
+            window.timer = null;
+            return;
+        }
+        div1.style.left = curPos + "px";
+        window.timer = setTimeout(step, interval);
+
+        console.log(curPos);
+    }
+    step();
+
+
+</script>
+</body>
+</html>

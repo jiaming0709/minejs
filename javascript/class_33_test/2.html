@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<ul>
+    <li class="list"></li>
+    <li class="tab a"></li>
+    <li class="tab a list"></li>
+    <li class="tab"></li>
+    <li class="tab list"></li>
+    <li class="tab a b "></li>
+</ul>
+<script>
+    function getEleByClass(classStr){
+//        if(document.getElementsByClassName){
+//            return document.getElementsByClassName("list   tab");
+//        }
+        var ary=classStr.replace(/^ +| +$/g,"").split(/ +/);
+
+        var eles=document.getElementsByTagName("*");
+
+        for(var i=0;i<ary.length;i++){
+            var reg=new RegExp("(?:^| )"+ary[i]+"(?: |$)");
+            var ele_ary=[];
+            for(var j=0;j<eles.length;j++){
+                var classNames=eles[j].className;
+                if(reg.test(classNames)){
+                    ele_ary.push(eles[j]);
+                }
+            }
+            eles=ele_ary;
+            console.log(eles);
+
+        }
+        return eles;
+
+
+    }
+    var res=getEleByClass("  list   tab  ");
+
+</script>
+</body>
+</html>

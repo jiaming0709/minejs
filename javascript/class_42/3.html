@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<a id="link" href="http://www.baidu.com">baidu</a>
+<script>
+    //阻止事件默认行为:
+        //-->return false
+        //-->事件直接驱动的方法无法人为传参 但浏览器会自动给它传一个实参:事件对象
+            //e.preventDefault() 阻止事件的默认行为
+
+
+    link.onclick=function(e){
+        e.preventDefault();
+        //return false;
+    }
+</script>
+</body>
+</html>

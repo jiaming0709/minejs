@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #ff0;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //当前起点:100px,1000ms内走到900px;
+    //当前消耗的时间/规定的时间=当前走的路/总路径
+
+    var times = 0;   //当前消耗的时间
+    var allTimes = 1000;  //总时间
+    var interval = 10;   //时间间隔 每隔多长时间运动一次
+
+    var start = 100;    //起点位置
+    var end = 900;     //结束位置
+
+
+    window.timer = setInterval(function () {
+        times += interval;
+        if (times < allTimes) {
+            var curPos = (times / allTimes) * (end - start) + start;
+        }
+        else {
+            curPos = end;
+            clearInterval(window.timer);
+            window.timer = null;
+        }
+        div1.style.left = curPos + "px";
+    }, interval);
+</script>
+</body>
+</html>

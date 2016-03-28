@@ -70,13 +70,14 @@ var utils = {
         var childNodes = parent.childNodes;
         var ary = [];
         for (var i = 0; i < childNodes.length; i++) {
-            if (childNodes[i].nodeType == 1) {
-                ary.push(childNodes[i]);
-            }
-            else if (typeof tagName == "string") {
+
+            if (typeof tagName == "string") {
                 if (childNodes[i].tagName == tagName.toUpperCase()) {
                     ary.push(childNodes[i]);
                 }
+            }
+            else if (childNodes[i].nodeType == 1) {
+                ary.push(childNodes[i]);
             }
             else {
                 return null;

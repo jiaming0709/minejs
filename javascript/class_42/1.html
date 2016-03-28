@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/icon.css"/>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div>一</div>
+        <div>二</div>
+        <div>三</div>
+        <div>四</div>
+        <div>五</div>
+    </div>
+    <ul id="btn">
+        <li class="selected"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="../js/animate.js"></script>
+<script>
+    var oLis = document.getElementById("btn").getElementsByTagName("li");
+    oDiv=document.getElementById("inner").getElementsByTagName("div")[0];
+    inner.appendChild(oDiv.cloneNode(true));
+    inner.style.width=inner.offsetWidth+oDiv.offsetWidth+"px";
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].index=i;
+        oLis[i].onclick = function(){
+            clearInterval(window.autoTimer);
+            window.autoTimer=null;
+
+            animate(inner,{left:this.index*-500},600);
+            icon(this.index);
+
+            step=this.index;
+            //注意点击一次即开启两个定时器,点击次数多-->定时器特别多  所以要即时清除所有定时器
+            //定时器执行完成之后再执行就没有意义了,所以要在执行前将setTimeout 清掉,不然就没用了,所以要在执行前变量名覆盖即清除setTimeout
+            window.autoTimer=setTimeout(function(){
+                window.autoTimer=setInterval(autoMove,2000);
+            },3000)
+        }
+    }
+
+
+    function icon(step){
+        for(var i=0;i<oLis.length;i++){
+            if(i==step){
+                oLis[i].className="selected";
+            }
+            else{
+                oLis[i].className="";
+            }
+        }
+    }
+
+    var step=0;
+    function autoMove(){
+        step++;
+        if(step>5){
+            step=0;
+            inner.style.left=0;
+        }
+        icon(step);
+        animate(inner,{left:step*-500},600);
+    }
+    window.autoTimer=setInterval(autoMove,2000);
+</script>
+</body>
+</html>

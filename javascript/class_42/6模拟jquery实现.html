@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<body>
+<script>
+    function Query(selector) {   //选择器格式的串
+        var regId = /^#([a-z]\w*)$/i;
+        var regClass = /^.([a-z][\w-]*)$/i;
+        var regTag = /^([a-z]\w*)$/;
+        if (regId.test(selector)) {
+            ele = document.getElementById(RegExp.$1);
+            this[0] = ele;
+            this.length = 1;
+        } else if (regClass.test(selector)) {
+            ele = document.getElementByClassName(RegExp.$1);
+            for (var i = 0; i < eles.length; i++) {
+                this[i] = eles[i];
+            }
+            this.length = ele.length;
+        } else if (regTag.test(selector)) {
+            ele = document.getElementByTag(RegExp.$1);
+            for (var i = 0; i < eles.length; i++) {
+                this[i] = eles[i];
+            }
+            //this=ele  这样是错误的
+            this.length = ele.length;
+        }
+
+    }
+    Query.prototype.width = function (value) {
+
+    };
+    Query.prototype.height = function (value) {
+
+    };
+    Query.prototype.bgColor = function (value) {
+
+    };
+    Query.prototype.eq = function (n) {  //返回 jquery 的对象
+
+    };
+    Query.prototype.get = function (n) {   //返回js原生的对象
+
+    };
+
+
+    $("div").width(100).height(100).bgColor("#f00").eq(3).width(200).bgColor("#f00").get(0).style.height = "200px";
+</script>
+</body>
+</html>

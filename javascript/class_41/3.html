@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{
+            width:100px;
+            height:100px;
+            background:#f00;
+            position:absolute;
+            left:100px;
+            top:100px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    // animate方法名  ele运动的元素    attr运动的方向css属性    target运动终点     duration完成动画的总时间     interval动画的间隔时间
+
+    function animate(ele, attr, target, duration) {
+        var times = 0;
+        var interval = 15;
+
+        var begin = parseFloat(getCss(ele, attr));
+
+        function step() {
+            times += interval;
+            var curPos = times / duration * (target - begin) + begin;
+            if(times>=duration){
+                curPos=target;
+                clearInterval(window.timer);
+                window.timer=null;
+            }
+            ele.style[attr]=curPos+"px";
+        }
+        window.timer = setInterval(step, interval);
+    }
+
+    div1.onclick= function () {
+        animate(div1,"width",500,1000);
+    }
+
+
+    function getCss(ele, attr) {
+        if (window.getComputedStyle) {
+            return getComputedStyle(ele, null)[attr];
+        }
+        else {
+            return ele.currentStyle[attr];
+        }
+    }
+</script>
+</body>
+</html>

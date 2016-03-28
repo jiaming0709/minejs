@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/icon.css"/>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div>一</div>
+        <div>二</div>
+        <div>三</div>
+        <div>四</div>
+        <div>五</div>
+    </div>
+    <ul id="btn">
+        <li class="selected"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="../js/animate.js"></script>
+<script>
+    var oLis = document.getElementById("btn").getElementsByTagName("li");
+    oDiv = document.getElementById("inner").getElementsByTagName("div")[0];
+    inner.appendChild(oDiv.cloneNode(true));
+    inner.style.width = inner.offsetWidth + oDiv.offsetWidth + "px";
+
+
+    for (var i = 0; i < oLis.length; i++) {
+        (function (i) {
+            oLis[i].onclick = function () {
+                clearInterval(window.autoRight);
+                window.autoRight = null;
+
+                step = i;
+                animate(inner, {left: step * -500}, 600);
+
+                setTimeout(function () {
+                    setInterval(autoRight, 2000);
+                }, 100)
+            }
+        })(i)
+    }
+
+    var step = 0;
+    function autoRight() {
+        console.log(step);
+        step--;
+        if (step < 0) {
+            step = 5;
+            inner.style.left = step * -500 + "px";
+            step--;
+        }
+        animate(inner, {left: step * -500}, 600);
+    }
+    window.autoRight = setInterval(autoRight, 1000);
+</script>
+</body>
+</html>
