@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background: #0ff;
+            position: relative;
+        }
+
+        #inner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+</div>
+<script>
+    //event1: mouseover 创建一张大图  在鼠标位置
+    //event2: mousemove 大图随鼠标移动而移动
+    //event3: mouseout 大图消失(隐藏或删除)
+
+
+    //这个函数由事件触发:浏览器自动把事件对象传给函数,不需要人为干预
+    //既然"事件"是对象,它应该承载很多的信息,
+    //event.clientX;event.clientY;  鼠标相对于浏览器的坐标
+    //event.pageX;event.pageY; (IE不支持)  鼠标相对于文档的坐标
+    //e.target;  event.srcElement(IE专用)
+    //e.keyCode  事件由键盘触发时,每个键的 ASCII 码
+    //e.stopPropagation();     e.cancelBubble=true;(IE专用)   停止事件传播,取消事件冒泡
+    //e.preventDefault();    e.returnValue=false;(IE专用)   DOM二级事件中  阻止事件默认行为
+
+    //事件 和 事件处理方法(给事件上绑定的方法) 是两码事
+    //
+
+
+    var ele = document.getElementById("div1");
+    ele.onmouseover = function () {
+        var oInner = document.createElement("div");
+        oInner.id = "inner";
+        this.appendChild(oInner);
+        oInner.style.left = arguments[0].clientX + "px";
+        oInner.style.top = arguments[0].clientY + "px";
+    };
+
+
+    function fn1(e) {
+        console.log("client" + e.clientX + "," + e.clientY);
+        console.log("page" + e.pageX + "," + e.pageY);
+    }
+    ele.onclick = fn1;//事件会直接触发fn1,弹出鼠标的X轴坐标;
+
+    //    ele.onclick=function(){
+    //        fn1();
+    //    }
+    //Error  事件不是直接触发fn2,而是先触发匿名方法,再由匿名方法调用fn1,这样事件对象则不会传给fn2;则arguments[0]是undefined,undefined没有任何属性,报错
+
+    ele.onclick = function (e) { //正解  匿名方法会收到事件对象放在arguments[0]上,然后再传给fn2
+        fn1(e);
+    }
+
+</script>
+</body>
+</html>

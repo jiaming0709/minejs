@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+    <div id="left">&lt;</div>
+    <div id="right">&gt;</div>
+</div>
+<script src="js/animate.js"></script>
+<script>
+    var oDiv=inner.getElementsByTagName("div")[0];
+    inner.appendChild(oDiv.cloneNode(true));
+    inner.style.width=inner.offsetWidth+oDiv.offsetWidth+"px";
+
+    var step=0;
+    right.onclick=function(){
+        if(inner.timer){
+            return;
+        }
+        step++;
+        if(step>=6){
+            inner.style.left=0;
+            step=1;
+        }
+        animate(inner, {left: -500*step}, 600);
+    }
+    left.onclick=function(){
+        if(inner.timer){
+            return;
+        }
+        if(step==0){
+            step=5;
+            inner.style.left=step*(-500)+"px";
+        }
+        step--;
+        animate(inner, {left: -500*step}, 600);
+    }
+</script>
+</body>
+</html>

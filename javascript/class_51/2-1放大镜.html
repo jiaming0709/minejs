@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+
+
+        #content {
+            width: 116px;
+            height: 150px;
+            background: url("timg.jpeg") left top no-repeat;
+            background-size: 116px 150px;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        #show {
+            width: 116px;
+            height: 150px;
+            background: #ccc;
+            position: absolute;
+            left: 150px;
+            overflow:hidden;
+        }
+
+        #mask {
+            background: #000;
+            opacity: 0.5;
+            position: absolute;
+            cursor:move;
+        }
+    </style>
+</head>
+<body>
+<div id="content"></div>
+
+<script>
+    //348 450
+    //遮罩/小图=右侧显示区/大图
+
+    var scale = 116 / 348;
+
+    var content = document.getElementById("content");
+    content.onmouseenter = function (e) {
+        var e = e || window.event;
+        var w = content.offsetWidth * scale;
+        var h = content.offsetHeight * scale;
+
+        //添加遮罩
+        var oMask = document.createElement("div");
+        oMask.id = "mask";
+        with (oMask.style) {
+            left = e.clientX - this.offsetLeft + "px";
+            top = e.clientY - this.offsetTop + "px";
+            width = w + "px";
+            height = h + "px";
+        }
+        this.appendChild(oMask);
+
+        //添加放大区域
+        var oShow = document.createElement("div");
+        oShow.id = "show";
+        var oImg = document.createElement("img");
+        oImg.src = "timg.jpeg";
+        oShow.appendChild(oImg);
+        content.appendChild(oShow);
+    };
+    content.onmousemove = function (e) {
+        var oMask = document.getElementById("mask");
+        var oShow=document.getElementById("show");
+
+        if (oMask) {
+            var l = e.clientX - this.offsetLeft - oMask.offsetWidth / 2; //正常情况下mask的水平位置
+            var t = e.clientY - this.offsetTop - oMask.offsetHeight / 2; //正常情况下mask的垂直位置
+            var maxL = this.offsetWidth - oMask.offsetWidth;  //鼠标能到达的最右边
+            var maxT = this.offsetHeight - oMask.offsetHeight; //鼠标能到达的最下边
+
+            with (oMask.style) {
+                if (l <= 0) {
+                    left = 0;
+                } else if (l < maxL) {
+                    left = l + "px";
+                    oShow.scrollLeft=l/scale;
+                }
+                else {
+                    left = maxL + "px";
+                }
+                if (t <= 0) {
+                    top = 0;
+                } else if (t < maxT) {
+                    top = t + "px";
+                    oShow.scrollTop=t/scale;
+                }
+                else {
+                    top = maxT + "px";
+                }
+            }
+        }
+    }
+
+    content.onmouseleave = function (e) {
+        var oMask = document.getElementById("mask");
+        if (oMask) {
+            this.removeChild(oMask);
+        }
+
+        var oShow=document.getElementById("show");
+        if(oShow){
+            this.removeChild(oShow);
+        }
+    }
+</script>
+</body>
+</html>

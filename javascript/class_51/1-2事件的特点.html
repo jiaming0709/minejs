@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background: #0ff;
+            position: relative;
+        }
+
+        #inner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //事件的传播和事件传播造成的影响
+
+    var ele = document.getElementById("div1");
+    ele.onmouseover = function (e) {
+        //e.relatedTarget;//当这个事件触发的时候,从哪离开的
+        //e.target; //到了哪
+        var relatedEle= e.relatedTarget;
+        var parent=relatedEle.parentNode;
+        while(parent){
+            if(parent==this){ //如果离开的地方是它自己的后代,则不触发这个方法
+                return;
+            }
+            parent=parent.parentNode;
+        }
+
+        var oInner = document.createElement("div");
+        oInner.id = "inner";
+        this.appendChild(oInner);
+        //clientX是相对于浏览器的偏移, 需要的是相对于窗口的偏移
+        oInner.style.left = arguments[0].clientX - this.offsetLeft + "px";
+        oInner.style.top = arguments[0].clientY - this.offsetTop + "px";
+
+        //oInner继承了 父级的传播,只要进入小容器,就会触发小容器的onmouseover,然后执行从大容器传播过来的事件(创建小容器)
+        oInner.onmouseover = function (e) {
+            e.stopPropagation();
+        }
+    };
+</script>
+</body>
+</html>

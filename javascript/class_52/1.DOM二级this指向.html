@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<script>
+    //DOM0 :为了区分最原始的操作网页结构的脚本,出现在 DOM Core(DOM的第一个版本)之前,称之为 DOM0,只解决了DOM的增删改查,
+    //document.forms;document.anchors; //DHTML
+    //document.onclick;ele.onmouseover
+
+    //DOM api的版本也不断在升级,DOM2,DOM3
+    //DOM2中,增加了一些新的API,主要和事件相关的方法
+    //addEventListener, removeEventListener,
+    //DOMContentLoaded ==> $(document).ready(); ==>$(function(){})
+
+    //适配器模式
+    function bind(ele, type, fn) {
+        if (ele.addEventListener) {
+            ele.addEventListener(type, fn, false);
+        }
+        else if (ele.attachEvent) {
+            ele.attachEvent("on" + type, fn);
+        }
+    }
+    function unbind(ele, type, fn) {
+        if (ele.removeEventListener) {
+            ele.removeEventListener(type, fn, false);
+        }
+        else if (ele.detachEvent) {
+            ele.detachEvent("on" + type, fn);
+        }
+    }
+
+
+    var innerHTML = "window";
+    function fn1() {
+        console.log(this.innerHTML);
+    }
+    function fn2() {
+        console.log("fn2:" + "2");
+    }
+    var counter = 0;
+    function fn3() {
+        counter++;
+        if (counter == 3) {
+            unbind(this, "click", fn1);
+            unbind(this, "click", fn2);
+        }
+        console.log("fn3:" + counter);
+    }
+
+    var div1=document.getElementById("div1");
+    bind(div1,"click",fn1);
+    bind(div1,"click",fn2);
+    bind(div1,"click",fn3);
+
+
+    //IE中用attachEvent绑定事件,其中的this指向window
+</script>
+</body>
+</html>

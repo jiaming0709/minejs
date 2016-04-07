@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<script src="../js/bind.js"></script>
+<script>
+    var innerHTML = "window";
+    function fn1() {
+        alert("fn1:" + this.innerHTML);
+    }
+    function fn2() {
+        alert("fn2:" + "2");
+    }
+    var counter = 0;
+    function fn3() {
+        counter++;
+        if (counter == 2) {
+            off(this, "click", fn1);
+            off(this, "click", fn2);
+        }
+        alert("fn3:" + counter);
+    }
+    function fn4() {
+        alert("fn:4");
+    }
+    function fn5() {
+        alert("fn:5");
+    }
+    function fn6() {
+        alert("fn:6");
+    }
+    function fn7() {
+        alert("fn:7");
+    }
+    function fn8() {
+        alert("fn:8");
+    }
+    function fn9() {
+        alert("fn:9");
+    }
+    function fn10() {
+        alert("fn:10");
+    }
+    function fn11() {
+        alert("fn:11");
+    }
+    function fn12() {
+        alert("fn:12");
+    }
+    function fn13() {
+        alert("fn:13");
+    }
+
+
+    var div1 = document.getElementById("div1");
+    function on(ele, type, fn) { //把fn放到一个和事件类型相对应的数组,数组是一个由事件类型来区分的自定义属性
+        if (!ele["aEvent" + type]) {
+            ele["aEvent" + type] = [];
+        }
+        var a = ele["aEvent" + type];
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] == fn) return;
+        }
+        a.push(fn);
+        bind(ele, type, run);
+    }
+
+    function run(e) {
+        var e = e || window.event;
+        var type = e.type;
+        var a = this["aEvent" + type];
+        for (var i = 0; i < a.length; i++) {
+            a[i].call(this);
+        }
+
+    }
+    function off(ele, type, fn) {
+        var a = ele["aEvent" + type];
+        if(a){
+            for(var i=0;i< a.length;i++){
+                if(a[i]==fn){
+                    a.splice(i,1);
+                    return;
+                }
+            }
+        }
+    }
+    on(div1, "click", fn1);
+    on(div1, "click", fn2);
+    on(div1, "click", fn3);
+    on(div1, "click", fn4);
+    on(div1, "click", fn5);
+    on(div1, "click", fn6);
+    on(div1, "click", fn7);
+
+</script>
+</body>
+</html>

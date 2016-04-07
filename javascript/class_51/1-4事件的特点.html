@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background: #0ff;
+            position: relative;
+        }
+
+        #inner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+
+    var ele = document.getElementById("div1");
+    ele.onmouseover = function (e) {
+        //e.relatedTarget;//当这个事件触发的时候,从哪离开的
+        //e.target; //到了哪
+        var relatedEle= e.relatedTarget;
+        var parent=relatedEle.parentNode;
+        while(parent){
+            if(parent==this){ //如果离开的地方是它自己的后代,则不触发这个方法
+                return;
+            }
+            parent=parent.parentNode;
+        }
+
+        //实现与mouserenter相同的功能
+        if(this==relatedEle){
+            return;
+        }
+        var oInner = document.createElement("div");
+        oInner.id = "inner";
+        this.appendChild(oInner);
+        //clientX是相对于浏览器的偏移, 需要的是相对于窗口的偏移
+        oInner.style.left = arguments[0].clientX - this.offsetLeft + "px";
+        oInner.style.top = arguments[0].clientY - this.offsetTop + "px";
+
+    };
+</script>
+</body>
+</html>

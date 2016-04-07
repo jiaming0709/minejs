@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //    let [foo = true] =[];
+    //    console.log(foo);
+    //
+    //    let [x,y="b"]=["a", "undefined"];
+    //    console.log(x, y);
+
+    let [x=1]=[undefined];
+    console.log(x);
+
+    let {foo:baz}={foo: "aaa"};
+    console.log(baz);
+
+    function add([x,y]) {
+        return x + y;
+    }
+    console.log(add([1 , 2]));
+
+    [[1,2],[3,4]].map(([a,b]) => console.log(a+b) );
+
+
+//    function move({x=0,y=0}={}){
+//        return [x,y];
+//    }
+//    move({x:3,y:8});  //3 8
+//    move({x:3});  //3 0
+//    move({});  //0 0
+//    move() //0 0
+
+    function move({x,y}={x:0,y:0}){
+        return[x,y];
+    }
+
+    //    move({x:3,y:8});  //3 8
+    //    move({x:3});  //3 undefined
+    //    move({});  //undefined undefined
+    //    move() //0 0
+</script>
+</body>
+</html>

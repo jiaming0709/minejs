@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div id="outer">
+    <div id="inner">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+    <ul id="icon">
+        <li class="selected"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div id="left">&lt;</div>
+    <div id="right">&gt;</div>
+</div>
+<script src="js/animate.js"></script>
+<script>
+    var icons = document.getElementById("icon").getElementsByTagName("li");
+    function seticon(step) {
+        for (var i = 0; i < icons.length; i++) {
+            icons[i].className = "";
+            if (i == step) {
+                icons[i].className = "selected";
+            }
+            if(step==5){
+                icons[0].className = "selected";
+            }
+        }
+    }
+    var div1 = document.getElementById("inner").getElementsByTagName("div")[0];
+    inner.appendChild(div1.cloneNode(true));
+    inner.style.width = inner.offsetWidth + div1.offsetWidth + "px";
+
+    var step = 0;
+    left.onclick = function () {
+        if (step == 0) {
+            step = 5;
+            inner.style.left = -500 * step + "px";
+        }
+        step--;
+        animate(inner, {left: -500 * step}, 400);
+
+        seticon(step);
+
+
+    };
+    right.onclick = function () {
+        step++;
+        if (step >= 6) {
+            step = 1;
+            inner.style.left = 0;
+
+        }
+        animate(inner, {left: -500 * step}, 400);
+
+        seticon(step);
+    }
+</script>
+<script>
+</script>
+</body>
+</html>

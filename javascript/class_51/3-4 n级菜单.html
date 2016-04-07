@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            margin: 5px 20px;
+            width: 200px;
+
+        }
+
+        li span {
+            background: #0ff;
+            display: block;
+        }
+
+        li span.open, li span.closed {
+            background: #0f0;
+        }
+
+        li span.open::before {
+            content: "-";
+            font-size: 24px;
+            color: #ff0;
+            font-weight: bold;
+        }
+
+        li span.closed::before {
+            content: "+";
+            font-size: 24px;
+            color: #ff0;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+<ul id="menu">
+    <li>
+        <span>第一级第一个菜单</span>
+        <ul>
+            <li><span>1第二级第一个菜单</span></li>
+            <li><span>1第二级第二个菜单</span>
+                <ul>
+                    <li><span>1-2第三级第一个菜单</span></li>
+                    <li><span>1-2第三级第二个菜单</span></li>
+                    <li><span>1-2第三级第三个菜单</span></li>
+                    <li><span>1-2第三级第四个菜单</span>
+                        <ul>
+                            <li><span>1-2-4第二级第一个菜单</span></li>
+                            <li><span>1-2-4第二级第二个菜单</span></li>
+                            <li><span>1-2-4第二级第三个菜单</span>
+                                <ul>
+                                    <li><span>3第二级第一个菜单</span></li>
+                                    <li><span>3第二级第二个菜单</span></li>
+                                    <li><span>3第二级第三个菜单</span></li>
+                                    <li><span>3第二级第四个菜单</span></li>
+                                </ul>
+
+                            </li>
+                            <li><span>1-2-4第二级第四个菜单</span></li>
+                        </ul>
+
+
+                    </li>
+                </ul>
+            </li>
+            <li><span>1第二级第三个菜单</span></li>
+            <li><span>1第二级第四个菜单</span></li>
+        </ul>
+
+    </li>
+    <li><span>第一级第二个菜单</span>
+        <ul>
+            <li><span>2第二级第一个菜单</span></li>
+            <li><span>2第二级第二个菜单</span></li>
+            <li><span>2第二级第三个菜单</span></li>
+            <li><span>2第二级第四个菜单</span></li>
+        </ul>
+    </li>
+    <li><span>第一级第三个菜单</span>
+        <ul>
+            <li><span>3第二级第一个菜单</span></li>
+            <li><span>3第二级第二个菜单</span></li>
+            <li><span>3第二级第三个菜单</span></li>
+            <li><span>3第二级第四个菜单</span></li>
+        </ul>
+
+    </li>
+    <li><span>第一级第四个菜单</span></li>
+
+</ul>
+<script>
+    //初始化
+    var oMenu = document.getElementById("menu");
+    var oSpans = oMenu.getElementsByTagName("span");
+    for (var i = 0; i < oSpans.length; i++) {
+        var oUl = oSpans[i].nextElementSibling;
+        if (oUl) {
+            oUl.style.display = "none";
+            oSpans[i].className = "closed";
+        }
+    }
+    oMenu.onclick = function (e) {
+        var target = e.target;
+        if (target.tagName == "SPAN") {
+            var oUl = target.nextElementSibling;
+            if (oUl) {
+                if (oUl.style.display == "none") {
+                    oUl.style.display = "block";
+                    target.className = "open";
+                }
+                else {
+                    oUl.style.display = "none";
+                    target.className = "closed";
+
+                    var otherUls = oUl.getElementsByTagName("ul");
+                    for (var i = 0; i < otherUls.length; i++) {
+                        otherUls[i].style.display = "none";
+                        otherUls[i].previousElementSibling.className = "closed";
+                    }
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

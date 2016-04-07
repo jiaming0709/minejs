@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<a href="http://www.baidu.com">baidu</a>
+<script>
+    var oA=document.getElementsByTagName("a")[0];
+    oA.addEventListener("click",function(e){
+        e.preventDefault();
+//        return false;
+    },false);
+    oA.attachEvent("onClick",function(){
+        window.event.returnValue=false;
+        return false;
+    })
+</script>
+</body>
+</html>

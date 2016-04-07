@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        li {
+            position: relative;
+            float: left;
+        }
+
+        li a.tooltip {
+            display: inline-block;
+            border:1px solid;
+        }
+
+        .tooltip > img {
+            width: 100px;
+        }
+
+        .bigpic {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>
+        <a class="tooltip" href="">
+            <img src="timg.jpeg" alt=""/>
+        </a>
+    </li>
+</ul>
+<script src="../jquery.min.js"></script>
+<script>
+    $("a.tooltip")
+            .mouseenter(function () {
+                console.log($(this).attr("href"));
+                $(this).append('<div class="bigpic"><img src="' + $(this).children("img").eq(0).attr("src") + '" /></div>');
+            }).mousemove(function (e) {
+                var l = e.pageX - $(this).offset().left;
+                var t = e.pageY - $(this).offset().top;
+                $(this).children(".bigpic").css({left: l, top: t});
+            }).mouseleave(function () {
+                $(this).children(".bigpic").remove();
+                //removeChild(ele)
+            });
+
+
+    //onmouseout三种解决方案
+    //-->relatedTarget
+    //-->+10
+    //-->mouseenter mouseleave
+
+</script>
+</body>
+</html>

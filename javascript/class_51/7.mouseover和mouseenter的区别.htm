@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var ele=document.getElementById("box");
+    ele.onmouseover = function (e) {
+        //离开的位置是它自己则不会触发enter
+        if (e.relatedTarget == this) return;
+
+        //如果它离开的位置,是它的后代元素也不会触发此事件的enter
+        if (e.relatedTarget.parentNode == this) return;
+    }
+</script>
+</body>
+</html>

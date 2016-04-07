@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="outer" style="background:#f00;"> outer
+    <div id="middle" style="background:#f90;"> middle
+        <div id="inner" style="background:#ff0;"> inner
+            <p id="p1" style="background:#0f0;"> p1
+                <span id="span1" style="background:#0ff;"> span1 </span>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    //事件传播:从内侧触发一个事件,会逐级向上查找
+    //事件源:e.target e.srcElement  事件本身发身在哪一个元素上
+    var eles = document.getElementsByTagName("*");
+    for (var i = 0; i < eles.length; i++) {
+        eles[i].onclick = function (e) {
+            //console.log(this.id || this.tagName);
+            //console.log(e.target);
+        }
+    }
+
+    //新的事件绑定方式 --> DOM二级事件
+    for (var i = 0; i < eles.length; i++) {
+        eles[i].addEventListener("click", function (e) {
+            console.log(this.id || this.tagName);
+            //console.log(e.target);
+        }, true);
+        //true :在捕获阶段引发事件上绑定的方法
+        //false:在冒泡阶段引发事件上绑定的方法
+    }
+    for (var i = 0; i < eles.length; i++) {
+        eles[i].addEventListener("click", function (e) {
+            console.log(this.id || this.tagName);
+            //console.log(e.target);
+        }, false);
+        //true :在捕获阶段引发事件上绑定的方法
+        //false:在冒泡阶段引发事件上绑定的方法
+    }
+
+    //事件传播同时有两个阶段:先捕获(true) 再冒泡(false)
+    // -->捕获阶段  从外向里 html-->body-->outer-->inner......--> e.target
+    // -->冒泡阶段  从里向外 e.target-->.....inner-->outer-->body -->html
+
+
+</script>
+</body>
+</html>

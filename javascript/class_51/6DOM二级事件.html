@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1{
+            width:100px;
+            height:100px;
+            background:#f00;
+        }
+    </style>
+</head>
+<body>
+<a href="http://www.baidu.com">baidu</a>
+<div id="div1">div1</div>
+<script>
+    var oA = document.getElementsByTagName("a")[0];
+var ele=document.getElementById("div1");
+    function bind(ele, type, fn) {
+        //把方法fn绑定到ele元素的type事件上
+        if (ele.addEventListener) {
+            ele.addEventListener(type, fn, false);
+        } else if (ele.attachEvent) {
+            ele.attachEvent("on" + type, fn)
+        } else {
+            ele["on" + type] = fn;
+        }
+
+//        if (typeof ele.attachEvent == "function") {//不能使用这种方式,ele.attachEvent不是function
+//
+//        }
+    }
+
+    function unbind(ele, type, fn) {
+        if (ele.removeEventListener) {
+            ele.removeEventListener(type, fn, false);
+        }
+        else if (ele.detachEvent) {
+            ele.detachEvent("on" + type, fn);
+        }
+    }
+
+    function fn1(){
+        console.log("fn1: "+this.innerHTML);
+    }
+    function fn2(){
+        console.log(2);
+    }
+
+    //点第三次时,用fn3将绑定的fn1,fn2移除
+    function fn3(){
+        counter++;
+        if(counter==3){
+            unbind(ele,"click",fn1);
+            unbind(ele,"click",fn2);
+        }
+        console.log("counter: "+counter);
+    }
+
+    var counter=0;
+    bind(ele,"click",fn1);
+    bind(ele,"click",fn2);
+    bind(ele,"click",fn3);
+
+    //IE中this不指向绑定的元素
+    //IE中执行顺序是乱的
+    //高级浏览器绑定多次只执行一次, IE可以重复绑定
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="outer" style="background:#f00;"> outer
+    <div id="middle" style="background:#f90;"> middle
+        <div id="inner" style="background:#ff0;"> inner
+            <p id="p1" style="background:#0f0;"> p1
+                <span id="span1" style="background:#0ff;"> span1 </span>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    //当点到某一个元素时弹出这个元素的ID名,不能弹出其祖先标签
+    var eles = document.getElementsByTagName("*");
+
+//    [].forEach.call(eles, function (ele) {
+//        ele.onclick = function (e) {
+//            console.log(this.id);
+//            e.stopPropagation();
+//            e.cancelBubble=true;
+
+    //        }
+//    }); //这种方式耗资源
+
+    //把所有元素的事件都委托给标签或上级标签去处理
+    document.documentElement.onclick = function (e) {
+        var e = e || window.event;
+        //console.log(e.target.id || e.srcElement);
+        console.log(e.target.id);
+
+    }
+
+
+</script>
+</body>
+</html>

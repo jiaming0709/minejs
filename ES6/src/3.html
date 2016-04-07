@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //    function getArea(shape, options) {
+    //        var area = 0;
+    //
+    //        switch (shape) {
+    //            case "Triangle":
+    //                area = .5 * options.width * options.height;
+    //                break;
+    //        }
+    //        return area;
+    //    }
+    //    console.log(getArea("Triangle", {width: 100, height: 100}));
+
+
+    var obj = {};
+    var foo = Symbol("foo");
+    obj.a="a";
+    Object.defineProperty(obj, foo, {value: "foobar"});
+    for (var i in obj) {
+        console.log(i);
+    }
+    console.log(Object.getOwnPropertyNames(obj));
+    console.log(Object.getOwnPropertySymbols(obj));
+
+    console.log(Reflect.ownKeys(obj));
+
+
+    var size=Symbol("size");
+    class Collection{
+        constructor(){
+            this[size]=0;
+        }
+        add(item){
+            this[this[size]]=item;
+            this[size]++;
+        }
+        static sizeOf(instance){
+            return instance[size];
+        }
+    }
+
+    var x=new Collection();
+    Collection.sizeof(x);
+
+    Object.keys(x);
+    Object.getOwnPropertyNames(x);
+    Object.getOwnPropertySymbols(x);
+
+</script>
+</body>
+</html>

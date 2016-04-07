@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-with-addons.min.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+<div id="animate"></div>
+<script type="text/jsx">
+    var ReactCssTransitionGroup = React.addons.CSSTransitionGroup;
+    var ToolList = React.createClass({
+        getInitialState: function () {
+            return {
+                items: ["hello", "world", "click", "me"]
+            };
+        },
+        handleAdd: function () {
+            console.log("add");
+            var newItems=this.state.items.concat([prompt('Enter some text')]);
+            this.setState({items:newItems});
+        },
+        handleRemove: function (i) {
+            console.log("remove");
+            var newItems=this.state.items.slice();
+            newItems.splice(i,1);
+            this.setState({items:newItems});
+        },
+        render: function () {
+            var items=this.state.items.map(function(item,i){
+               return (
+                       <div key={item} onclick={this.handleRemove}>
+                           {item}
+                       </div>
+               )
+            }.bind(this));
+            return (
+                    <div>
+                        <button onClick={this.handleAdd}>Add item</button>
+                        <ReactCssTransitionGroup>
+                            {items}
+                        </ReactCssTransitionGroup>
+                    </div>
+
+            );
+        }
+    });
+    React.render(
+            <ToolList />,
+            document.getElementById("animate")
+    )
+</script>
+</body>
+</html>

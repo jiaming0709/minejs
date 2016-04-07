@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            background: #eee;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script src="js/animate.js"></script>
+<script>
+
+
+    div1.onclick = function () {
+        animate(div1, {height: "500", left: "500"}, 1000);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<script>
+    function bind(ele, type, fn) {
+        if (ele.addEventListener) {
+            ele.addEventListener(type, fn, false);
+        }
+        else if (ele.attachEvent) {
+            if (!ele.fnEvent) {
+                ele.fnEvent = [];
+            }
+            var fnTemp = function () {
+                fn.call(ele);
+            };
+            fnTemp.flag = fn;//识别的标志
+            ele.fnEvent.push(fnTemp);  //保存的目的--移除时可以找到; 数组里保存的是用call处理后的匿名方法,
+
+            ele.attachEvent("on" + type, fnTemp)
+        }
+    }
+    function unbind(ele, type, fn) {
+        if (ele.removeEventListener) {
+            ele.removeEventListener(type, fn, false);
+        }
+        else if (ele.detachEvent) {
+            for (var i = 0; i < ele.fnEvent.length; i++) {
+                if (ele.fnEvent[i].flag == fn) {
+                    ele.detachEvent("on" + type, ele.fnEvent[i]);
+                    ele.detachEvent("on" + type, ele.fnEvent[i]);
+                }
+            }
+        }
+    }
+
+
+    var innerHTML = "window";
+    function fn1() {
+        alert(this.innerHTML);
+    }
+    function fn2() {
+        alert("fn2:" + "2");
+    }
+    var counter = 0;
+    function fn3() {
+        counter++;
+        if (counter == 2) {
+            unbind(this, "click", fn1);
+            unbind(this, "click", fn2);
+        }
+        alert("fn3:" + counter);
+    }
+
+    var div1 = document.getElementById("div1");
+    bind(div1, "click", fn1);
+    bind(div1, "click", fn2);
+    bind(div1, "click", fn3);
+
+
+    //IE中用attachEvent绑定事件,其中的this指向window
+
+    //不参被污染,跨作用域可访问 自定义属性数组方式,并给其中每一个函数元素添加自定义标志属性
+</script>
+</body>
+</html>

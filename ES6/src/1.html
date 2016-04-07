@@ -6,11 +6,16 @@
 </head>
 <body>
 <script>
-    function fn(){
-        console.log(a);
-        let a=2;
-    }
-    fn();
+        function* fibs(){
+            let a=0;
+            let b=1;
+            while(true){
+                yield a;
+                [a,b]=[b,a+b];
+            }
+        }
+    var [first,second,third,fourth,fifth,sixth]=fibs();
+    console.log(sixth);
 </script>
 </body>
 </html>

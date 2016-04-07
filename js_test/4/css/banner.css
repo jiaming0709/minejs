@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+#outer {
+  overflow: hidden;
+  width: 500px;
+  height: 300px;
+  background: #fefefe;
+  margin: 20px auto;
+  position: relative; }
+  #outer #inner {
+    width: 2500px;
+    height: 300px;
+    position: absolute;
+    left: 0; }
+    #outer #inner div {
+      width: 500px;
+      height: 300px;
+      float: left;
+      line-height: 300px;
+      font-size: 100px;
+      color: #eee;
+      text-align: center;
+      opacity: 0.1; }
+      #outer #inner div:nth-child(1) {
+        background: #f00; }
+      #outer #inner div:nth-child(2) {
+        background: #f90; }
+      #outer #inner div:nth-child(3) {
+        background: #ff0; }
+      #outer #inner div:nth-child(4) {
+        background: #0f0; }
+      #outer #inner div:nth-child(5) {
+        background: #0ff; }
+      #outer #inner div:last-child {
+        background: #f00; }
+  #outer #icon {
+    position: absolute;
+    right: 30px;
+    bottom: 30px; }
+    #outer #icon li {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background: #fff;
+      float: left; }
+      #outer #icon li + li {
+        margin-left: 10px; }
+
+/*# sourceMappingURL=banner.css.map */

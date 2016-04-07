@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<script>
+    var fnTemp = null;
+    function bind(ele, type, fn) {
+        if (ele.addEventListener) {
+            ele.addEventListener(type, fn, false);
+        }
+        else if (ele.attachEvent) {
+            //ele.attachEvent("on" + type, fn.call(ele));  //让fn直接运行,把结果绑定给ele的type
+            fnTemp = function () {
+                fn.call(ele);
+            };
+            ele.attachEvent("on" + type, fnTemp)//绑定的不是fn,绑定的是fn的"变形"
+        }
+    }
+    function unbind(ele, type, fn) {
+        if (ele.removeEventListener) {
+            ele.removeEventListener(type, fn, false);
+        }
+        else if (ele.detachEvent) {
+            ele.detachEvent("on" + type, fnTemp);
+        }
+    }
+
+
+    var innerHTML = "window";
+    function fn1() {
+        alert(this.innerHTML);
+    }
+    function fn2() {
+        alert("fn2:" + "2");
+    }
+    var counter = 0;
+    function fn3() {
+        counter++;
+        if (counter == 2) {
+            unbind(this, "click", fn1);
+            unbind(this, "click", fn2);
+        }
+        alert("fn3:" + counter);
+    }
+
+    var div1 = document.getElementById("div1");
+    bind(div1, "click", fn1);
+    bind(div1, "click", fn2);
+    bind(div1, "click", fn3);
+
+
+    //IE中用attachEvent绑定事件,其中的this指向window
+
+    //局部变量,跨作用域访问不到,全局变量容易冲突
+    //利用全局变量,fnTemp=最后一次bind运行的结果=fn3,之前的被覆盖,最后把fn3移除了
+</script>
+</body>
+</html>

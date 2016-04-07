@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background: #0ff;
+            position: relative;
+        }
+
+        #inner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //onmouseenter 和 onmouseover  的区别:
+    //onmouseover 存在事件传播:  即父级元素添加mouseover事件,当鼠标进入到子元素中会触发子元素的mouseover,子元素再传播给父级,父级的mouseover中的方法再执行
+    //onmouseenter 不存在事件传播: 父级元素添加mouseover事件,只有鼠标从外界进入父元素时才会执行
+
+    //onmouseenter onmouseleave
+    //onmouseover onmouseout
+
+    var ele = document.getElementById("div1");
+
+    ele.onmouseenter = function (e) {
+        var oInner = document.createElement("div");
+        oInner.id = "inner";
+        this.appendChild(oInner);
+
+        oInner.style.left = arguments[0].clientX - this.offsetLeft + "px";
+        oInner.style.top = arguments[0].clientY - this.offsetTop + "px";
+    };
+</script>
+</body>
+</html>

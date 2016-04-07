@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<ul id="tab"> ultab
+    <li class="tab">tab1</li>
+    <li class="tab">tab2</li>
+    <li class="tab">tab3</li>
+</ul>
+<div id="animate"> divanimate
+    <ul id="id"> ulid
+        <li>animate1</li>
+        <li>animate2</li>
+        <li>animate3</li>
+        <li>animate4</li>
+        <li>animate5</li>
+    </ul>
+</div>
+<script>
+    document.documentElement.onclick = function (e) {
+        var ele = e.target;
+        console.log(e.target);
+        if (ele.className == "tab" && ele.parentNode.id == "tab") {
+            console.log("选项卡");
+        }
+        else if (ele.tagName == "LI" && ele.parentNode.id == "btn") {
+            console.log("animate");
+        }
+    }
+</script>
+</body>
+</html>

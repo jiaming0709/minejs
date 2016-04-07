@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<script src="../js/bind.js"></script>
+<script>
+    var innerHTML = "window";
+    function fn1() {
+        alert("fn1:" + this.innerHTML);
+    }
+    function fn2() {
+        alert("fn2:" + "2");
+    }
+    var counter = 0;
+    function fn3() {
+        counter++;
+        if (counter == 3) {
+            unbind(this, "click", fn1);
+            unbind(this, "click", fn2);
+        }
+        alert("fn3:" + counter);
+    }
+    function fn4() {
+        alert("fn:4");
+    }
+    function fn5() {
+        alert("fn:5");
+    }
+    function fn6() {
+        alert("fn:6");
+    }
+    function fn7() {
+        alert("fn:7");
+    }
+    function fn8() {
+        alert("fn:8");
+    }
+    function fn9() {
+        alert("fn:9");
+    }
+    function fn10() {
+        alert("fn:10");
+    }
+    function fn11() {
+        alert("fn:11");
+    }
+    function fn12() {
+        alert("fn:12");
+    }
+    function fn13() {
+        alert("fn:13");
+    }
+
+
+    var div1 = document.getElementById("div1");
+
+
+    function run(e) {//中介 --> 它负责协调管理其它方法的执行   在run 让fn1-fn13按顺序执行
+
+        var e= e || window.event;
+        var a = this["aEvent"+ e.type];
+        for (var i = 0; i < a.length; i++) { //执行各fn,并让this指向各个fn
+            a[i].call(this);
+        }
+    }
+
+    function on(ele, type, fn) {
+        if(!ele["aEvent"+type]){
+            ele["aEvent"+type]=[];
+        }
+        var a=ele["aEvent"+type];
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] == fn) {
+                return;
+            }
+        }
+        a.push(fn);  //把这些方法放在一个数组里而已
+        bind(ele, type, run);
+    }
+
+    on(div1, "click", fn1);
+</script>
+</body>
+</html>

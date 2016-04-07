@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1, #div2 {
+            width: 100px;
+            height: 100px;
+            background: #f00;
+            position: absolute;
+            top: 100px;
+            cursor: pointer;
+        }
+
+        #div2 {
+            top: 280px;
+            left: 150px;
+            background: #0f0;;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+<script>
+    function on(ele, type, fn) {
+        ele.addEventListener(type, fn, false);
+    }
+    function off(ele, type, fn) {
+        ele.removeEventListener(type, fn, false);
+    }
+
+    //盒子新位置=盒子的原始+(鼠标新位置-鼠标的原始位置)
+    var ele = document.getElementById("div1");
+    on(ele, "mousedown", down);
+    function down(e) {
+        this.x = this.offsetLeft;
+        this.y = this.offsetTop;
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        if (this.setCapture) {
+            this.setCapture();
+            on(ele, "mousemove", move);
+            on(ele, "mouseup", up);
+        }
+        else {
+//            function processThis(obj, fn) {
+//                return function (e) {
+//                    fn.call(obj, e);
+//                }
+//            }
+//            this.MOVE = processThis(this, move);
+//            this.UP = processThis(this, up);
+
+            this.MOVE=move.bind(this);
+            this.UP=up.bind(this);
+            on(document, "mousemove", this.MOVE);
+            on(document, "mouseup", this.UP);
+        }
+    }
+    function move(e) {
+        this.style.left = this.x + (e.pageX - this.mx) + "px";
+        this.style.top = this.y + (e.pageY - this.my) + "px";
+    }
+    function up(e) {
+        if (this.releaseCapture) {
+            off(ele, "mousemove", move);
+            off(ele, "mouseup", up);
+        }
+        else {
+            off(document, "mousemove", this.MOVE);
+            off(document, "mouseup", this.UP);
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 300px;
+            height: 100px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<script>
+    function bind(ele, type, fn) {
+        if (ele.addEventListener) {
+            ele.addEventListener(type, fn, false);
+        }
+        else if (ele.attachEvent) {
+            if (!ele["fnEvent" + type]) { //给不同的事件类型定义不同的数组,来有区别的保存方法
+                ele["fnEvent" + type] = [];
+            }
+            var a = ele["fnEvent" + type];
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].flag == fn) {
+                    return;
+                }
+            }
+
+            var fnTemp = function () {
+                fn.call(ele);
+            };
+            fnTemp.flag = fn;//识别的标志
+            a.push(fnTemp);
+            ele.attachEvent("on" + type, fnTemp);
+        }
+    }
+    function unbind(ele, type, fn) {
+        if (ele.removeEventListener) {
+            ele.removeEventListener(type, fn, false);
+        }
+        else if (ele.detachEvent) {
+            var a = ele["fnEvent" + type];
+            if (a && a.length) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i].flag == fn) {
+                        ele.detachEvent("on" + type, a[i]); //将事件移除
+                        a.splice(i, 1);  //从数组中移除
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+
+    var innerHTML = "window";
+    function fn1() {
+        alert(this.innerHTML);
+    }
+    function fn2() {
+        alert("fn2:" + "2");
+    }
+    var counter = 0;
+    function fn3() {
+        counter++;
+        if (counter == 2) {
+            unbind(this, "click", fn1);
+            unbind(this, "click", fn2);
+        }
+        alert("fn3:" + counter);
+    }
+
+    var div1 = document.getElementById("div1");
+    bind(div1, "click", fn1);
+    //bind(div1, "mouseover", fn1); //不同事件类型绑定时不能成功,因为所有的事件类型都是用的一个数组
+    bind(div1, "click", fn2);
+    bind(div1, "click", fn3);
+
+
+</script>
+</body>
+</html>

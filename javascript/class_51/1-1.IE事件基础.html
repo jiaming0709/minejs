@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background: #0ff;
+            position: relative;
+        }
+
+        #inner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+</div>
+<script>
+
+    var ele = document.getElementById("div1");
+    ele.onmouseover = function () {
+    };
+
+    //IE浏览器当事件触发时,把事件对象赋给window.event全局变量,即window.event是来接收当时的事件对象
+
+    //当同时触发多个event时,window.event存储最后一个
+
+    //处理兼容问题
+    // -->event = event || window.event
+    // -->IE没有e.pageX     e.pageY 自定义e.pageX,e.pageY
+    if (!event.pageX) { //不严谨,event.pageX=0时 --> if(true)
+    }
+    if (typeof event.pageX == "undefined") {
+        e.pageX = (document.documentElement.scrollLeft || document.body.scrollLeft) + e.clientX;
+        e.pageY = (document.documentElement.scrollTop || document.body.scrollTop) + e.clientY;
+    }
+
+</script>
+</body>
+</html>
