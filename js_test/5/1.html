@@ -5,6 +5,26 @@
     <title>Document</title>
 </head>
 <body>
+<script>
+    var event = {
+        on: function (ele, type, fn) {
+            if (ele.addEventListener) {
+                ele.addEventListener(type, fn, false);
+            }
+            else {
+                ele.attachEvent("on" + type, fn);
+            }
+        },
+        off: function (ele, type, fn) {
+            if (ele.removeEventListener) {
+                ele.removeEventListener(type, fn, false);
+            }
+            else {
+                ele.detach("on" + type, fn);
+            }
+        }
+    }
 
+</script>
 </body>
 </html>

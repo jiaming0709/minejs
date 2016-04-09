@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    function fn1() {
+        console.log("fn:1");
+    }
+    function fn2() {
+        console.log("fn:2");
+    }
+    function fn3() {
+        console.log("fn:3");
+    }
+    function fn4() {
+        console.log("fn:4");
+    }
+    function fn5() {
+        console.log("fn:5");
+    }
+    function fn6() {
+        console.log("fn:6");
+    }
+    function fn7() {
+        console.log("fn:7");
+    }
+    function fn8() {
+        console.log("fn:8");
+    }
+
+
+    function processThis(fn, obj) {//改变函数中的this
+        return function (e) {
+            fn.call(obj, e);
+        }
+    }
+    function on(ele, type, fn) {//把需要绑定的方法保存到程序池(数组)
+        if (window.addEventListener) {
+            ele.addEndEventListener(type, fn, false);
+            return;
+        }
+        if (!ele["aEvent" + type]) {//避免和原生属性冲突,避免事件冲突
+            ele["aEvent" + type] = [];
+            ele.attachEvent("on" + type, processThis(run, ele)); //系统事件和自定义程序池里的方法如何关联?????
+        }
+        var a = ele["aEvent" + type];
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] == fn) return;
+        }
+        a.push(fn);//核心代码,放到程序池
+    }
+    function run() {//这是真正被绑定到事件上的方法当事件触发时,执行这个run方法,由run方法按顺序遍历执行保存到程序池的方法
+        var e = window.event;
+        var type = e.type;
+        var a = this["aEvent" + type];
+        if (!e.target) {
+            e.target = e.srcElement;
+            e.stopPropagation = function () {
+                e.cancelBubble = true;
+            };
+            e.preventDefault = function () {
+                e.returnValue = false;
+            };
+            e.pageX = (document.documentElement.scrollLeft || document.body.scrollLeft) + e.clientX;
+            e.pageY = (document.documentElement.scrollTop || document.body.scrollTop) + e.clientY;
+        }
+        if (a && a.length) {
+            for (var i = 0; i < a.length; i++) {
+                if (typeof a[i] == "function") {
+                    a[i].call(this, e);
+                }
+                else {
+                    a.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+    }
+    function off(ele, type, fn) {//和on方法相反的方法负责从程序池里把指定的fn方法移除
+        if (ele.removeEventListener) {
+            ele.removeEndEventListener(type, fn, false);
+            return;
+        }
+        var a = ele["aEvent" + type];
+        if (a && a.length) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] == fn) {
+                    a[i] = null;
+                    return;
+                }
+            }
+        }
+    }
+
+    on(div1, "click", fn1);
+    on(div1, "click", fn2);
+    on(div1, "click", fn3);
+</script>
+</body>
+</html>
