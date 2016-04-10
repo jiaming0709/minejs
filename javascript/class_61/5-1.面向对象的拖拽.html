@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background: red;
+            cursor: move;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //down move up 不仅是行为,还是乘载这个行为的载体
+    //用面向对象的方式来看等拖拽: Drag类是承载了整个这些行为(即留有接口,又可以扩展)
+    //以对象类型为丑时向的编程方式,把有共同特征的数据,进行抽象,形成一个类,然后通过这个类,对有共性的东西进行管理
+
+    function on(ele, type, fn) {
+        ele.addEventListener(type, fn, false);
+    }
+
+    function off(ele, type, fn) {
+        ele.removeEventListener(type, fn, false);
+    }
+    function processThis(fn, obj) {
+        return function (e) {
+            fn.call(obj, e);
+        }
+    }
+
+
+    //首先明确原则,this指向问题,this指向当前类的实例
+    //-->和event.js事件绑定时的处理原则(方法绑定给谁,方法里的this就是指向谁)冲突
+    //-->如果发生冲突,以上边的原则为准(即类方法中的this指向当前类的实例)
+
+
+    //承载且管理着定义在它的原型上的这些行为或属性
+
+    function Drag(ele) {
+        this.ele = ele;//把拖拽的对象保存到实例的ele属性上
+        this.x = null;//this指向当前类的实例
+        this.y = null;
+        this.mx = null;
+        this.my = null;
+        this.DOWN = processThis(this.down, this);
+        this.MOVE = processThis(this.move, this);
+        this.UP = processThis(this.up, this);
+        on(this.ele, "mousedown", this.DOWN);//当down方法执行时,里面的this是this.ele
+    }
+    Drag.prototype.down = function (e) {
+        this.x = this.ele.offsetLeft;
+        this.y = this.ele.offsetTop;
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        if (this.ele.setCapture) {
+            this.ele.setCapture();
+            on(this.ele, "mousemove", this.MOVE);
+            on(this.ele, "mouseup", this.UP)
+        }
+        else {
+            on(document, "mousemove", this.MOVE);
+            on(document, "mouseup", this.UP)
+        }
+        e.preventDefault();
+    };
+    Drag.prototype.move = function (e) {
+        this.ele.style.left = e.pageX - this.mx + this.x + "px";
+        this.ele.style.top = e.pageY - this.my + this.y + "px";
+    };
+    Drag.prototype.up = function (e) {
+        if (this.ele.releaseCapture) {
+            this.ele.releaseCapture();
+            off(this.ele, "mousemove", this.MOVE);
+            off(this.ele, "mouseup", this.UP);
+        }
+        else{
+            off(document, "mousemove", this.MOVE);
+            off(document, "mouseup", this.UP)
+        }
+    };
+
+    new Drag(div1);
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //一个水壶有烧水的功能,用代码描述:当水烧开了,可以泡方便面,洗漱
+    //用代码描述:交通工具遇到红灯停,绿灯行
+
+    //面向对象和面向过程看代行为的方式不同:
+    //-->面向对象:发生在乘载行为的行为主体上,约定的是主体,
+    //-->面向过程
+
+
+    function EventEmitter() {//第三方组件,单独使用没有意义  独立于具体的行为之上
+    }
+    EventEmitter.prototype.on = function (type, fn) {//约定或绑定
+        if (!this["emitter" + type]) {
+            this["emitter" + type] = [];
+        }
+        var a = this["emitter" + type];
+        if (a) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] == fn) return;
+            }
+            a.push(fn);
+        }
+    };
+    EventEmitter.prototype.run = function (type, fn) {//通知执行
+        var a = this["emitter" + type];
+        if (a) {
+            for (var i = 0; i < a.length; i++) {
+                if (typeof a[i] == "function") {
+                    a[i].call(this);
+                }
+                else {
+                    a.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+    };
+    EventEmitter.prototype.off = function (type, fn) {//解除约定
+        var a = this["emitter" + type];
+        if (a) {
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] == fn) {
+                    a[i] = null;
+                    return;
+                }
+            }
+        }
+
+    };
+
+    function Kettle() {
+        console.log("i am a kettle");
+    }
+    Kettle.prototype.__proto__ = EventEmitter.prototype;
+    Kettle.prototype = new EventEmitter();
+    Kettle.prototype.boiling = function () {
+        var _this = this;
+        setTimeout(function () {
+            console.log("The water is boiling");
+            _this.run("boiling", Cooking); //假设boiling是一个事件类型
+            _this.run("boiling", WashFace);
+        }, 5000)
+    };
+    var kettle1 = new Kettle();
+    kettle1.boiling();
+    kettle1.on("boiling", Cooking); //假设boiling是一个事件类型
+    kettle1.on("boiling", WashFace);
+
+    //相当于在水壶的功能和其它的功能之后,留了一个接口
+    //水壶上的报警器相当于一个通知作用的组件,这个组件的特点是它本身不属于水壶的功能,而是一个第三方的功能焊接到水壶上去的
+
+    //约定功能:
+    //通知功能:
+    //解除约定的功能:
+
+    function Cooking() {
+        console.log("Cooking noodles");
+    }
+    function WashFace() {
+        console.log("Wash a face");
+    }
+
+    //在烧水之前就应该约定好水开后干嘛
+</script>
+</body>
+</html>
