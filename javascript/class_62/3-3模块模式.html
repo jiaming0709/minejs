@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            background: red;
+            cursor: move;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">div1</div>
+<div id="div2" style="top:150px;">div2</div>
+<div id="div3" style="top:300px;">div3</div>
+<script>
+    function on(ele, type, fn) {
+        ele.addEventListener(type, fn, false);
+    }
+    function off(ele, type, fn) {
+        ele.removeEventListener(type, fn, false);
+
+    }
+    var MODULE = (function () {
+        var x = null;
+        var y = null;
+        var mx = null;
+        var my = null;
+        MOVE = null;
+        UP = null;
+        function down(e) {
+            x = this.offsetLeft;
+            y = this.offsetTop;
+            mx = e.pageX;
+            my = e.pageY;
+            if (this.setCapture) {
+                this.setCapture();
+                on(this, "mousemove", move);
+                on(this, "mouseup", up);
+            } else {
+                MOVE = move.bind(this);
+                UP = up.bind(this);
+                on(document, "mousemove", MOVE);
+                on(document, "mouseup", UP);
+            }
+            e.preventDefault();
+        }
+
+        function move(e) {
+            this.style.left = e.pageX - mx + x + "px";
+            this.style.top = e.pageY - my + y + "px";
+        }
+
+        function up(e) {
+            if (this.releaseCapture) {
+                this.releaseCapture();
+                off(this, "mousemove", move);
+                off(this, "mouseup", up);
+            }
+            else {
+                off(document, "mousemove", MOVE);
+                off(document, "mouseup", UP);
+            }
+        }
+
+        function init(ele) {
+            on(ele, "mousedown", down);
+        }
+
+        return {init: init, down: down, move: move, up: up}; //关键
+    })
+    ();
+
+    MODULE.init(div1);
+    MODULE.init(div2);
+    MODULE.init(div3);
+</script>
+</body>
+</html>

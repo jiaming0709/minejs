@@ -17,28 +17,20 @@
     </style>
 </head>
 <body>
-<div id="div1"></div>
+<div id="div1">div1</div>
+<div id="div2" style="left:200px;">div2</div>
 <script src="../js/drag.js"></script>
 <script>
-    function on(ele, type, fn) {
-        ele.addEventListener(type, fn, false);
-    }
-    function off(ele, type, fn) {
-        ele.removeEventListener(type, fn, false);
-    }
-    function processThis(fn, obj) {
-        return function (e) {
-            fn.call(obj, e);
-        }
-    }
+    //1买了一件成熟产品,它已经具备了完善功能,但是厂家还可以继续升级它的产品
+    //2用户也可以自己来扩展完善功能
 
-
-
+    //扩展原型方法
     var obj = new Drag(div1);
-    obj.on("eventDown",clearEffect);
-    obj.on("eventMove",getSpeed);
-    obj.on("eventUp",fly);
-    obj.on("eventUp",drop);
+    obj.on("eventDown", clearEffect);
+    obj.on("eventMove", getSpeed);
+    obj.on("eventUp", fly);
+    obj.on("eventUp", drop);
+    obj.border();
 
     function clearEffect() {
         clearTimeout(this.flyTimer);
@@ -102,7 +94,9 @@
         }
     }
 
-    //自己发布的拖拽开始的事件和mousedown事件有什么区别呢?直接用mousedown事件不是挺好嘛 ,为什么 要自已整个"拖拽开始"事件呢
+
+    var obj2 = new Drag(div2);
+    obj2.addRange({left: 100, right: 800, top: 100, bottom: 100});
 </script>
 </body>
 </html>

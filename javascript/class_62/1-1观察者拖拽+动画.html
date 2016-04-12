@@ -20,19 +20,6 @@
 <div id="div1"></div>
 <script src="../js/drag.js"></script>
 <script>
-    function on(ele, type, fn) {
-        ele.addEventListener(type, fn, false);
-    }
-    function off(ele, type, fn) {
-        ele.removeEventListener(type, fn, false);
-    }
-    function processThis(fn, obj) {
-        return function (e) {
-            fn.call(obj, e);
-        }
-    }
-
-
 
     var obj = new Drag(div1);
     obj.on("eventDown",clearEffect);

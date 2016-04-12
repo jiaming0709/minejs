@@ -28,7 +28,7 @@
             a.push(fn);
         }
     };
-    EventEmitter.prototype.run = function (type, fn) {//通知执行
+    EventEmitter.prototype.run = function (type) {//通知执行
         var a = this["emitter" + type];
         if (a) {
             for (var i = 0; i < a.length; i++) {
@@ -59,14 +59,13 @@
         console.log("i am a kettle");
     }
     Kettle.prototype.__proto__ = EventEmitter.prototype;
-    Kettle.prototype = new EventEmitter();
+//    Kettle.prototype = new EventEmitter();
     Kettle.prototype.boiling = function () {
         var _this = this;
         setTimeout(function () {
             console.log("The water is boiling");
-            _this.run("boiling", Cooking); //假设boiling是一个事件类型
-            _this.run("boiling", WashFace);
-        }, 5000)
+            _this.run("boiling"); //假设boiling是一个事件类型
+        }, 2000)
     };
     var kettle1 = new Kettle();
     kettle1.boiling();

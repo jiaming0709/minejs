@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul {
+            width: 480px;
+            background: #eee;
+            margin: 10px auto;
+            padding: 5px;
+            height: 640px;
+
+        }
+
+        ul::after {
+            clear: both;
+            content: " ";
+            height: 0;
+            display: block;
+        }
+
+        li {
+            width: 150px;
+            height: 150px;
+            float: left;
+            margin: 5px;
+            background: #ffdddd;
+            cursor: move;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+        }
+
+        img {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="4img/1.png" alt=""/></li>
+    <li><img src="4img/2.png" alt=""/></li>
+    <li><img src="4img/3.png" alt=""/></li>
+    <li><img src="4img/4.png" alt=""/></li>
+    <li><img src="4img/5.png" alt=""/></li>
+    <li><img src="4img/6.png" alt=""/></li>
+    <li><img src="4img/7.png" alt=""/></li>
+    <li><img src="4img/8.png" alt=""/></li>
+    <li><img src="4img/9.png" alt=""/></li>
+    <li><img src="4img/10.png" alt=""/></li>
+    <li><img src="4img/11.png" alt=""/></li>
+    <li><img src="4img/12.png" alt=""/></li>
+</ul>
+<script src="../js/animate.js"></script>
+<script src="../js/drag.js"></script>
+<script>
+    var eles = document.getElementsByTagName("li");
+    for (var i = eles.length - 1; i >= 0; i--) {
+        eles[i].t = eles[i].offsetTop;
+        eles[i].l = eles[i].offsetLeft;
+        eles[i].style.top = eles[i].t + "px";
+        eles[i].style.left = eles[i].l + "px";
+        eles[i].style.position = "absolute";
+        eles[i].style.margin = 0;
+        new Drag(eles[i]).on("eventDown", increaseIndex).on("eventMove", saveHited).on("eventUp", changePosi).border();
+    }
+    var zIndex = 1;
+    function increaseIndex() {
+        this.ele.style.zIndex = ++zIndex;
+    }
+
+    function goBack() {
+        animate(this.ele, {left: this.ele.l, top: this.ele.t}, 400);
+    }
+
+    //碰撞检测:检测两个盒子是否撞上了,将撞上的保存下来,背景改变为黄色
+    function hitedTest(r, b) {//碰撞检测,return boolean
+        return !(r.offsetLeft + r.offsetWidth < b.offsetLeft || r.offsetTop + r.offsetHeight < b.offsetTop || r.offsetLeft > b.offsetLeft + b.offsetWidth || r.offsetTop > b.offsetTop + b.offsetHeight);
+
+    }
+    function saveHited() {//save 撞上的盒子,且更改 backgroundColor
+        this.aHited = [];
+        for (var i = 0; i < eles.length; i++) {
+            if (eles[i] == this.ele) continue;
+            eles[i].style.backgroundColor = "";
+            if (hitedTest(this.ele, eles[i])) {
+                this.aHited.push(eles[i]);
+                eles[i].style.backgroundColor = "#ff0";
+            }
+        }
+    }
+
+    //寻找距离最短的,交换位置
+    function changePosi() {
+        var a = this.aHited;
+        if (a.length == 0) {
+            animate(this.ele, {left: this.ele.l, top: this.ele.t}, 400);
+            return;
+        }
+        for (var i = 0; i < a.length; i++) {
+            this.ele.hitedLength = Math.pow(this.ele.offsetLeft - a[i].offsetLeft) + Math.pow(this.ele.offsetTop - a[i].offsetTop);
+        }
+        a.sort(function (a, b) {
+            return a.hitedLength - b.hitedLength;
+        });
+        var shortest = a[0];
+        animate(this.ele, {left: shortest.l, top: shortest.t}, 400);
+        animate(shortest, {left: this.ele.l, top: this.ele.t}, 400);
+        var templ = this.ele.l;
+        var tempt = this.ele.t;
+        this.ele.l = shortest.l;
+        this.ele.t = shortest.t;
+        shortest.l = templ;
+        shortest.t = tempt;
+        for (var i = 0; i < a.length; i++) {
+            a[i].style.backgroundColor = "";
+        }
+    }
+</script>
+</body>
+</html>

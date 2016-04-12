@@ -35,6 +35,9 @@ function animate(ele, obj, duration, callback) {
             for (attr in obj) {
                 curPos[attr] = obj[attr];
             }
+            if(typeof callback=="function"){
+                callback.call(ele);
+            }
         }
         for (attr in obj) {
             animate.setCss(ele, attr, curPos[attr]);
