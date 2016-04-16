@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+    <meta content='yes' name='apple-mobile-web-app-capable'/>
+    <meta content='black' name='apple-mobile-web-app-status-bar-style'/>
+    <meta content='telephone=no' name='format-detection'/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .top, .bottom {
+            background: #ccc;
+            height: 2000px;
+        }
+
+        .# {
+            height: 50px;
+        }
+    </style>
+</head>
+<body id="body" draggable="true">
+<div class="top"></div>
+<div id="center">continue continue continue continue continue continue</div>
+<div class="bottom"></div>
+<script src="../h5/js/jquery.min.js"></script>
+<script src="../h5/js/zepto.min.js"></script>
+<script>
+    $(function () {
+
+        var center_p = $("#center").offset().top + $("#center").height();
+
+        document.addEventListener("touchstart", start, false);
+        var flag1 = 0;
+        var flag2 = 0;
+
+        function start(e) {
+//            console.log(e.changedTouches);
+            this.mousey = e.changedTouches[0].clientY;
+
+            document.addEventListener("touchmove", move, false);
+            document.addEventListener("touchend", end, false);
+//            e.preventDefault();
+        }
+
+        function move(e) {
+            var scroll_p = $(window).scrollTop() + $(window).height();
+
+            console.log(scroll_p);
+
+            var client_pos = $("#center").offset().top - $(window).scrollTop();
+            var window_hei = $(window).height();
+
+            if (client_pos <= window_hei && client_pos >= 0) {
+                if (this.mousey > e.touches[0].clientY) {
+//                    console.log(">", this.mousey - e.touches[0].clientY);
+                    $("body").animate({scrollTop: "2000"}, 1000);
+                }
+                else {
+                    $("body").animate({scrollTop: "1366"}, 1000);
+//                    console.log("<::::", this.mousey - e.touches[0].clientY);
+                }
+            }
+
+
+            this.mousey = e.touches[0].clientY;
+
+
+        }
+
+        function end(e) {
+            document.removeEventListener("touchmove", move, false);
+            document.removeEventListener("touchend", end, false);
+        }
+
+
+    });
+
+
+</script>
+</body>
+</html>
