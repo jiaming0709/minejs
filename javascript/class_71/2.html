@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="js/ajax.js"></script>
+<script>
+    var xhr = getXHR();
+
+    //2.调用open方法发起http的request 构造了报文起始行,但是没有发送
+    //open(http method, request url, [async?(true)], [username(undefined)], [password(undefined)])
+    xhr.open("GET", 'data.txt');
+
+
+    //3.获取响应
+    //当ajax对象的readyState改变时执行 onreadystatechange 方法
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && /^2\d{2}$/.test(this.status)) {
+
+            //获取服务器返回的数据
+            console.log(xhr.responseText); //把响应主体当成串显示
+            console.log(xhr.responseXML); //把响应主体当成xml来显示
+
+            xhr.responseType = "json"; //把response转为指定的格式 , 如果不能成功转换,报错
+            console.log(xhr.response);//直接获取响应主体,不进行转型 IE10+
+
+        }
+        else {
+            console.log("something wrong");
+        }
+    };
+    //readyState 当前ajax对象的状态,执行到哪一步了,
+    // xhr.readtState获取,是一个枚举值(
+    // 0 UNSEND
+    // 1 OPENED 已经执行open方法
+    // 2 HEADERS_RECEIVED 接收到响应首部
+    // 3 LOADING 正在接收响应主体
+    // 4 DONE 全部完成
+
+
+    //4.发起http请求
+    xhr.send();
+    //parse type: string fromdata(表单数据) blob(二进制块) arraybuffer(二进制流) null undefined
+    //send会把参数放到什么地方?
+    //会把参数放到请求主体里,因为get系没有请求主体,所以传参数无效 因此get系请求不需要传参数,如果是put系,则会把参数原封不动放到请求主体
+    //get系(get delete head)
+    //post系(post,put)
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="js/ajax_all.js"></script>
+<script>
+    var abc = x.noConflict();
+    abc.ajax({
+        url: "data.txt",
+        type: "get",
+        cache: "false",
+        header: {"zidingyi": "touxinxi"},
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            console.log("success", data);
+        },
+        error: function (err) {
+//            console.log(err);
+        },
+        data: {a: 1, b: 2}
+    })
+</script>
+</body>
+</html>

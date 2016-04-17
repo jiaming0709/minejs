@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="js/ajax.js"></script>
+<script>
+    var xhr = getXHR();
+
+    //2.调用open方法发起http的request 构造了报文起始行,但是没有发送
+    //open(http method, request url, [async?(true)], [username(undefined)], [password(undefined)])
+    xhr.open("GET", 'data.txt');
+
+    //2.1设置请求首部,首部是可以自定义,但是有兼容性 ie10+
+    xhr.setRequestHeader("myname", "jm");
+    xhr.setRequestHeader("content-type", "text/plain; charset=utf-8");
+
+    //2.2重写响应的mine类型
+    xhr.overrideMimeType("text/plain; charset=utf-8");
+    //什么是mimeType? 告诉浏览器以什么格式解析这段数据
+    //文本: text/plain  text/css  test/javascript  text/html  image/png  image/gif  image/jpeg
+    // JSON: application/json  二进制流:application/octct-stream  application(为应用扩展的)
+    //格式固定 "前面大类型/后面小类型[; charset=...]" 只在大类型为text charset才生效 charset用来表示这段内容是什么编码格式(GB2312 BIG5 UTF-8 GBK)
+    //只要通过http获取的资源 100% 会有 mimeType
+
+    //通过 navigator.mimeTypes 获取当前浏览器支持哪些vmimeType
+
+
+    //3.获取响应
+    xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && /^2\d{2}$/.test(this.status)) {
+
+            //3.2获取服务器的响应首部,兼容ie10+
+            var GMT = xhr.getResponseHeader("Date");
+            var date = new Date(GMT);
+//            date.setHours(date.getHours()+8);
+            console.log(date);
+
+            //获取服务器返回的数据
+            console.log(xhr.responseText);
+            console.log(xhr.responseXML);
+
+            xhr.responseType = "json";
+            console.log(xhr.response);
+
+        }
+        else {
+            console.log("something wrong");
+        }
+    };
+
+
+    xhr.send();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    //利用自执行函数实现惰性函数
+    var getXHR = (function () {
+        log = function () {
+            console.log("has if");
+            return true
+        };
+        if (window.XMLHttpRequest && log()) {
+            return function () {
+                return new XMLHttpRequest();
+            }
+        }
+        return function () {
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    })();
+
+    console.log("start");
+    for (var i = 0; i < 100; i++) {
+        console.log(getXHR());
+    }
+
+
+    //
+</script>
+</body>
+</html>
