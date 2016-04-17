@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var x=0;
+    console.log(x); //全局x
+</script>
+<script src="js/ajax_all.js"></script>
+<script>
+    console.log(x); //ajax 类库
+
+    var abc = x.noConflict();
+
+    console.log(x); //全局x
+
+    abc.ajax({
+        url: "data.txt",
+        type: "get",
+        cache: "false",
+        header: {"zidingyi": "touxinxi"},
+        async: true,
+        dataType: "json",
+        success: function (data) {
+            console.log("success", data);
+        },
+        error: function (err) {
+//            console.log(err);
+        },
+        data: {a: 1, b: 2}
+    })
+</script>
+</body>
+</html>

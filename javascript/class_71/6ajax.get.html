@@ -5,9 +5,19 @@
     <title>Document</title>
 </head>
 <body>
+<script>
+    var x=0;
+    console.log(x); //全局x
+</script>
 <script src="js/ajax_all.js"></script>
 <script>
+    console.log(x); //ajax 类库
+
     var abc = x.noConflict();
+
+    console.log(x); //全局x
+
+    //配置性很强,可完成任意需求
     abc.ajax({
         url: "data.txt",
         type: "get",
@@ -19,10 +29,18 @@
             console.log("success", data);
         },
         error: function (err) {
-//            console.log(err);
+            console.log(err);
         },
         data: {a: 1, b: 2}
-    })
+    });
+
+    //仅需要几个简单参数,没 那么强的配置
+    abc.get("data.txt",{a:3,b:4},function(data){
+        console.log("get",data)
+    });
+    abc.post("data.txt",{a:5,b:6},function(data){
+        console.log("post",data);
+    },"json");
 </script>
 </body>
 </html>

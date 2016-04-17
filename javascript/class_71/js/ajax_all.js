@@ -65,7 +65,7 @@
         }
 
 
-        xhr.open(userOptions.type, userOptions.url, userOptions.sync);
+        xhr.open(userOptions.type, userOptions.url, userOptions.async);
         if (tool.isObject(userOptions.header)) {
             tool.eachObject(userOptions.header, function (key, value) {
                 xhr.setRequestHeader(key, value);
@@ -80,9 +80,10 @@
                 if (/^2\d{2}$/.test(xhr.status)) {
                     if (userOptions.dataType === "json") {
                         try {
-                            tool.JSONParse(responseText);
+                            responseText =tool.JSONParse(responseText);
                         } catch (e) {
                             userOptions.error(e);
+                            return;
                         }
                     }
                     userOptions.success(responseText);
@@ -154,7 +155,7 @@
                 return url + '?' + padString;
             }
 
-            return url + (/\?/.test(url)) ? '&' : '?' + padString;
+            //return url + (/\?/.test(url)) ? '&' : '?' + padString;
         },
         JSONParse: function (jsonString) {
             if (window.JSON) {
@@ -164,16 +165,32 @@
         }
     };
     tool.init();
-
     x.ajax = ajax;
-    x.noConflict = function (symbol) {
+
+    //封装简单的get post
+    tool.each(["get", "post"], function (item) {
+        x[item] = function (url, data, callback, dataType) {
+            ajax({
+                url: url,
+                type: item,
+                data: data,
+                success: callback,
+                dataType: dataType
+            })
+        }
+    });
+
+    //解决全局同名的冲突
+    var globalX = global.x;
+    x.noConflict = function (symbol) {   //backbone lodash jquery
         if (symbol && tool.isString(symbol)) {
             window.symbol = x;
         }
+        window.x = globalX;
         return x;
     };
 
-    global.x = x;
+    global.x = x; //暴露到全局环境中
 })(this);//自执行函数this是window
 
 //http:username:pass@www.baidu.com:80/index.html?a=1&b=2#hash

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="../jquery.min.js"></script>
+<script>
+    $.ajax({
+        url: "",
+        async: ture,
+        cache: true,
+
+        //设置请求的mimetype类型 default f
+        contentType: 'application/x-www-form-urlencoded',
+
+        //success,error,complete,三个函数里的上下文对象
+        context: {},
+
+        //往服务器发送的数据
+        data: {},
+
+        //数据格式
+        dataType: "text",
+
+        beforeSend: function () {//send方法执行前,执行的函数
+        },
+        error: function (e) {
+
+        },
+        success: function () {
+
+        },
+        complete: function () {//不管成功还是失败都执行
+        },
+
+        //自定义请求首部
+        headers:{},
+
+        //使用什么HTTP方法,1.9以前使用type,之后使用method
+        method:"GET",
+
+        //重写响应的mimeType
+        mimeType:"",
+
+        //是否格式化参数为uri string,当data 为二进制或 formData 时需要设置为 false
+        processData:true,
+
+        timeout:0
+
+    });
+
+
+    $.get("request url",{},function(){},"dataType");
+    $.post("request url",{},function(){},"dataType");
+
+    //把返回的数据强制转为JSON
+    $.getJson("request url",{},function(){});  //===$.get("request url",{},function(){},"json");
+
+
+    //获取JS并执行
+    $.getScript("request url",{},function(){});
+
+
+</script>
+</body>
+</html>

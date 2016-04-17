@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="../jquery.min.js"></script>
+<script>
+    $.post("data.txt", {name: "123"}, function (data) {
+        console.log("get", data);
+    }, "json");
+
+    var formdata = new FormData();
+    formdata.append("name", "123");
+    $.ajax({
+        url: "data.txt",
+        data: formdata,
+        method: "post",
+        success: function (data) {
+            console.log("formdata", data);
+        }
+    });
+
+    //    $.post("request url",{},function(){},"dataType");
+    //
+    //    //把返回的数据强制转为JSON
+    //    $.getJson("request url",{},function(){});  //===$.get("request url",{},function(){},"json");
+    //
+    //
+    //    //获取JS并执行
+    //    $.getScript("request url",{},function(){});
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //ready load区别:
+    //ready:DOM加载完成后执行,load 所有资源加载完成后执行
+
+    //原生实现
+    var ready = (function () {
+        var isReady = false;
+        if (window.addEventListener) {
+            return function (callback) {
+                if (isReady) {
+                    callBack();
+                    return;
+                }
+                window.addEventListener("DOMContentLoaded", function () {
+                    isReady = true;
+                    callback();
+                }, false);
+            }
+        }
+
+
+        //IE需要监测两个地方 document.onreadystatechange document.doScroll
+        //在IE里,只绑定onreadystatechange来监测DOM树是否加载完成,是远远不够的,还需要监听另外的事件:document.doScroll
+//            当dom树加载完成时,即可执行document.doScroll,否则报错
+        return function (callback) {
+            var complete = function () {
+                isReady = true;
+                callback();
+            };
+            document.onreadystatechange = function () {
+                //interactive 交互 正在构建DOM树
+                if (isReady == false && document.readyState == "interactive" || document.readyState === "complete") {
+                    complete();
+                }
+            };
+            setTimeout(function () {
+                try {
+                    document.doScroll("left");
+                    document.onreadystatechange = null;
+                    isReady == false && complete();
+                } catch (e) {
+                    setTimeout(arguments.callee, 50);
+                }
+            }, 50);
+        }
+    })()
+
+    ready(function () {
+        console.log("ready");
+    });
+    window.onload = function () {
+        console.log("onload");
+    }
+</script>
+</body>
+</html>

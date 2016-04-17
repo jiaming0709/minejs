@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table {
+            margin: 50px auto;
+            text-align: center;
+
+        }
+
+        td, th {
+            line-height: 30px;
+            border: 1px solid #eee;
+            width: 150px;
+        }
+
+        caption {
+            line-height: 50px;
+        }
+    </style>
+    <table>
+        <caption>用户信息</caption>
+        <thead>
+        <tr>
+            <th node-type="class">class</th>
+            <th node-type="username">username</th>
+            <th node-type="age">age</th>
+            <th node-type="sex">sex</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="2">
+                <button>prev page</button>
+            </td>
+            <td colspan="2">
+                <button>next page</button>
+            </td>
+
+        </tr>
+        </tfoot>
+    </table>
+</head>
+<body>
+<script src="js/ajax_all.js"></script>
+<script>
+    window.onload = function () {
+
+        var getIndex = function () {
+            var index = {};
+            var th = document.querySelectorAll("th");
+            for (var i = 0; i < th.length; i++) {
+                index[th[i].getAttribute("node-type")] = i;
+            }
+            return index; //{username: 0, age: 1, sex: 2, class: 3}
+        };
+
+
+        var abc = x.noConflict();
+        abc.get("data2.json", {}, function (data) {
+
+            var list = data;
+            var len = 0;
+            var index = getIndex();
+            if (list  && (len = list.length)) {
+                var html = "";
+                while (len--) {
+                    html += "<tr>";
+                    var arr = [];
+                    for (var n in list[len]) {
+                        arr[index[n]] = "<td>" + list[len][n] + "</td>";
+                    }
+                    html += arr.join('') + "</tr>";
+                }
+                document.querySelector("tbody").innerHTML = html;
+            }
+        },"json");
+    }
+</script>
+</body>
+</html>

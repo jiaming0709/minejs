@@ -1,0 +1,122 @@
+[
+  {
+    "username": "1",
+    "age": "43",
+    "sex": "男",
+    "class": "1"
+  },
+  {
+    "username": "2",
+    "age": "43",
+    "sex": "女",
+    "class": "2"
+  },
+  {
+    "username": "3",
+    "age": "32",
+    "sex": "女",
+    "class": "3"
+  },
+  {
+    "username": "4",
+    "age": "23",
+    "sex": "男",
+    "class": "5"
+  },
+  {
+    "username": "5",
+    "age": "32",
+    "sex": "",
+    "class": "4"
+  },
+  {
+    "username": "6",
+    "age": "98",
+    "sex": "",
+    "class": "5"
+  },
+  {
+    "username": "7",
+    "age": "76",
+    "sex": "男",
+    "class": "6"
+  },
+  {
+    "username": "8",
+    "age": "765",
+    "sex": "",
+    "class": "7"
+  },
+  {
+    "username": "9",
+    "age": "545",
+    "sex": "",
+    "class": "8"
+  },
+  {
+    "username": "10",
+    "age": "54",
+    "sex": "男",
+    "class": "9"
+  },
+  {
+    "username": "11",
+    "age": "54",
+    "sex": "",
+    "class": "10"
+  },
+  {
+    "username": "12",
+    "age": "54",
+    "sex": "男",
+    "class": ""
+  },
+  {
+    "username": "13",
+    "age": "54",
+    "sex": "",
+    "class": ""
+  },
+  {
+    "username": "14",
+    "age": "54",
+    "sex": "男",
+    "class": ""
+  },
+  {
+    "username": "15",
+    "age": "54",
+    "sex": "",
+    "class": ""
+  },
+  {
+    "username": "16",
+    "age": "54",
+    "sex": "",
+    "class": ""
+  },
+  {
+    "username": "17",
+    "age": "54",
+    "sex": "",
+    "class": ""
+  },
+  {
+    "username": "18",
+    "age": "54",
+    "sex": "男",
+    "class": ""
+  },
+  {
+    "username": "19",
+    "age": "54",
+    "sex": "",
+    "class": ""
+  },
+  {
+    "username": "20",
+    "age": "54",
+    "sex": "",
+    "class": ""
+  }
+]
