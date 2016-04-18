@@ -70,7 +70,7 @@
             tool.eachObject(userOptions.header, function (key, value) {
                 xhr.setRequestHeader(key, value);
             })
-        }
+        }out
         if (userOptions.contentType && tool.isString(userOptions.contentType)) {
             xhr.setRequestHeader('content-type', userOptions.contentType);
         }

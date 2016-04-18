@@ -34,7 +34,7 @@
         }
     </style>
 </head>
-<body>
+<body onmousewheel="return false;">
 <div id="main" class="top" data-currentPage="first">
     <div class="top text">由于Sencha Touch 2这种开发模式的特性，基本决定了它原生的数据交互行为几乎只能通过AJAX来实现。
         　　当然了，通过调用强大的PhoneGap插件然后打包，你可以实现100%的Socket通讯和本地数据库功能，又或者通过HTML5的WebSocket也可以实现与服务器的通讯和服务端推功能，但这两种方式都有其局限性，前者需要PhoneGap支持，后者要求用户设备必须支持WebSocket，因此都不能算是ST2的原生解决方案，原生的只有AJAX。
@@ -93,7 +93,9 @@
 <script src="zepto.min.js"></script>
 <script>
     $(function () {
-
+        var continue_pos = $(".continue").offset().top;
+        var continue_height = $(".continue").height();
+        var window_height = $(window).height();
 
         $("#main").bind("touchstart", function (e) {
             $(this).attr("touch_start_y", e.touches[0].clientY);
@@ -105,83 +107,57 @@
             $(this).attr("touch_curr_y", e.touches[0].clientY);
         });
         $("#main").bind("touchend", function (e) {
+            var scroll_top = (document.body.scrollTop || document.documentElement.scrollTop);
+            if (continue_pos - window_height > scroll_top || continue_pos + continue_height < scroll_top) {
+                return;
+            }
+            tool.swiper(e, scroll_top,$(this));
 
-            pageSwipe(e, $(this));
-
-//            console.log("end");
             $(this).removeAttr("touch_start_y");
             $(this).removeAttr("touch_prev_y");
             $(this).removeAttr("touch_curr_y");
         });
 
 
-//        setInterval(function () {
-//            var scroll_top = (document.body.scrollTop || document.documentElement.scrollTop);
-//            var swipe_pos = $(".continue").offset().top + $(".continue").height();
-//            if (scroll_top > swipe_pos) {
-//                $("#main").attr("data-currentPage", "second");
-//            }
-//            else {
-//                $("#main").attr("data-currentPage", "first");
-//            }
-//        }, 100)
     });
 
 
-    function pageSwipe(e, selector) {
-        var swipe_pos = $(".continue").offset().top + $(".continue").height();
-        var window_he = $(window).height();
-        var scroll_pos = (document.body.scrollTop || document.documentElement.scrollTop) + $(window).height();
-        var scroll_top = (document.body.scrollTop || document.documentElement.scrollTop);
-
-//        console.log("上:", swipe_pos - window_he - $(".continue").height(), "下", swipe_pos + $(".continue").height(), "scrollTop", scroll_top);
-        if (swipe_pos - window_he - $(".continue").height() > scroll_top) {
-            selector.attr("data-currentPage", "first");
-            console.log("return");
-            return;
-        }
-        if (swipe_pos + $(".continue").height() < scroll_top) {
-            selector.attr("data-currentPage", "second");
-            return;
-        }
-
-        if (selector.attr("data-currentPage") == "first" && selector.attr("touch_curr_y") < selector.attr("touch_start_y")) {
-//            console.log(scroll_top, swipe_pos - window_he - $(".continue").height());
-
-            if (swipe_pos - window_he > scroll_top) {
-                tool.animate(swipe_pos - window_he, scroll_top);
-                return;
-            }
-            if (selector.attr("touch_prev_y") - selector.attr("touch_curr_y") >= 100) {
-                console.log("展示下面的内容");
-                tool.animate(swipe_pos, scroll_top);
-                selector.attr("data-currentPage", "second");
-            }
-            else {
-                console.log("返回定位1");
-                tool.animate(swipe_pos - window_he, scroll_top);
-            }
-
-            return;
-        }
-
-        if (selector.attr("data-currentPage") == "second" && selector.attr("touch_curr_y") > selector.attr("touch_prev_y")) {
-            if (selector.attr("touch_curr_y") - selector.attr("touch_prev_y") >= 100) {
-                console.log("返回定位2");
-                tool.animate(swipe_pos, scroll_top);
-            }
-            else {
-                console.log("展示上面的内容-----");
-                selector.attr("data-currentPage", "first");
-                tool.animate(swipe_pos - window_he, scroll_top);
-            }
-        }
-
-
-    }
-
-
     var tool = {
+        swiper: function (e,scroll_top,selector) {
+            var continue_pos = $(".continue").offset().top;
+            var continue_height = $(".continue").height();
+            var window_height = $(window).height();
+
+//            var continue_top=continue_pos-scroll_top;
+//            var continue_bottom=scroll_top+window_height-continue_pos-continue_height;
+//            console.log(continue_top,continue_bottom);
+//            if(continue_top<continue_bottom){
+//                tool.animate(continue_pos+continue_height,scroll_top)  //展示上面
+//            }
+//            else{
+//                tool.animate(continue_pos+continue_height-window_height,scroll_top);  //展示下面
+//            }
+            var end=selector.attr("touch_curr_y");
+            var start=selector.attr("touch_start_y");
+            var diff_value=window_height/3;
+            console.log(start,end);
+            if(start<end){
+                if(end-start<diff_value){
+                    tool.animate(continue_pos+continue_height,scroll_top);  //展示上面
+                    return;
+                }
+                tool.animate(continue_pos+continue_height-window_height,scroll_top);  //展示下面
+            }
+            else{
+                if(start-end<diff_value){
+                    tool.animate(continue_pos+continue_height-window_height,scroll_top);  //展示下面
+                    return;
+                }
+                tool.animate(continue_pos+continue_height,scroll_top);  //展示上面
+            }
+
+
+        },
         animate: function (target, current) {
             var step = target > current ? 10 : -10;
             var timer = window.setTimeout(function () {
