@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            margin: 100px auto;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            border: 1px solid #eee;
+            background: #fafafa;
+            width: 300px;
+        }
+
+        li, input {
+            line-height: 30px;
+            height: 30px;
+            cursor: pointer
+        }
+
+        li:hover {
+            cursor: pointer;
+            background-color: beige;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text"/><input type="button" value="百度一下"/>
+
+    <div>
+        <ul>
+
+        </ul>
+    </div>
+</div>
+<script src="jsonp.js"></script>
+<script>
+    var inputWindow = document.querySelector("input[type='text']");
+    var searchButton = document.querySelector("input[type='button']");
+    var ul = document.querySelector("ul");
+
+    ul.onclick = function (e) {
+        e = e || window.event;
+        e.target = e.target || e.srcElement;
+        window.open("http://www.baidu.com/s?word=" + encodeURIComponent(e.target.innerHTML), "black");
+    };
+    searchButton.onclick=function(){
+        window.open("http://www.baidu.com/s?word=" + encodeURIComponent(inputWindow.value), "black");
+    }
+
+    inputWindow.onkeydown = function () {
+        var value = inputWindow.value;
+        if (value) {
+//            alert();
+            window.x.jsonp("https://gsp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su", {wd: value}, "cb", function (data) {
+//                console.log(data.s);
+                var list = data.s;
+                var fragment = document.createDocumentFragment();
+                ul.innerHTML = "";
+                for (var i = 0, j = list.length; i < j; i++) {
+                    var li = document.createElement("li");
+                    li.innerHTML = list[i];
+                    fragment.appendChild(li);
+                }
+                ul.appendChild(fragment);
+            })
+        }
+    }
+
+    //https://gsp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=jQuery17204305493217439613_1460887266042&wd=1&sc=hao123&_=1460887282811
+    //https://gsp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?cb=jQuery17204305493217439613_1460887266043&wd=1a&sc=hao123&_=1460887358135
+</script>
+</body>
+</html>

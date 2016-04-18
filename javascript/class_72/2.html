@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script src="jsonp.js"></script>
+<script>
+    window.onload = function () {
+        window.x.jsonp("http://localhost:8080", {a: 1, b: 2}, "callback", function (data) {
+            console.log(data);
+        });
+    }
+</script>
+</body>
+</html>

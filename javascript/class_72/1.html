@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<!--<script src="../jquery.min.js"></script>-->
+<!--<script>-->
+    <!--$.get("localhost:8080", {}, function (data) {-->
+        <!--console.log(data);-->
+    <!--})-->
+<!--</script>-->
+<script>
+    //1.先定义好一个func,浏览器依次向下执行
+    var func=function(data){
+        console.log(data);
+    }
+</script>
+<!--服务器返回数据 func({name:"123",context:"china"})-->
+<script src="http://localhost:8080?callback=func"></script>
+</body>
+</html>
