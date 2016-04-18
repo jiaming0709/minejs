@@ -55,16 +55,16 @@
             var client_pos = $("#center").offset().top - $(window).scrollTop();
             var window_hei = $(window).height();
 
-            if (client_pos <= window_hei && client_pos >= 0) {
-                if (this.mousey > e.touches[0].clientY) {
-//                    console.log(">", this.mousey - e.touches[0].clientY);
-                    $("body").animate({scrollTop: "2000"}, 1000);
-                }
-                else {
-                    $("body").animate({scrollTop: "1366"}, 1000);
-//                    console.log("<::::", this.mousey - e.touches[0].clientY);
-                }
-            }
+//            if (client_pos <= window_hei && client_pos >= 0) {
+//                if (this.mousey > e.touches[0].clientY) {
+////                    console.log(">", this.mousey - e.touches[0].clientY);
+//                    $("body").animate({scrollTop: "2000"}, 1000);
+//                }
+//                else {
+//                    $("body").animate({scrollTop: "1366"}, 1000);
+////                    console.log("<::::", this.mousey - e.touches[0].clientY);
+//                }
+//            }
 
 
             this.mousey = e.touches[0].clientY;
