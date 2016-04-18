@@ -54,14 +54,10 @@
         e.target = e.target || e.srcElement;
         window.open("http://www.baidu.com/s?word=" + encodeURIComponent(e.target.innerHTML), "black");
     };
-    searchButton.onclick=function(){
-        window.open("http://www.baidu.com/s?word=" + encodeURIComponent(inputWindow.value), "black");
-    }
 
-    inputWindow.onkeydown = function () {
+    searchButton.onclick = function () {
         var value = inputWindow.value;
         if (value) {
-//            alert();
             window.x.jsonp("https://gsp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su", {wd: value}, "cb", function (data) {
 //                console.log(data.s);
                 var list = data.s;
