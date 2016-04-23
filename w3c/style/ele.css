@@ -394,7 +394,7 @@ div[class^="ele-leg-"]:before {
     right: 5px;
 }
 
-/*@-webkit-keyframes leg-animation {
+@-webkit-keyframes leg-animation {
     0% {
         height: 65px;
         -webkit-transform: translate3d(0, -90%, 0) rotate3d(0, 0, 1, 10deg) translate3d(0, 30%, 0);
@@ -782,4 +782,4 @@ div[class^="ele-leg-"]:before {
     100% {
         height: 18px;
     }
-}*/
+}

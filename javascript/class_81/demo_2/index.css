@@ -1,0 +1,47 @@
+/*
+Error: Invalid US-ASCII character "\xE8"
+        on line 21 of index.scss
+
+16:   left: 50%;
+17:   margin-left: -320px;
+18:   overflow: hidden;
+19:   border: 1px solid #f00;
+20:   transform-origin: top;
+21:   -webkit-transform-origin: top; //设置缩放点
+22:   li {
+23:     position: absolute;
+24:     width: 100%;
+25:     height: 100%;
+26:     background-repeat: no-repeat;
+
+Backtrace:
+index.scss:21
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/util.rb:1302:in `rescue in block in find_encoding_error'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/util.rb:1297:in `block in find_encoding_error'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/util.rb:1296:in `each'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/util.rb:1296:in `each_with_index'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/util.rb:1296:in `find_encoding_error'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/util.rb:905:in `check_sass_encoding'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/engine.rb:436:in `check_encoding!'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/engine.rb:392:in `_to_tree'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/plugin.rb:82:in `update_stylesheets'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/exec/base.rb:52:in `parse'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/lib/sass/exec/base.rb:19:in `parse!'
+/Users/yuanjiaming/.rvm/rubies/ruby-1.9.3-p551/lib/ruby/gems/1.9.1/gems/sass-3.4.22/bin/scss:13:in `<top (required)>'
+/Users/yuanjiaming/.rvm/gems/ruby-1.9.3-p551/bin/scss:23:in `load'
+/Users/yuanjiaming/.rvm/gems/ruby-1.9.3-p551/bin/scss:23:in `<main>'
+/Users/yuanjiaming/.rvm/gems/ruby-1.9.3-p551/bin/ruby_executable_hooks:15:in `eval'
+/Users/yuanjiaming/.rvm/gems/ruby-1.9.3-p551/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid US-ASCII character \"\xE8\"\A         on line 21 of index.scss\A \A 16:   left: 50%;\A 17:   margin-left: -320px;\A 18:   overflow: hidden;\A 19:   border: 1px solid #f00;\A 20:   transform-origin: top;\A 21:   -webkit-transform-origin: top; //设置缩放点\A 22:   li {\A 23:     position: absolute;\A 24:     width: 100%;\A 25:     height: 100%;\A 26:     background-repeat: no-repeat;"; }

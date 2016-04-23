@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    class Point {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        toString() {
+            return '(' + this.x + ',' + this.y + ')';
+        }
+
+        toSum() {
+            return this.x + this.y;
+        }
+    }
+    //函数间不要用,分隔
+
+    var p1 = new Point(2, 3);
+    console.log(p1.toString());
+    console.log(p1.toSum());
+</script>
+</body>
+</html>

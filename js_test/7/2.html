@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            margin: 30px auto;
+        }
+
+        th {
+            background: #ccc;
+        }
+
+        td, th {
+            width: 150px;
+            line-height: 30px;
+            color: #aaa;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+
+        #page span {
+            min-width: 20px;
+            padding: 0 5px;
+            line-height: 30px;
+            color: #aaa;
+            background: #eee;
+            margin: 5px;
+            -webkit-user-select: none;
+            cursor: pointer;
+        }
+
+        #page_list {
+            display: inline-block;
+        }
+
+        #page_list span.cur {
+            background: #0ff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <table id="table">
+        <thead id="thead">
+        <tr>
+            <th data-type="sex">sex</th>
+            <th data-type="score">score</th>
+            <th data-type="num">num</th>
+        </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <div id="page">
+        <span id="prev">prev</span>
+        <span id="first">first</span>
+
+        <div id="page_list">
+
+        </div>
+        <span id="last">last</span>
+        <span id="next">next</span>
+    </div>
+</div>
+<script>
+    var tool = {
+        getXHR: function () {
+            if (window.XMLHttpRequest) {
+                getXHR = function () {
+                    return new XMLHttpRequest();
+                };
+                return new XMLHttpRequest();
+            }
+            getXHR = function () {
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            };
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        },
+        toJSON: function (data) {
+            return (window.JSON) ? JSON.parse(data) : eval('(' + data + ')');
+        },
+        ajax: function (method, url, callback, dataType) {
+            var _this = this;
+            var xhr = this.getXHR();
+            xhr.open(method, url, "async");
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    if (/^2\d{2}$/.test(this.status)) {
+                        var data = this.responseText;
+                        if (dataType.toLowerCase() == "json") {
+                            data = _this.toJSON(data);
+                        }
+                        callback(data);
+                    }
+                    else {
+                        console.log("error");
+                    }
+                }
+            };
+            xhr.send();
+        },
+        getIndex: function () {
+            var ths = table.tHead.rows[0].cells;
+            var index = [];
+            for (var i = 0; i < ths.length; i++) {
+                index[ths[i].getAttribute("data-type")] = i;
+            }
+            return index;
+        }
+    };
+
+    var total = 0;
+    var total_page = 0;
+    var current_page = 1;
+    var page_number = 10;
+
+
+    tool.ajax("get", "data.json", function (data) {
+        total = data.length;
+        total_page = Math.ceil(total / page_number);
+
+        page.onclick = function (e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            if (target.id == "prev") {
+                current_page = (current_page == 1) ? current_page : (current_page - 1);
+            }
+            else if (target.id == "first") {
+                current_page = 1;
+            }
+            else if (target.id == "last") {
+                current_page = total_page;
+            }
+            else if (target.id == "next") {
+                current_page = (current_page == total_page) ? current_page : (current_page + 1);
+            }
+            else if (target.tagName.toUpperCase() == "SPAN") {
+                current_page = target.innerHTML;
+            }
+            draw_table(current_page, page_number, data);
+            change_page(current_page);
+        };
+
+        draw_table(current_page, page_number, data);
+        draw_page(current_page, total_page);
+    }, "json");
+
+
+    function draw_table(current_page, page_number, data) {
+        var start = (current_page - 1) * page_number;
+        var end = current_page * page_number - 1;
+        console.log(start, end);
+        var index = tool.getIndex();
+        tbody.innerHTML = "";
+        var frg = document.createDocumentFragment();
+        for (var i = start; i <= end; i++) {
+            var tr = document.createElement("tr");
+            var arr = [];
+            for (var key in data[i]) {
+                var value = (data[i][key] == "sex") ? (data[i][key] == 1 ? "女" : "男") : data[i][key];
+                arr[index[key]] = '<td>' + value + '</td>';
+            }
+            tr.innerHTML = arr.join("");
+            frg.appendChild(tr);
+        }
+        tbody.appendChild(frg);
+    }
+
+    function draw_page(current_page, total_page) {
+        var frg = document.createDocumentFragment();
+        for (var i = 0; i < total_page; i++) {
+            var p = document.createElement("span");
+            p.innerHTML = i + 1;
+            if (i + 1 == current_page) {
+                p.className = "cur";
+            }
+            frg.appendChild(p);
+        }
+        page_list.appendChild(frg);
+
+    }
+
+    function change_page(current_page) {
+        var pages = page_list.getElementsByTagName("span");
+        for (var i = 0; i < pages.length; i++) {
+            pages[i].className = "";
+        }
+        pages[current_page-1].className = "cur";
+    }
+</script>
+</body>
+</html>

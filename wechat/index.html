@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var tool = {
+        getXHR: function () {
+            if (window.XMLHttpRequest) {
+                getXHR = function () {
+                    return new XMLHttpRequest();
+                };
+                return new XMLHttpRequest();
+            }
+            getXHR = function () {
+                return new ActiveXObject();
+            };
+            return new ActiveXObject();
+        },
+        toJson: function (str) {
+            return (window.JSON) ? (JSON.parse(str)) : eval("(" + str + ")");
+        },
+        ajax: function (method, url, callback, dataType, data) {
+            var _this = this;
+            var xml = this.getXHR();
+            xml.open(method, url, "async");
+            xml.onreadystatechange = function () {
+                if (this.readyState == 4 && /^2\d{2}$/.test(this.status)) {
+                    if (typeof callback == "function") {
+                        var data = this.responseText;
+                        data = dataType.toLowerCase() == "json" ? _this.toJson(data) : data;
+                        callback(data);
+                    }
+                }
+            };
+            xml.send();
+        }
+    };
+
+
+    tool.ajax("get", "http://sugg.us.search.yahoo.net/gossip-gl-location/?appid=weather&output=json&command=广州", function (data) {
+        console.log(data.length);
+    })
+</script>
+</body>
+</html>

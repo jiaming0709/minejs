@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'/>
+
+    <style>
+        canvas {
+            background: #00acff;
+            /*width:100px;*/
+            /*height:100px;*/
+        }
+    </style>
+</head>
+<body>
+<canvas id="cav" width="410" height="410"></canvas>
+<canvas id="cav_process" width="410" height="410"></canvas>
+<script>
+    function drawRoundRect(cx, cy, r) {
+        var context = document.getElementById("cav").getContext("2d");
+        context.strokeStyle = "#f00";
+        context.lineWidth = 5;
+        context.beginPath();
+        context.moveTo(cx, cy);
+        context.moveTo(cx + r, cy);
+        context.arc(cx, cy, r, 0, Math.PI * 2, 0);
+        context.stroke();
+        context.closePath();
+    }
+
+    function drawSector(cx, cy, r, s, e) {
+        var context = document.getElementById("cav").getContext("2d");
+        context.lineWidth = 5;
+        context.strokeStyle = "rgba(255,255,255,1)";
+        context.beginPath();
+        context.moveTo(cx, cy - r);
+        context.arc(cx, cy, r, Math.PI / 180 * s, Math.PI / 180 * e);
+        context.stroke();
+        context.closePath();
+    }
+
+
+    function draw_process(cx,cy,r,bordercolor){
+        var context = document.getElementById("cav_process").getContext("2d");
+        context.fillStyle = "rgba(255,255,255,0.3)";
+        context.beginPath();
+        context.moveTo(cx, cy-r);
+        context.arc(cx, cy, r, 0, Math.PI * 2, 0);
+        context.fill();
+        context.closePath();
+    }
+
+    draw_process(cav.width / 2, 5, 7, "rgba(255,255,255,1)");
+    draw_process(cav.width / 2, 5, 10, "rgba(255,255,255,0.3)");
+
+
+
+
+    //    function pageLoaded() {
+//        context.strokeStyle = "red";
+//        context.strokeRect(50, 50, 100, 40);
+//        context.strokeStyle = "green";
+//        context.strokeRect(120, 100, 100, 35);
+//        context.fillStyle = "rgb(0,0,255)";
+//        context.fillRect(80, 230, 100, 40);
+//        context.fillStyle = "rgba(0,0,0,0.2)";
+//        context.fillRect(300, 180, 100, 50);
+//    }
+//    pageLoaded();
+    drawRoundRect(150, 150, 145);
+    drawSector(150, 150, 145, -90, 0)
+</script>
+</body>
+</html>
