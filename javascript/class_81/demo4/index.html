@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+</head>
+<body>
+<div id="main">
+    <div id="loading">
+        <div class="load">0%</div>
+    </div>
+    <div id="title">
+        <div class="desc">
+            <p>说点实际的：1. 不用jQuery，原生js如何实现，可以参考这里：You Might Not Need jQuery 原生js越来越好了，如果是简单的页面，没必要引入一个庞大的jQuery，尤其在手机端，对速度流量敏感的地方，另外最好自己简单封装一些常用的函数，比如toggleClass等。。。</p>
+            <p>2.页面写完后，记得用Firefox 查看页面源代码功能，可以一眼发现未闭合标签、未转义的HTML字符，如果不嫌麻烦，可以提交代码到 http://validator.w3.org/ 验证HTML、CSS，下面图片来自CSDN当前首页源码，可以看到Firefox红色高亮了错误的HTML代码，_blank后面多了一个双引号。</p>
+            <p>3.如果不在页面中用js引用元素，尽可能不要设置元素的id，也尽量不要用#main{}来设置元素css样式，而是用class方式.main{}，1可以防止ID重复，造成错误，2可以方便引入新CSS复写样式，另外应当绝对避免行内css样式：</p>
+        </div>
+        <div class="finger"></div>
+        <div class="name">name name name</div>
+    </div>
+</div>
+<script src="index.js"></script>
+</body>
+</html>
