@@ -67,8 +67,8 @@ function move(e) {
 function end(e) {
     if (this.flag) {
         oLis[this.prevsIndex].firstElementChild.id = "a" + (this.prevsIndex);
-        oLis[this.prevsIndex].style.webkitTransform = "translate(0,0)";
-        oLis[this.prevsIndex].style.webkitTransition = ".5s";
+        oLis[this.prevsIndex].style.webkitTransform = "translate(0, 0)";
+
         //oLis[this.prevsIndex].addEventListener("webkitTransitionEnd", function () {
         //    oLis[this.prevsIndex].style.webkitTransition = "";
         //

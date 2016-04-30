@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+@media screen and (min-device-width: 320px) and (max-device-width: 374px) {
+  html {
+    font-size: 85.3px; } }
+@media screen and (min-device-width: 375px) and (max-device-width: 413px) {
+  html {
+    font-size: 100px; } }
+@media screen and (min-device-width: 414px) {
+  html {
+    font-size: 109.07px; } }
+#main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden; }
+  #main #loading {
+    background: #484848;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    transition: all 1.5s 1s;
+    -webkit-transition: all 1.5s 1s; }
+    #main #loading .load {
+      width: .7rem;
+      height: .7rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%); }
+      #main #loading .load::before {
+        content: " ";
+        display: block;
+        animation: loading1 1s infinite;
+        border-radius: 50%;
+        background: #ccc;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: .7rem;
+        height: .7rem; }
+      #main #loading .load::after {
+        content: " ";
+        display: block;
+        animation: loading2 1s infinite;
+        border-radius: 50%;
+        background: #fff;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: .7rem;
+        height: .7rem; }
+  #main #scanning {
+    background: url("img/first_bg.jpg") no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 9; }
+    #main #scanning .text {
+      position: absolute;
+      top: 20%;
+      font-size: 20px;
+      color: #fff;
+      width: 100%;
+      text-align: center; }
+    #main #scanning .finger {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      width: 150px;
+      height: 150px; }
+      #main #scanning .finger img {
+        width: 100%; }
+        #main #scanning .finger img#scan {
+          position: absolute;
+          left: 0;
+          top: -16px;
+          transform: translate(0, 150px);
+          -webkit-transform: translate(0, 150px);
+          transition: 1s;
+          -webkit-transition: 1s;
+          opacity: 0; }
+  #main .next {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -25px;
+    width: 50px;
+    height: 50px;
+    z-index: 8;
+    animation: next 1s infinite; }
+  #main #me_info {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 7;
+    overflow: hidden; }
+    #main #me_info section {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0; }
+      #main #me_info section:first-child {
+        z-index: 7;
+        background: url(img/second_bg.png) no-repeat center;
+        background-size: cover; }
+        #main #me_info section:first-child .head {
+          position: absolute;
+          left: 50%;
+          top: 20%;
+          margin-left: -55px;
+          text-align: center;
+          width: 110px;
+          height: 105px;
+          padding-top: 5px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.5); }
+          #main #me_info section:first-child .head img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transform: scale(0, 0);
+            transition: all 1s; }
+        #main #me_info section:first-child ul {
+          font-size: 40px;
+          padding: 50px 0 0 50px;
+          line-height: 2em;
+          color: #fff;
+          top: 50%;
+          position: absolute; }
+          #main #me_info section:first-child ul li {
+            transition: all 1s 1s; }
+            #main #me_info section:first-child ul li span {
+              display: inline-block;
+              width: 100px; }
+          #main #me_info section:first-child ul li:nth-child(odd) {
+            transform: translate(600px, 20px); }
+          #main #me_info section:first-child ul li:nth-child(even) {
+            transform: translate(-600px, 20px); }
+      #main #me_info section#animate_0 img {
+        transform: scale(1, 1); }
+      #main #me_info section#animate_0 ul {
+        font-size: 20px; }
+        #main #me_info section#animate_0 ul li {
+          transform: translate(0, 0); }
+      #main #me_info section:nth-child(2) {
+        background: #f00;
+        z-index: 100; }
+      #main #me_info section:nth-child(3) {
+        background: #f00; }
+      #main #me_info section:nth-child(4) {
+        background: #f00; }
+
+.zIndex {
+  display: block;
+  z-index: 7; }
+
+@keyframes loading2 {
+  0% {
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    z-index: 10; }
+  100% {
+    transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    z-index: 10; } }
+@keyframes loading1 {
+  0% {
+    transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    z-index: 10; }
+  100% {
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    z-index: 0; } }
+@-webkit-keyframes loading2 {
+  0% {
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    z-index: 10; }
+  100% {
+    transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    z-index: 10; } }
+@-webkit-keyframes loading1 {
+  0% {
+    transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    z-index: 10; }
+  100% {
+    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+    z-index: 0; } }
+@keyframes next {
+  0% {
+    transform: translate(0, 6px);
+    opacity: 1; }
+  100% {
+    transform: translate(0, -6px);
+    opacity: 0; } }
+
+/*# sourceMappingURL=style.css.map */
