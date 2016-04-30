@@ -35,6 +35,21 @@ var tool = {
         }
     },
     touch_animate: function () {
+        var audio = document.querySelector("#audio");
+        var music = document.querySelector("#music");
+        audio.play();
+        music.style.display = "block";
+        music.className = "musicMove";
+        music.addEventListener("touchend", function () {
+            if (audio.paused) {
+                audio.play();
+                music.className = "musicMove";
+                return;
+            }
+            audio.pause();
+            music.className = "";
+        }, false);
+
         var section = document.querySelectorAll("#me_info section");
         section[0].id = "animate_0";
         [].forEach.call(section, function (item, index, list) {
@@ -104,5 +119,5 @@ var tool = {
 };
 
 var n = 0;
-var ary = ["circle.png", "experience.png", "finger_line.png", "first_bg.jpg", "finger_print.png", "head_bg.jpg", "me.jpg", "next.png", "second_bg.png", "third_bg.jpg"];
+var ary = ["circle.png", "experience.png", "finger_line.png", "finger_print.png", "first_bg.jpg", "head_bg.jpg", "me.jpg", "music.svg", "next.png", "second_bg.png", "third_bg.jpg"];
 tool.load_img(ary);
