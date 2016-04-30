@@ -69,6 +69,8 @@ var tool = {
                 if (index != ind) {
                     item.style.display = "none";
                     item.id = "";
+                    item.style.webkitTransform = "scale(0,0)";
+
                 }
                 item.className = "";
             });
@@ -87,6 +89,7 @@ var tool = {
             section[this.prevIndex].style.webkitTransform = "translate(0," + duration + ")";
             section[this.prevIndex].className = "zIndex";
             section[this.prevIndex].style.display = "block";
+            this.style.webkitTransform = "scale(" + (1 - Math.abs(movePos / this.offsetHeight) / 2) + ") translate(0," + movePos + "px)";
         }
 
         function end(e) {
