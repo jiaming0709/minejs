@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-
-    <!-- 设置苹果手机到头后在下来出现的那个黑色背景框的标题-->
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta name="app-mobile-web-app-title" content="标题"/>
+    <style>
+        #box {
+            width: 200px;
+            height: 200px;
+            background: #f00;
+        }
+    </style>
 </head>
 <body>
+<div id="box"></div>
+<script src="zepto.js"></script>
+<script>
+    $(function () {
+        console.log("reset");
+        $("#box").singleTap(function () {
+            console.log("left");
+        });
+    })
+</script>
+<script></script>
 </body>
 </html>

@@ -57,6 +57,11 @@ var tool = {
             this.moveX = e.changedTouches[0].pageX;
             var movePos = this.moveY - this.startY;
 
+            if (Math.abs(movePos) < Math.abs(this.moveX - this.startX)) {
+                this.flag = false;
+                return;
+            }
+
             var index = this.index;
             var lastIndex = section.length - 1;
 
@@ -96,5 +101,5 @@ var tool = {
 };
 
 var n = 0;
-var ary = ["circle.png", "finger_line.png", "first_bg.jpg", "finger_print.png", "head_bg.jpg", "me.jpg", "next.png", "second_bg.png", "third_bg.jpg"];
+var ary = ["circle.png", "experience.png", "finger_line.png", "first_bg.jpg", "finger_print.png", "head_bg.jpg", "me.jpg", "next.png", "second_bg.png", "third_bg.jpg"];
 tool.load_img(ary);
