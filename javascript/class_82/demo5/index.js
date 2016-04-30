@@ -96,5 +96,5 @@ var tool = {
 };
 
 var n = 0;
-var ary = ["finger_line.png", "first_bg.jpg", "finger_print.png"];
+var ary = ["circle.png", "finger_line.png", "first_bg.jpg", "finger_print.png", "head_bg.jpg", "me.jpg", "next.png", "second_bg.png", "third_bg.jpg"];
 tool.load_img(ary);
