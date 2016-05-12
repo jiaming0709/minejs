@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+html, body {
+  height: 100%;
+  width: 100%; }
+
+.main {
+  height: 400px;
+  background: #eee;
+  position: relative;
+  overflow: hidden; }
+  .main .banner {
+    position: relative;
+    width: 100%;
+    height: 100%; }
+    .main .banner li {
+      float: left;
+      width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat; }
+      .main .banner li:nth-child(1) {
+        background-image: url(../img/1.png); }
+      .main .banner li:nth-child(2) {
+        background-image: url(../img/2.jpg); }
+      .main .banner li:nth-child(3) {
+        background-image: url(../img/3.jpg); }
+      .main .banner li:nth-child(4) {
+        background-image: url(../img/4.jpg); }
+      .main .banner li:target {
+        animation: rotate 1s ease-in; }
+  .main .icon {
+    position: fixed;
+    right: 20%;
+    top: 100px;
+    z-index: 10; }
+    .main .icon li {
+      padding: 10px; }
+      .main .icon li a {
+        display: block;
+        width: 25px;
+        height: 25px; }
+        .main .icon li a::before {
+          width: 3px;
+          height: 25px;
+          content: " ";
+          display: block;
+          background: #fff; }
+        .main .icon li a:hover::before, .main .icon li a:target::before {
+          background: #f00; }
+
+@keyframes rotate {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/*# sourceMappingURL=1.css.map */

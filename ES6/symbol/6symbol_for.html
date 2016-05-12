@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //Symbol.for 使用同一个symbol值,
+    //-->接收一个字符串,搜索有没有以该参数作为名称的symbol,没有,返回一个新的symbol值;  有,返回搜索到的symbol值
+    var x = Symbol.for("foo");
+    var y = Symbol.for("foo");
+    console.log(x == y); //true
+
+
+    //-->symbol.for() 和 symbol()的区别
+    //Symbol.for() 会被登记到全局环境中供搜索 Symbol()不会
+    console.log(Symbol.for("a") === Symbol.for("a")); //true
+    console.log(Symbol("a") === Symbol("a")); //false
+
+
+    //-->Symbol.keyFor() 返回一个已登记的 symbol 类型的 key
+    var a = Symbol("foo");
+    var b = Symbol.for("foo");
+    console.log(Symbol.keyFor(a)); //undefined
+    console.log(Symbol.keyFor(b)); //"foo"
+
+    //Symbol.for()为Symbol值登记的名字,是全局环境的可以在不同的iframe 或 service worker 中取到同一个值
+
+
+</script>
+</body>
+</html>

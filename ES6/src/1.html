@@ -6,15 +6,21 @@
 </head>
 <body>
 <script>
-        function* fibs(){
-            let a=0;
-            let b=1;
-            while(true){
-                yield a;
-                [a,b]=[b,a+b];
-            }
+    function* fibs() {
+        let a = 0;
+        let b = 1;
+        while (true) {
+            yield a;
+            [a,b]=[b, a + b];
+            console.log(a, b);
         }
+    }
     var [first,second,third,fourth,fifth,sixth]=fibs();
+    console.log(first);
+    console.log(second);
+    console.log(third);
+    console.log(fourth);
+    console.log(fifth);
     console.log(sixth);
 </script>
 </body>

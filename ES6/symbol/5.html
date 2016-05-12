@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var size = Symbol("size");
+    class Collection {
+        constructor() {
+            this[size] = 0;
+        }
+
+        addItem(item) {
+            this[this[size]] = item;
+            this[size]++;
+        }
+
+        static sizeOf(instance) {
+            return instance[size]
+        }
+    }
+
+    var x = new Collection();
+    console.log(Collection.sizeOf(x));  //0
+    x.addItem('foo');
+    console.log(Collection.sizeOf(x)); //1
+    console.log(x); //Collection {0: "foo", Symbol(size): 1}
+    console.log(Object.keys(x)); //["0"]
+    console.log(Object.getOwnPropertyNames(x)); //["0"]
+    console.log(Object.getOwnPropertySymbols(x)); //[Symbol(size)]
+</script>
+</body>
+</html>

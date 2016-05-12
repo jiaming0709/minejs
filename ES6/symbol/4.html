@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //--> symbol作为属性名,不会出现在 for in    for of 中,
+    //-->getOwnPropertySymbols 获取所有的 symbol 属性名
+    var obj = {};
+    var a = Symbol('a');
+    var b = Symbol.for('b');
+    obj[a] = 'hello';
+    obj[b] = 'world';
+    var objSymbols = Object.getOwnPropertySymbols(obj);
+    console.log(objSymbols); //[Symbol(a),Symbol(b)]
+
+
+    //-->Object.getOwnPropertyNames 不能得到 symbol 属性名   getOwnPropertySymbols可以
+    //Object.defineProperty(param1, symbol key, value obj)
+    var obj2 = {};
+    var foo = Symbol("foo");
+    Object.defineProperty(obj2, foo, {value: "first-key"});
+    console.log(Object.getOwnPropertySymbols(obj2));
+    for (var key in obj2) {
+        console.log(key); //无输出
+    }
+    console.log(Object.getOwnPropertyNames(obj2)); //[]
+    console.log(Object.getOwnPropertySymbols(obj2)); //[Symbol(foo)]
+
+
+
+    //-->Reflect.ownKeys() 返回所有类型的 key
+    var foo = Symbol();
+    var obj3 = {
+        key1: "key1",
+        key2: "key2",
+        [foo]:"symbol key"
+    }
+    for (key in obj3){
+        console.log(key + ":" + obj3[key]);
+    }
+    console.log(Reflect.ownKeys(obj3));
+</script>
+</body>
+</html>

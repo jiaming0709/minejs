@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    //Symbol值作为标识符用作对象的属性名 保证不会出现同名的属性(每一个Symbol值都是不相等的)
+    var mySymbol = Symbol();
+    var a = {};
+    a[mySymbol] = 'hello';
+
+    var a = {
+        [mySymbol]: 'hello'
+    };
+
+    var a={};
+    Object.defineProperty(a, mySymbol, {value:'hello3'});
+    console.log(a);
+
+
+
+
+    var b={};
+    b.mySymbol = "hello";
+    console.log(b[mySymbol]); //undefined
+    //-->symbol值作为对象属性名时,不能用点运算符
+    //  点运算符后面总是字符串,不会读取 mySymbol作为标识符
+
+    //在对象内部,使用symbol定义属性:Symbol必须放在方括号中
+
+
+    var log = {};
+    log.levels = {
+        DEBUG: Symbol("debug"),
+        INFO: Symbol("info"),
+        WARN: Symbol("warn")
+    };
+    console.log(log.levels.DEBUG, "debuge message");
+    console.log(log.levels.INFO, "info message");
+    console.log(log.levels.DEBUG == log.levels.INFO);
+    //-->symbol类型用于定义一组常量,保证这组常量的值都不相等
+
+
+    const COLOR_RED = Symbol();
+    const COLOR_GREEN = Symbol();
+    function complement(color){
+        switch (color){
+            case COLOR_RED:
+                return COLOR_RED;
+            case COLOR_GREEN:
+                return COLOR_GREEN;
+            default:
+                throw new Error("undefined Color");
+        }
+    }
+    console.log(complement(COLOR_RED) == complement(COLOR_GREEN));
+
+    //-->symbol值作为属性名时,为公有属性而不是私有属性
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>symbol</title>
+</head>
+<body>
+<script>
+    //symbol  一种机制,保证每一个属性的名字都是独一无二的,从根本上防止属性名的冲突
+    //JS第七种数据类型: Symbol   (Number,String,Boolean,Object,Undefined,Null)
+
+
+    let s = Symbol();
+    console.log(typeof s);  //"symbol"
+    //--> Symbol前不能使用new, 生成的 Symbol  是一个原始类型的值,不是对象,不能添加属性(类似于字符串的数据类型)
+
+    var s1 = Symbol("foo");
+    console.log(s1.toString()); //"Symbol(foo)"
+    //--> 可以接受一个字符串作为参数,表示对Symbol实例的描述, 为了转换为串时比较好区分
+
+    var s1 = Symbol("foo");
+    var s2 = Symbol("foo");
+    console.log(s1 == s2); //false
+    //-->相同参数的Symbol函数的返回值是不相等的,每一个Symbol值都是不相等的
+
+    //-->symbol值不能与其他类型进行运算,会报错 可以显示的转为字符串/boolean值, 但是不能转为数值
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+html, body {
+  height: 100%; }
+
+body {
+  background: #333;
+  position: relative; }
+
+.ball {
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -250px 0 0 -250px;
+  transition: all .6s; }
+  .ball:hover {
+    transform: scale(1.2); }
+  .ball .ball_box {
+    width: 100%;
+    height: 100%;
+    animation: rotate3d 20s infinite linear;
+    transform: rotate(-20deg) rotateX(-20deg);
+    transform-style: preserve-3d; }
+    .ball .ball_box div {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+      border: solid 1px #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -50% 0 0 -50%; }
+      .ball .ball_box div.x1 {
+        transform: rotateY(0deg); }
+      .ball .ball_box div.x2 {
+        transform: rotateY(20deg); }
+      .ball .ball_box div.x3 {
+        transform: rotateY(40deg); }
+      .ball .ball_box div.x4 {
+        transform: rotateY(60deg); }
+      .ball .ball_box div.x5 {
+        transform: rotateY(80deg); }
+      .ball .ball_box div.x6 {
+        transform: rotateY(100deg); }
+      .ball .ball_box div.x7 {
+        transform: rotateY(120deg); }
+      .ball .ball_box div.x8 {
+        transform: rotateY(140deg); }
+      .ball .ball_box div.x9 {
+        transform: rotateY(160deg); }
+      .ball .ball_box div.y1 {
+        transform: rotateX(90deg) translateZ(200px) scale(0.6); }
+      .ball .ball_box div.y2 {
+        transform: rotateX(90deg) translateZ(150px) scale(0.8); }
+      .ball .ball_box div.y3 {
+        transform: rotateX(90deg) translateZ(100px) scale(0.92); }
+      .ball .ball_box div.y4 {
+        transform: rotateX(90deg) translateZ(50px) scale(0.98); }
+      .ball .ball_box div.y5 {
+        transform: rotateX(90deg) translateZ(0px); }
+      .ball .ball_box div.y6 {
+        transform: rotateX(90deg) translateZ(-50px) scale(0.98); }
+      .ball .ball_box div.y7 {
+        transform: rotateX(90deg) translateZ(-100px) scale(0.92); }
+      .ball .ball_box div.y8 {
+        transform: rotateX(90deg) translateZ(-150px) scale(0.8); }
+      .ball .ball_box div.y9 {
+        transform: rotateX(90deg) translateZ(-200px) scale(0.6); }
+
+@keyframes rotate3d {
+  0% {
+    transform: rotate(-20deg) rotateX(-20deg) rotateY(0deg); }
+  100% {
+    transform: rotate(-20deg) rotateX(-20deg) rotateY(360deg); } }
+
+/*# sourceMappingURL=3.css.map */
