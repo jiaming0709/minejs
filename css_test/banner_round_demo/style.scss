@@ -5,7 +5,7 @@
 }
 
 body {
-  //background: #000;
+  background: #000;
 }
 
 #div1 {
@@ -28,9 +28,9 @@ body {
   .hid {
     position: absolute;
     left: 50%;
-    width: 153px;
-    height: 400px;
-    margin: -90px 0 0 -67px;
+    width: 323px;
+    height: 250px;
+    margin: -60px 0 0 -161px;
     font-size: 50px;
     overflow: hidden;
     transition: all 1s;
@@ -48,8 +48,8 @@ body {
       background-image: url(../img/4.jpg);
     }
     .img {
-      width: 133px;
-      height: 200px;
+      width: 300px;
+      height: 120px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -61,15 +61,15 @@ body {
       .over {
         position: absolute;
         left: 0;
-        top: 214px;
-        width: 133px;
-        height: 200px;
+        top: 130px;
+        width: 300px;
+        height: 120px;
         transform: scale(1, -1);
         .shadow {
           position: absolute;
           left: 0;
-          width: 133px;
-          height: 200px;
+          width: 300px;
+          height: 120px;
           opacity: 0.2;
           background-size: cover;
           background-position: center;

@@ -3,7 +3,7 @@ var banner = {
     initAnimate: function () {
         var i = hDiv.length - 1;
         window.timer = window.setInterval(function () {
-            hDiv[i].style.transform = "rotateY(" + (i / hDiv.length * 360) + "deg) translateZ(400px)";
+            hDiv[i].style.transform = "rotateY(" + (i / hDiv.length * 360) + "deg) translateZ(600px)";
             i--;
             if (i < 0) {
                 clearInterval(window.timer);

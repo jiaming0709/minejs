@@ -3,6 +3,9 @@
   padding: 0;
   list-style: none; }
 
+body {
+  background: #000; }
+
 #div1 {
   width: 200px;
   height: 200px;
@@ -22,9 +25,9 @@
   #div1 .hid {
     position: absolute;
     left: 50%;
-    width: 153px;
-    height: 400px;
-    margin: -90px 0 0 -67px;
+    width: 323px;
+    height: 250px;
+    margin: -60px 0 0 -161px;
     font-size: 50px;
     overflow: hidden;
     transition: all 1s;
@@ -38,8 +41,8 @@
     #div1 .hid:nth-child(4n+4) .img, #div1 .hid:nth-child(4n+4) .shadow {
       background-image: url(../img/4.jpg); }
     #div1 .hid .img {
-      width: 133px;
-      height: 200px;
+      width: 300px;
+      height: 120px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -51,15 +54,15 @@
       #div1 .hid .img .over {
         position: absolute;
         left: 0;
-        top: 214px;
-        width: 133px;
-        height: 200px;
+        top: 130px;
+        width: 300px;
+        height: 120px;
         transform: scale(1, -1); }
         #div1 .hid .img .over .shadow {
           position: absolute;
           left: 0;
-          width: 133px;
-          height: 200px;
+          width: 300px;
+          height: 120px;
           opacity: 0.2;
           background-size: cover;
           background-position: center;
