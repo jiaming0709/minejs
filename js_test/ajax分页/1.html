@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 550px;
+            margin: 40px auto;
+            height: 500px;
+            position: relative;
+        }
+
+        thead th {
+            background: #ccc;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        th, td {
+            width: 150px;
+            line-height: 30px;
+            color: #aaa;
+            text-align: center;
+        }
+
+        #page {
+            color: #aaa;
+            position: absolute;
+            bottom: 0;
+            -webkit-user-select: none;
+        }
+
+        #page span {
+            min-width: 20px;
+            line-height: 30px;
+            display: inline-block;
+            background: #eee;
+            margin: 0 5px;
+            padding: 0 5px;
+            text-align: center;
+            cursor: pointer;
+
+        }
+
+        #page #page_num {
+            display: inline-block;
+        }
+
+        #page .selected {
+            background: #0ff;;
+            color: #fff;
+        }
+
+        #page input {
+            height: 20px;
+            width: 25px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <table>
+        <caption>users table</caption>
+        <thead>
+        <tr>
+            <th data-title="score">score</th>
+            <th data-title="sex">sex</th>
+            <th data-title="num">num</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+
+    </table>
+
+    <div id="page">
+        <span id="prev">prev</span>
+        <span id="first">first</span>
+
+        <div id="page_num">
+        </div>
+        <span id="last">last</span>
+        <span id="next">next</span>
+        <input id="search" type="text"/>
+    </div>
+</div>
+<script>
+    var test = function () {
+        console.log("has if");
+        return true;
+    };
+    var tool = {
+        getXHR: function () {
+            if (window.XMLHttpRequest && test()) {
+                this.getXHR = function () {
+                    return new XMLHttpRequest();
+                };
+                return new XMLHttpRequest();
+            }
+            this.getXHR = function () {
+                return new ActiveXObject("Microsoft.XMLHTTP");
+            };
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        },
+        toJson: function (data) {
+            if (window.JSON) {
+                return JSON.parse(data);
+            }
+            return eval("(" + data + ")");
+        },
+        ajax: function (url, callback) {
+            var XML = this.getXHR();
+            XML.open("get", url, "async");
+            XML.onreadystatechange = function () {
+                if (this.readyState == 4) {
+                    if (/^2\d{2}$/.test(this.status)) {
+                        var data = tool.toJson(this.responseText);
+                        callback(data);
+                    } else {
+                        console.log("error");
+                    }
+                }
+            };
+            XML.send();
+        },
+        getIndex: function (ths) {
+            var index = {};
+            for (var i = 0; i < ths.length; i++) {
+                index[ths[i].getAttribute("data-title")] = i;
+            }
+            return index;
+        }
+    };
+
+    var page_number = 10; //每页显示的 记录 条数
+    var total = 0; //所有数据的总条数
+    var total_page = 0;  //一共要显示多少页
+    var current_page = 1; //当前显示的是哪一页
+
+    var table = document.getElementsByTagName("table")[0];
+    var tBody = table.tBodies[0];
+    var ths = table.tHead.rows[0].cells;
+
+    var data_index = tool.getIndex(ths);
+    console.log(data_index);  //{sex: 0, score: 1, num: 2}
+
+    tool.ajax("data.json", function (data) {
+//        console.log(data);
+        total = data.length;
+        total_page = Math.ceil(total / page_number);
+
+        draw_page(page_number, current_page, data);
+        draw_btn(total_page, current_page, page_num);
+
+        page.onclick = function (e) {
+            var e = e || window.event;
+            var target = e.target || e.srcElement;
+            if (target.id == "prev") {
+                current_page = (current_page > 1) ? (current_page - 1) : current_page;
+            }
+            else if (target.id == "next") {
+                current_page = (current_page < total_page) ? (current_page + 1) : current_page;
+            }
+            else if (target.id == "first") {
+                current_page = 1;
+            }
+            else if (target.id == "last") {
+                current_page = total_page;
+            }
+            else if (target.tagName.toLowerCase() == "span") {
+                current_page = target.innerHTML;
+            }
+            draw_page(page_number, current_page, data);
+            change_btn(current_page, page_num);
+        };
+
+        search.onkeyup = function (e) {
+            e = e || window.event;
+            if (e.keyCode != 13) return;
+            var value = this.value;
+            this.value = "";
+            console.log(value);
+            if (!isNaN(value)) {
+                if (value > total_page || value <= 0) {
+                    alert("没有那么多页");
+                    return;
+                }
+                current_page = parseInt(value);
+            } else {
+                alert("请输入数字");
+                return;
+            }
+            draw_page(page_number, current_page, data);
+            change_btn(current_page, page_num);
+        }
+
+
+    });
+
+    function draw_page(page_number, current_page, data, page_num) {
+        var start = (current_page - 1) * page_number;
+        var end = page_number * current_page - 1;
+        var fragment = document.createDocumentFragment();
+        tBody.innerHTML = "";
+        for (var i = start; i <= end; i++) {
+            var tr = document.createElement("tr");
+            var arr = [];
+            for (var key in data[i]) {
+                var value = (key == "sex") ? (data[i][key] == 1 ? "女" : "男") : data[i][key];
+                arr[data_index[key]] = "<td>" + value + "</td>";
+            }
+            tr.innerHTML = arr.join("");
+            fragment.appendChild(tr);
+        }
+        tBody.appendChild(fragment);
+        fragment = null;
+    }
+
+    function draw_btn(total_page, current_page, page_num) {
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < total_page; i++) {
+            var p = document.createElement("span");
+            if (i + 1 == current_page) {
+                p.className = "selected";
+            }
+            p.innerHTML = i + 1;
+            fragment.appendChild(p);
+        }
+        page_num.appendChild(fragment);
+    }
+
+    function change_btn(current_page, page_num) {
+        var ele = page_num.getElementsByTagName("span");
+        for (var i = 0; i < ele.length; i++) {
+            ele[i].className = "";
+        }
+        ele[current_page - 1].className = "selected";
+    }
+
+</script>
+</body>
+</html>

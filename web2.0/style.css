@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+#box {
+  width: 1200px;
+  margin: 0 auto;
+  background: #efefef;
+  position: relative; }
+  #box ul li {
+    height: 220px;
+    line-height: 220px;
+    text-align: center;
+    display: inline-block;
+    background: #ff0;
+    float: left;
+    border: 3px solid #fff; }
+  #box ul::after {
+    content: ' ';
+    clear: both;
+    display: block;
+    overflow: hidden;
+    height: 0; }
+  #box #active-block {
+    position: absolute;
+    background: #f00;
+    height: 220px;
+    display: none; }
+
+/*# sourceMappingURL=style.css.map */
