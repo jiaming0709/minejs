@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .clear {
+            clear: both;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .main {
+            width: 500px;
+            border: 1px solid #f00;
+        }
+
+
+
+        .hig {
+            padding-left: 30px;
+            position: relative;
+        }
+
+        a {
+            display: block;
+            color: #333;
+            line-height: 2em;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #f00;
+        }
+
+        b {
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-left: 10px solid #333;
+            width: 0;
+            height: 0;
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            display: inline-block;
+            opacity: 0;
+        }
+
+        a:hover b {
+            opacity: 1;
+            left: 15px;
+            -webkit-transition: all .5s ease-in;
+            -ms-transition: all .5s ease-in;
+            -moz-transition: all .5s ease-in;
+            transition: all .5s ease-in;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="hig clear">
+        <a href=""><b></b>为奥运助威为奥运助威为奥运助威 <span class="fr">2012-12-12</span></a>
+    </div>
+    <div class="hig clear">
+        <a href=""><b></b>为奥运助威为奥运助威为奥运助威 <span class="fr">2012-12-12</span></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"version":3,"sources":["student.js"],"names":[],"mappings":";;AAAA,SAAS,GAAT,CAAa,OAAb,EAAsB;AAClB,YAAQ,GAAR,CAAY,aAAW,OAAvB;AACH;AACD,QAAQ,GAAR,GAAY,GAAZ","file":"student-compiled.js","sourcesContent":["function add(student) {\n    console.log(\"student:\"+student)\n}\nexports.add=add;"]}

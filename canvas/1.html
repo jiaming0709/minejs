@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="main_stream_institutions">
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+    <canvas class="rake_chart" width="60" height="60" style=" background: #ccc;"></canvas>
+</div>
+
+<script src="../javascript/jquery.min.js"></script>
+<script>
+    var canvasFunc = {
+        drawCircle: function (context, cx, cy, r, bgColor) {
+            context.fillStyle = bgColor;
+            context.beginPath();
+            context.moveTo(cx, cy - r);
+            context.arc(cx, cy, r, 0, Math.PI * 2, 0);
+            context.fill();
+            context.closePath();
+        },
+        drawSector: function(context, cx, cy, r, bgColor, rake){
+            context.fillStyle = bgColor;
+            context.beginPath();
+            context.moveTo(cx, cy);
+            context.arc(cx, cy, r+2, Math.PI/180*-90, Math.PI/180*(rake/100*360-90), 0);
+            context.fill();
+            context.closePath();
+        }
+    };
+    $('#main_stream_institutions .rake_chart').each(function (index, item) {
+        var context = $(this)[0].getContext('2d');
+        var cx = 30, cy = 30, r = 30;
+        canvasFunc.drawCircle(context, cx, cy, r, '#f00');
+        canvasFunc.drawSector(context, cx, cy, r, '#ff0', 25);
+        context.fillStyle = '#000';
+        context.fillText('12.6%',cx-15, cy+5, 30);
+    });
+
+
+</script>
+</body>
+</html>

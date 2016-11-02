@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    li{
+        width: 15px;
+        height: 15px;
+        background: #f00;
+        border-radius: 50%;
+        position: relative;
+        margin: 10px;
+    }
+    li.active::after{
+        position: absolute;
+        content: ' ';
+        display: block;
+        left: -3px;
+        right: -3px;
+        top: -3px;
+        bottom: -3px;
+
+        border-radius: 50%;
+        border: 1px solid #f00;
+    }
+</style>
+<body>
+<ul>
+    <li class="active"></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"version":3,"sources":["count.js"],"names":[],"mappings":";;AAAA,IAAI,IAAE,CAAN;AACA,SAAS,KAAT,GAAiB;AACb,WAAO,EAAE,CAAT;AACH;AACD,QAAQ,KAAR,GAAc,KAAd","file":"count-compiled.js","sourcesContent":["var i=0;\nfunction count() {\n    return ++i;\n}\nexports.count=count;"]}
